@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# if a second monitor is connected: 
+if [[ $(xrandr -q | grep ' connected' | wc -l) == 2 ]]; then
+	# if the lid is closed to this laptop, only power the second monitor
+	if [[ $(cat /proc/acpi/button/lid/LID0/state | grep 'closed' | wc -l) == 1 ]]; then
+		xrandr --output DP2 --scale 2x2 --mode 1920x1080 --auto && xrandr --output eDP1 --off && val = "second" 
+	# if the lid is open, display on both monitors
+	else
+		xrandr --output eDP1 --mode 3840x2160 --scale 1x1 --auto --output DP2 --scale 2x2 --mode 1920x1080 --right-of eDP1 #&& val = "both" 
+	fi
+# if only the first monitor is connected, only output to the first
+else 
+	xrandr --output eDP1 --mode 3840x2160 --scale 1x1 --auto && xrandr --output DP2 --off && val = "first" 
+fi
+
+# if the display mode has changed, refresh i3
+#if [[ ! $(cat /tmp/monstatus.dat | grep ${val}) ]]; then
+#	i3-msg restart && echo "${val}" > /tmp/monstatus.dat
+#fi

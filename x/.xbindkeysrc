@@ -1,0 +1,74 @@
+"poweroff"
+  Mod4 + Escape
+"reboot"
+  Mod4 + Shift + Escape
+"pavucontrol"
+  Mod4 + a
+"/usr/bin/spotify --force-device-scale-factor=2"
+  Mod4 + Tab
+"thunar"
+  Mod4 + BackSpace
+"chromium"
+  Mod4 + backslash
+"wmctrl -zi -c $(xdotool getactivewindow)"
+  Mod4 + q
+"lock"
+  Mod4 + grave
+"screenclip"
+  Mod4 + equal + Release
+"colorclip"
+  Mod4 + minus
+"roficlip"
+  Mod4 + c
+"xkill"
+  End
+
+
+# VOLUME KEYS
+"amixer -D pulse sset Master 10%+"
+  XF86AudioRaiseVolume
+"amixer -D pulse sset Master 10%-"
+  XF86AudioLowerVolume
+"amixer -D pulse sset Master Playback Switch toggle"
+  XF86AudioMute
+
+# BRIGHTNESS KEYS
+"light -A 10"
+  XF86MonBrightnessUp
+"light -A 5"
+  Shift+XF86MonBrightnessUp
+"light -U 10"
+  XF86MonBrightnessDown
+"light -U 5"
+  Shift+XF86MonBrightnessDown
+
+# MUSIC
+"playerctl play-pause"
+  XF86AudioPlay
+"playerctl play-pause"
+  Mod4 + Shift + slash
+
+"playerctl previous"
+  XF86AudioPrev
+"playerctl previous"
+  Mod4 + Shift + comma
+
+"playerctl next"
+  XF86AudioNext
+
+#https://wiki.archlinux.org/index.php/Spotify#Global_media_hotkeys
+# Play/Pause
+#"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause & sleep 0.2"
+#XF86AudioPlay
+
+# Next
+#"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next & sleep 0.2"
+#XF86AudioNext
+
+# Previous
+#"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous & sleep 0.2"
+#XF86AudioPrev
+
+# Stop
+#"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop & sleep 0.2"
+#XF86AudioStop
