@@ -84,11 +84,14 @@ gaps outer 0
 gaps inner 15
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec blueman-applet
-exec nm-applet
 exec compton --config $HOME/.config/compton/config
+
 exec "xsetroot -solid #2c2f3a"
 exec feh --bg-scale -no-xinerama ~/.config/i3/background.png
+
+exec blueman-applet
+exec nm-applet
+
 exec "watch -n 5 multimonitor-output"
 
 client.focused          #00bcd4 #00bcd4 #FFFFFF #00bcd4   #00bcd4
