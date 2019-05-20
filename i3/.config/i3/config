@@ -73,15 +73,17 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-msg exit"
 
-default_border pixel 2
-new_window pixel 2
+# set border size
+for_window [class="^.*"] border pixel 2
+default_border pixel 0
+new_window pixel 0
 
 # constrain size of popup images
 floating_minimum_size 300 x 300
 floating_maximum_size 1600 x 1200
 
 gaps outer 0
-gaps inner 15
+gaps inner 10
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec compton --config $HOME/.config/compton/config

@@ -20,11 +20,10 @@ adapta = #383c4a
 override-redirect = false
 bottom = false
 fixed-center = true
-monitor = eDP1
 
-dpi = 250
+dpi = 200
 width = 100%
-height = 45 
+height = 40 
 
 font-0 = "M+ 1m:size=8;0"
 font-1 = "Font Awesome 5 Free:style=Solid:size=8;2"
@@ -36,7 +35,7 @@ line-color = ${color.cyan}
 underline-size = 0
 overline-size = 0
 
-border-bottom-size = 5
+border-bottom-size = 4
 border-bottom-color = ${color.cyan}
 
 padding-left = 1
