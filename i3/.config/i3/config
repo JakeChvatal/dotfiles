@@ -58,17 +58,6 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
-workspace $ws1 output $mon1
-workspace $ws2 output $mon1
-workspace $ws3 output $mon1
-workspace $ws4 output $mon1
-workspace $ws5 output $mon1
-workspace $ws6 output $mon1
-workspace $ws7 output $mon1
-workspace $ws8 output $mon1
-workspace $ws9 output $mon1
-workspace $ws10 output $mon2
-
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-msg exit"

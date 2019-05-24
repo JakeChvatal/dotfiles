@@ -26,7 +26,7 @@ width = 100%
 height = 40 
 
 font-0 = "M+ 1m:size=8;0"
-font-1 = "Font Awesome 5 Free:style=Solid:size=8;2"
+font-1 = "Font Awesome 5 Free:style=Solid:size=10;1"
 
 background = ${color.adapta}
 foreground = ${color.white}
@@ -46,7 +46,7 @@ module-margin-right = 1
 tray-position = right
 tray-padding = 0
 tray-offset-y = -4 
-tray-maxsize = 32
+tray-maxsize = 24
 
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
@@ -69,6 +69,25 @@ type = internal/xwindow
 format = <label>
 label = %title%
 label-maxlen = 75
+
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+blacklist-1 = scroll lock
+
+format = <label-indicator>
+
+format-prefix =
+format-prefix-foreground = ${color.red}
+
+
+label-layout = %name%
+
+label-indicator-padding = 1
+label-indicator-margin = 0
+label-indicator-background = ${color.red}
+
 
 [module/i3]
 type = internal/i3
