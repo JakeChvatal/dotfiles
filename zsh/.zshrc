@@ -106,6 +106,7 @@ alias spotify="/usr/bin/spotify --force-device-scale-factor=2.5"
 
 # find local programs
 export PATH=$PATH:~/.bin
+export PATH=$PATH:~/.gem/ruby/2.6.0/bin
 export WEB_BROWSER=chromium
 export GTK_THEME=oomox-arc-dark
 export GTK2_RC_FILES=$HOME/.themes/oomox-arc-dark/gtk-2.0/gtkrc	

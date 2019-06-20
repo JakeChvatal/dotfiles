@@ -74,6 +74,7 @@ floating_maximum_size 1600 x 1200
 gaps outer 0
 gaps inner 10
 
+exec_always multimonitor-output
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec compton --config $HOME/.config/compton/config
 
