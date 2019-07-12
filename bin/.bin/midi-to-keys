@@ -1,8 +1,0 @@
-#!/bin/bash
-aseqdump -p "Launchpad Mini" | \
-while IFS=" ," read src ev1 ev2 ch label1 data1 label2 data2 rest; do
-    case "$ev1 $ev2 $data1" in
-        "Note on 64" ) xdotool type hello ;;
-        "Note on 48" ) xdotool key ctrl+j ;;
-    esac
-done
