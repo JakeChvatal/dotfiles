@@ -58,6 +58,5 @@ unclutter &
 dunst -font "M+ 1m 8" &
 # ensures touchscreen stays on output 1
 xinput --map-to-output 12 eDP1 &
-slack &
 # starts window manager
 exec i3 
