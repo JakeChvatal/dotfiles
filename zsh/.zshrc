@@ -91,6 +91,9 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# enable opam packages
+eval `opam config env`
+
 ## Aliases #########
 
 # aliasing sudo allows aliases to function as root
