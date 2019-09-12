@@ -105,6 +105,7 @@ alias vim=nvim
 
 # HiDPI Spotify
 alias spotify="/usr/bin/spotify --force-device-scale-factor=2.5"
+alias condactivate="source /opt/anaconda/bin/activate root"
 
 # find local programs
 export PATH=$PATH:~/.bin
