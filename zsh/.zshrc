@@ -110,6 +110,7 @@ alias condactivate="source /opt/anaconda/bin/activate root"
 # find local programs
 export PATH=$PATH:~/.bin
 export PATH=$PATH:~/.gem/ruby/2.6.0/bin
+export ANDROID_SDK=/home/jake/Android/Sdk
 export WEB_BROWSER=chromium
 export GTK_THEME=oomox-arc-dark
 export GTK2_RC_FILES=$HOME/.themes/oomox-arc-dark/gtk-2.0/gtkrc	

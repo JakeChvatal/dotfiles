@@ -5,6 +5,8 @@
   (add-to-list 'package-archives
                (cons "melpa" (concat proto "://melpa.org/packages/")) t))
 (package-initialize)
+;; Add Doom Emacs configuration
+(add-to-list 'load-path "~/.emacs.d")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
