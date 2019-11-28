@@ -57,6 +57,10 @@ unclutter &
 # starts notification daemon
 dunst -font "M+ 1m 8" &
 # ensures touchscreen stays on output 1
+multimonitor-output &
+# map the screens to the right places
 xinput --map-to-output 12 eDP1 &
+# start dropbox
+/usr/bin/dropbox &
 # starts window manager
 exec i3 

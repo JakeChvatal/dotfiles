@@ -102,6 +102,8 @@ alias sudo='sudo '
 # always use nvim
 alias vi=nvim
 alias vim=nvim
+# make emacs easier to type
+alias ec=emacs
 
 # HiDPI Spotify
 alias spotify="/usr/bin/spotify --force-device-scale-factor=2.5"
