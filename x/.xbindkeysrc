@@ -10,18 +10,24 @@
   Mod4 + BackSpace
 "chromium"
   Mod4 + backslash
-"wmctrl -zi -c $(xdotool getactivewindow)"
-  Mod4 + q
 "lock"
   Mod4 + grave
-"screenclip"
-  Mod4 + equal + Release
-"colorclip"
-  Mod4 + minus
-"roficlip"
-  Mod4 + c
 "xkill"
   End
+"emacs"
+  Mod4 + Shift 
+
+
+# NAVIGATION
+# hjkl as arrow keys everywhere
+"xdotool keydown Down"
+  Caps_Lock+J
+"xdotool keydown Up"
+  Caps_Lock+K
+"xdotool keydown Right"
+  Caps_Lock+L
+"xdotool keydown Left"
+  Caps_Lock+H
 
 
 # VOLUME KEYS
