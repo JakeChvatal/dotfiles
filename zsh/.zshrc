@@ -2,12 +2,12 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/usr/share/oh-my-zsh/"
+export ZSH="/home/jake/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
@@ -26,8 +26,14 @@ ZSH_THEME="robbyrussell"
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -73,11 +79,12 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='nvim'
-fi
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -90,32 +97,17 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias vi="nvim"
+alias vim="nvim"
+alias ec="emacs"
+alias sudo="sudo "
 
-# enable opam packages
-eval `opam config env`
+PATH="$HOME/.node_modules/bin:$PATH" 
+export npm_config_prefix=~/.node_modules
+PATH=$PATH:/usr/local/bin
+PATH=$PATH:/home/jake/.gem/ruby/2.6.0/bin
 
-## Aliases #########
-
-# aliasing sudo allows aliases to function as root
-alias sudo='sudo '
-
-# always use nvim
-alias vi=nvim
-alias vim=nvim
-# make emacs easier to type
-alias ec=emacs
-
-# HiDPI Spotify
-alias spotify="/usr/bin/spotify --force-device-scale-factor=2.5"
-alias condactivate="source /opt/anaconda/bin/activate root"
-
-# find local programs
-export PATH=$PATH:~/.bin
-export PATH=$PATH:~/.gem/ruby/2.6.0/bin
-export ANDROID_SDK=/home/jake/Android/Sdk
-export WEB_BROWSER=chromium
-export GTK_THEME=oomox-arc-dark
-export GTK2_RC_FILES=$HOME/.themes/oomox-arc-dark/gtk-2.0/gtkrc	
-
-# starts x server if its opening from tty
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then exec startx; fi
+autoload -Uz compinit
+compinit
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin

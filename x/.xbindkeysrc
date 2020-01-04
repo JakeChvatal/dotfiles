@@ -2,40 +2,23 @@
   Mod4 + Escape
 "reboot"
   Mod4 + Shift + Escape
-"pavucontrol"
-  Mod4 + a
-"/usr/bin/spotify --force-device-scale-factor=2"
-  Mod4 + Tab
+#"/usr/bin/spotify --force-device-scale-factor=2"
+#  Mod4 + Tab
 "thunar"
   Mod4 + BackSpace
-"chromium"
+"firefox"
   Mod4 + backslash
-"lock"
-  Mod4 + grave
 "xkill"
   End
-"emacs"
-  Mod4 + Shift 
-
-
-# NAVIGATION
-# hjkl as arrow keys everywhere
-"xdotool keydown Down"
-  Caps_Lock+J
-"xdotool keydown Up"
-  Caps_Lock+K
-"xdotool keydown Right"
-  Caps_Lock+L
-"xdotool keydown Left"
-  Caps_Lock+H
-
+# "emacs"
+#   Mod4 + Delete 
 
 # VOLUME KEYS
-"amixer -D pulse sset Master 10%+"
+"pulseaudio-ctl up 5"
   XF86AudioRaiseVolume
-"amixer -D pulse sset Master 10%-"
+"pulseaudio-ctl down 5"
   XF86AudioLowerVolume
-"amixer -D pulse sset Master Playback Switch toggle"
+"pulseaudio-ctl mute"
   XF86AudioMute
 
 # BRIGHTNESS KEYS

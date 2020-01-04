@@ -3,7 +3,7 @@ margin-top = 0
 margin-bottom = 0
 
 [color]
-white = #fff
+white = #b6bdc5
 base = #efebe0
 brown = #666
 orange = #fbb253
@@ -12,9 +12,9 @@ purple = #e58a95
 red = #f1383d
 pink = #f26262
 pink2 = #f64d64
-blue = #19aed3
-cyan = #00bcd4
-adapta = #383c4a
+blue = #51afef
+cyan = #51afef
+adapta = #1d2026
 
 [bar/top]
 override-redirect = false
@@ -23,9 +23,9 @@ fixed-center = true
 
 dpi = 200
 width = 100%
-height = 40 
+height = 45 
 
-font-0 = "M+ 1m:size=8;0"
+font-0 = "Fira Code:size=8;0"
 font-1 = "Font Awesome 5 Free:style=Solid:size=10;1"
 
 background = ${color.adapta}
@@ -35,18 +35,18 @@ line-color = ${color.cyan}
 underline-size = 0
 overline-size = 0
 
-border-bottom-size = 4
+border-bottom-size = 0
 border-bottom-color = ${color.cyan}
 
 padding-left = 1
 padding-right = 1
-module-margin-left = 1
-module-margin-right = 1
+module-margin-left = 2
+module-margin-right = 0
 
 tray-position = right
-tray-padding = 0
-tray-offset-y = -4 
-tray-maxsize = 24
+tray-offset-y = -3 
+tray-maxsize = 25
+tray-background = ${color.adapta}
 
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
@@ -54,7 +54,7 @@ scroll-down = i3wm-wsprev
 ## Mod Loc #########
 modules-left = i3 
 modules-center = xwindow
-modules-right = xkeyboard music volume battery date
+modules-right = xkeyboard music volume battery time date
 
 # Modules ##########
 [module/music]
@@ -116,8 +116,8 @@ battery = BAT0
 adapter = AC
 full-at = 98
 
-format-charging = <label-charging> <animation-charging> 
-format-discharging = <label-discharging> <ramp-capacity> 
+format-charging = <label-charging>  <animation-charging> 
+format-discharging = <label-discharging>  <ramp-capacity> 
 format-full =  
 format-full-foreground = ${color.cyan}
 
@@ -155,7 +155,13 @@ type = internal/date
 interval = 1
 
 date = "%Y-%m-%d"
+
+label = %date%
+
+[module/time]
+type = internal/date
+interval = 1
+
 time = %H:%M
 
-label = %date% | %time%
-
+label = %time%

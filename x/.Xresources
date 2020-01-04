@@ -1,68 +1,38 @@
 #include ".Xresources.hidpi"
 
-*background:  #000000
-*foreground:  #A3A3A3
-*color0:  #4e4e4e
-*color1:  #a76180
-*color2:  #438e8e
-*color3:  #9797b4
-*color4:  #54708e
-*color5:  #7961a7
-*color6:  #4c80a7
-*color7:  #a4b7bc
-*color8:  #585858
-*color9:  #da689b
-*color10:  #6ec1c1
-*color11:  #b9b9e6
-*color12:  #6295ce
-*color13:  #997dce
-*color14:  #7bb1da
-*color15:  #dbdbdb
-
-! ------------------------------------------------------------------------------
-! Nord Color Scheme
-! By Arctic Ice Studio 
-! ------------------------------------------------------------------------------
-
 ! special
-*.foreground:   #d8dee8
-*.background:   #383c4a
-*.cursorColor:  #00bcd4
+*.foreground:   #bbcfc5
+*.background:   #282c34
+*.cursorColor:  #bbcfc5
 
 ! black
-*.color0  : #4b5262
-*.color8  : #434a5a
+*.color0:       #19161d
+*.color8:       #d6c0f5
 
 ! red
-*.color1  : #bf616a
-*.color9  : #b3555e
+*.color1:       #221f28
+*.color9:       #da8548
 
 ! green
-*.color2  : #a3be8c
-*.color10 : #93ae7c
+*.color2:       #342f3b
+*.color10:      #98be65
 
 ! yellow
-*.color3  : #ebcb8b
-*.color11 : #dbbb7b
+*.color3:       #46d9ff
+*.color11:      #c678dd
 
 ! blue
-*.color4  : #81a1c1
-*.color12 : #7191b1
+*.color4:       #6c6379
+*.color12:      #51afef
 
 ! magenta
-*.color5  : #b48ead
-*.color13 : #a6809f
+*.color5:       #8f879a
+*.color13:      #e987b5
 
 ! cyan
-*.color6  : #93e5cc
-*.color14 : #7bcdb4
+*.color6:       #b6b1be
+*.color14:      #51afef
 
 ! white
-*.color7  : #e5e9f0
-*.color15 : #d1d5dc
-
-rofi.color-enabled: true
-rofi.color-window: #383c4a, #383c4a, #383c4a
-rofi.color-normal: #383c4a, #d8dee8, #383c4a, #383c4a, #00bcd4
-rofi.color-active: #383c4a, #b48ead, #383c4a, #383c4a, #93e5cc
-rofi.color-urgent: #383c4a, #ebcb8b, #383c4a, #383c4a, #ebcb8b           
+*.color7:       #5b6268
+*.color15:      #aed8eb
