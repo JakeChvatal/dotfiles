@@ -38,7 +38,7 @@ window#main-window {
 	--tab-height                         : 20px;
 	--tabs-container-height              : 20px;
 	--tab-text-font                      : "System-ui", sans-serif;
-	--tab-text-font-size                 : 8pt;
+	--tab-text-font-size                 : 10pt;
 	--margin-before-tab-list             : 5px;
 	--margin-after-tab-list              : -5px;
 	--urlbar-text-font                   : "mononoki Nerd Font", sans-serif;
