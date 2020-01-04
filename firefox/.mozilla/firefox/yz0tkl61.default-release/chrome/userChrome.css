@@ -1,4 +1,7 @@
 window#main-window {
+	/* Modified from https://github.com/turing753/minimal-functional-fox */
+
+
 	/* *******************************************************************
 	You can tweak the major colors here, the names should
 	be self explanatory. If you want you can also import the stylesheet
@@ -6,13 +9,13 @@ window#main-window {
 	--color-* vars.
 	*/
 
-	--color-fg   : #fefefa;
-	--color-bg   : #282a36;
+	--color-fg   : #b6bdc5;
+	--color-bg   : #282c34;
 	--color-0    : #43c9cf;
 	--color-1    : #d0d01e;
-	--color-2    : #fc6b89;
+	--color-2    : #1d2026;
 	--color-3    : #bc6ccc;
-	--color-4    : #f79130;
+	--color-4    : #1d2026;
 	--color-5    : #ead2ef;
 
 	--color-tab-active-end       : var(--color-4);
@@ -28,21 +31,21 @@ window#main-window {
 
 	/* Easy way to tweak most params */
 	--gap-between-tabs                   : 10px;
-	--margin-around-urlbar               : 9px;
-	--margin-before-back-button          : 9px;
-	--padding-around-searchengine-opts   : 10px;
+	--margin-around-urlbar               : 5px;
+	--margin-before-back-button          : 5px;
+	--padding-around-searchengine-opts   : 5px;
 	--pinned-tab-favicon-dim             : 27px;
-	--tab-height                         : 40px;
-	--tabs-container-height              : 135px;
+	--tab-height                         : 20px;
+	--tabs-container-height              : 20px;
 	--tab-text-font                      : "System-ui", sans-serif;
-	--tab-text-font-size                 : 14pt;
-	--margin-before-tab-list             : 16px;
-	--margin-after-tab-list              : -17px;
+	--tab-text-font-size                 : 8pt;
+	--margin-before-tab-list             : 5px;
+	--margin-after-tab-list              : -5px;
 	--urlbar-text-font                   : "mononoki Nerd Font", sans-serif;
-	--urlbar-text-size                   : 15pt;
+	--urlbar-text-size                   : 10pt;
 	--urlbar-text-weight                 : 600;
-	--urlbar-list-width                  : 50%;
-	--urlbar-container-margin            : 12px;
+	--urlbar-list-width                  : 70%;
+	--urlbar-container-margin            : 6px;
 
 
 	/* ******************************************************************* */
