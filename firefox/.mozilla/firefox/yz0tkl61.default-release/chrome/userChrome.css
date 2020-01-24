@@ -40,6 +40,7 @@ html#main-window {
 	padding-right: 10px !important;
 }
 
+
 /* Bookmarks bar tweaks */
 #PlacesToolbar {
 	align-items: center !important;
@@ -53,6 +54,8 @@ html#main-window {
 /* Custom back and forward buttons */
 #back-button {
 	list-style-image: url("left-arrow.svg") !important;
+	border: none !important;
+	color: var(--color-bg) !important;
 }
 
 #forward-button {
@@ -70,7 +73,12 @@ html#main-window {
 
 /* *******************************************************************
 	Urlbar
+
 */
+
+::-moz-selection {
+  background-color: #21242b !important;
+}
 
 /* Url bar suggestions list container */
 .urlbarView {
@@ -232,6 +240,50 @@ input#urlbar-input {
 /* *******************************************************************
 	Settings menu pop-up
 */
+menupopup {
+  -moz-appearance: none !important;
+  background-color: #4a4a4f !important;
+  border: 1px solid #333 !important;
+  margin: -1px 0 0 0 !important;
+  border-radius: 4px !important;
+  transform: scale(.9, .9) !important;
+}
+
+menuitem:hover, menugroup:hover, menu:hover {
+  -moz-appearance: none !important;
+  background: #5c5c61 !important;
+}
+
+menuseparator {
+  -moz-appearance: none !important;
+  max-height: 1px !important;
+  border: none !important;
+  padding: 0.5px 0 !important;
+  background-color: #5c5c61 !important;
+}
+
+menuitem, menu {
+  -moz-appearance: none !important;
+  color: white !important;
+  padding: 1px 1px 2px 11px !important;
+  min-height: 25px !important;
+}
+
+menugroup {
+  padding: 2px !important;
+  background-color: transparent !important;
+}
+
+.menu-right {
+  -moz-appearance: none !important;
+  padding: 7px !important;
+  margin-right: 6px !important;
+  color: white !important;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(-45deg) scale(.35);
+}
+
 .panel-arrowbox {
 	margin: 0 !important;
 	display: none !important;

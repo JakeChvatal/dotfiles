@@ -101,13 +101,19 @@ alias vi="nvim"
 alias vim="nvim"
 alias ec="emacs"
 alias sudo="sudo "
+alias spotify="/usr/bin/spotify --force-device-scale-factor=2.5"
 
-PATH="$HOME/.node_modules/bin:$PATH" 
+export PATH=$PATH:~/.bin
+export PATH="$HOME/.node_modules/bin:$PATH" 
 export npm_config_prefix=~/.node_modules
-PATH=$PATH:/usr/local/bin
-PATH=$PATH:/home/jake/.gem/ruby/2.6.0/bin
-
+export PATH=$PATH:/usr/local/bin
+export PATH=$PATH:/home/jake/.gem/ruby/2.6.0/bin
+export JAVA_HOME=$JAVA_HOME:/usr/lib/jvm/java-8-openjdk/jre
 autoload -Uz compinit
 compinit
 # Completion for kitty
 kitty + complete setup zsh | source /dev/stdin
+
+eval $(opam env)
+
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then exec startx; fi

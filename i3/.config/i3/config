@@ -2,8 +2,8 @@ set $mod Mod4
 floating_modifier $mod
 
 # default monitor locations
-set $mon1 eDP1
-set $mon2 DP2
+set $mon1 eDP-1
+set $mon2 DP-2
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -26,7 +26,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start rofi (a program launcher)
-bindsym $mod+d exec rofi -show run -lines 5 -fullscreen true -bw 0 -width 100 -padding 800 -eh 2 -hide-scrollbar true 
+bindsym $mod+d exec rofi -show run -lines 5 -bw 2 -width 20 -padding 50 -eh 2 -hide-scrollbar true 
 # -color "#b6bdc5,#1d2026,#282c34,#1d2026,#51afaf"
 
 # change focus
@@ -104,6 +104,9 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+# with two monitors, always start ws10 on the second
+workspace $ws10 output $mon2
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -154,6 +157,8 @@ exec --no-startup-id hsetroot -solid "#1d2026"
 # start polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # exec nextcloud
+# exec nm-applet
+# exec blueman-applet
 
 client.focused          #2257A0 #2257A0 #FFFFFF #2257A0   #51afef
 client.focused_inactive #333333 #2257A0 #FFFFFF #484E50   #5F676A
