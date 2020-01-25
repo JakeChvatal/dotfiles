@@ -76,6 +76,9 @@
 (setq org-directory "~/org/")
 (setq org-default-notes-file "~/org/refile.org")
 
+;; directory for attaching files in org more
+(setq org-attach-directory "~/Dropbox/org/.attach/") ;; Note trailing /
+
 ;; set TODO keywords
 (setq org-todo-keywords
       (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
