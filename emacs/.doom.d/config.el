@@ -1,7 +1,5 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here
-
 ;; ### FONTS ###
 (defun fira-code-mode--make-alist (list)
   "Generate prettify-symbols alist from LIST."
@@ -33,7 +31,7 @@
     "<$" "<$>" "<!--" "<-" "<--" "<->" "<+" "<+>" "<="
     "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<" "<~"
     "<~~" "</" "</>" "~@" "~-" "~=" "~>" "~~" "~~>" "%%"
-    ":" "+" "+" "*"))
+    ))
 
 (defvar fira-code-mode--old-prettify-alist)
 
@@ -69,7 +67,12 @@
 ;; ### PATH DEBUG FIX ###
 (setq exec-path-from-shell-arguments '("-i"))
 
+;; ### BROWSER ###
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "firefox")
+
 ;; ### ORG MODE ###
+
 ;; directory for all .org files
 (setq org-agenda-files
       (quote ("~/org/")))
