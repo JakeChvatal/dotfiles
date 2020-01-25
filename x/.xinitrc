@@ -18,6 +18,8 @@ source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
 
 # bind keys to x
 xbindkeys & 
+# key aliases
+xmodmap &
 # hide mouse pointer when not in use
 unclutter &
 # dropbox

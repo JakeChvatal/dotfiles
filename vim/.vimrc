@@ -8,7 +8,7 @@ Plug 'scrooloose/nerdtree'
 call plug#end()
 
 if has('gui_running')
-  set guifont=Lucida_Console:h11
+	set guifont=Lucida_Console:h11
 endif
 
 map <C-n> :NERDTreeToggle<CR>
@@ -21,18 +21,18 @@ let s:opam_share_dir = substitute(s:opam_share_dir, '[\r\n]*$', '', '')
 let s:opam_configuration = {}
 
 function! OpamConfOcpIndent()
-  execute "set rtp^=" . s:opam_share_dir . "/ocp-indent/vim"
+	execute "set rtp^=" . s:opam_share_dir . "/ocp-indent/vim"
 endfunction
 let s:opam_configuration['ocp-indent'] = function('OpamConfOcpIndent')
 
 function! OpamConfOcpIndex()
-  execute "set rtp+=" . s:opam_share_dir . "/ocp-index/vim"
+	execute "set rtp+=" . s:opam_share_dir . "/ocp-index/vim"
 endfunction
 let s:opam_configuration['ocp-index'] = function('OpamConfOcpIndex')
 
 function! OpamConfMerlin()
-  let l:dir = s:opam_share_dir . "/merlin/vim"
-  execute "set rtp+=" . l:dir
+	let l:dir = s:opam_share_dir . "/merlin/vim"
+	execute "set rtp+=" . l:dir
 endfunction
 let s:opam_configuration['merlin'] = function('OpamConfMerlin')
 
@@ -40,14 +40,14 @@ let s:opam_packages = ["ocp-indent", "ocp-index", "merlin"]
 let s:opam_check_cmdline = ["opam list --installed --short --safe --color=never"] + s:opam_packages
 let s:opam_available_tools = split(system(join(s:opam_check_cmdline)))
 for tool in s:opam_packages
-  " Respect package order (merlin should be after ocp-index)
-  if count(s:opam_available_tools, tool) > 0
-    call s:opam_configuration[tool]()
-  endif
+	" Respect package order (merlin should be after ocp-index)
+	if count(s:opam_available_tools, tool) > 0
+		call s:opam_configuration[tool]()
+	endif
 endfor
 " ## end of OPAM user-setup addition for vim / base ## keep this line
 " ## added by OPAM user-setup for vim / ocp-indent ## 3ced94a505d6ddff550c6588bcffc883 ## you can edit, but keep this line
 if count(s:opam_available_tools,"ocp-indent") == 0
-  source "/home/jake/.opam/default/share/ocp-indent/vim/indent/ocaml.vim"
+	source "/home/jake/.opam/default/share/ocp-indent/vim/indent/ocaml.vim"
 endif
 " ## end of OPAM user-setup addition for vim / ocp-indent ## keep this line

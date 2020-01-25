@@ -111,6 +111,7 @@ export PATH=$PATH:/home/jake/.gem/ruby/2.6.0/bin
 export JAVA_HOME=$JAVA_HOME:/usr/lib/jvm/java-8-openjdk/jre
 autoload -Uz compinit
 compinit
+
 # Completion for kitty
 kitty + complete setup zsh | source /dev/stdin
 

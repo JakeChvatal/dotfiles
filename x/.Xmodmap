@@ -1,0 +1,4 @@
+clear Lock
+keycode 66 = Hyper_L
+
+keycode 133 = Caps_Lock

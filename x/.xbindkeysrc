@@ -5,9 +5,9 @@
 #"/usr/bin/spotify --force-device-scale-factor=2"
 #  Mod4 + Tab
 "emacs"
-  Mod4 + BackSpace
+  Mod4 + semicolon
 "firefox"
-  Mod4 + backslash
+  Mod4 + apostrophe
 "xkill"
   End
 
