@@ -4,14 +4,12 @@
   Mod4 + Shift + Escape
 #"/usr/bin/spotify --force-device-scale-factor=2"
 #  Mod4 + Tab
-"thunar"
+"emacs"
   Mod4 + BackSpace
 "firefox"
   Mod4 + backslash
 "xkill"
   End
-# "emacs"
-#   Mod4 + Delete 
 
 # VOLUME KEYS
 "pulseaudio-ctl up 5"

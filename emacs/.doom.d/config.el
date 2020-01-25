@@ -33,7 +33,7 @@
     "<$" "<$>" "<!--" "<-" "<--" "<->" "<+" "<+>" "<="
     "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<" "<~"
     "<~~" "</" "</>" "~@" "~-" "~=" "~>" "~~" "~~>" "%%"
-    "x" ":" "+" "+" "*"))
+    ":" "+" "+" "*"))
 
 (defvar fira-code-mode--old-prettify-alist)
 
@@ -62,7 +62,6 @@
 
 (provide 'fira-code-mode)
 
-(add-hook 'org-mode-hook 'fira-code-mode)
 (add-hook 'tuareg-mode-hook 'fira-code-mode)
 (add-hook 'haskell-mode-hook 'fira-code-mode)
 
