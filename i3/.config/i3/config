@@ -20,6 +20,7 @@ bindsym $mod+apostrophe 	exec firefox
 bindsym $mod+backslash 		exec spotify
 bindsym $mod+bracketright 	exec slack
 bindsym $mod+Return 		exec kitty -1
+bindsym $mod+BackSpace 		exec thunar
 
 # arrow keys cheat
 bindsym $mod+w exec xvkbd -xsendevent -text '\[Up]'
@@ -79,10 +80,6 @@ bindsym $mod+m resize shrink width 5 px or 5 ppt
 
 bindsym $mod+Shift+Tab 	workspace back_and_forth
 bindsym $mod+f 		fullscreen toggle
-
-
-# macros
-
 
 # don't have to hold $mod for these!
 mode "Control" {

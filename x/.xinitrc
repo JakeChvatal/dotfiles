@@ -25,6 +25,8 @@ unclutter &
 # dropbox
 dropbox &
 # reform monitor gang
-multimonitor-output & 
+multimonitor-output &
+# compositor
+picom --config ~/.config/picom/picom.conf &  
 # start wm
 exec i3
