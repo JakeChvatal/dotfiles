@@ -70,7 +70,6 @@ format = <label>
 label = %title%
 label-maxlen = 75
 
-
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock

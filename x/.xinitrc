@@ -16,10 +16,10 @@ export SSH_AUTH_SOCK
 
 source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh 
 
-# bind keys to x
-xbindkeys & 
 # key aliases
-xmodmap &
+xmodmap ~/.Xmodmap &
+# short press on caps lock is escape
+xcape -e 'Hyper_L=Escape' & 
 # hide mouse pointer when not in use
 unclutter &
 # dropbox
