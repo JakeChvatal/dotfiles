@@ -15,8 +15,9 @@ bindsym $mod+Escape 		exec poweroff
 bindsym $mod+Shift+Escape 	exec reboot
 
 # run gui programs
-bindsym $mod+semicolon 		exec emacs
-bindsym $mod+apostrophe 	exec firefox
+# bindsym $mod+semicolon 		exec emacs
+bindsym $mod+semicolon 		exec xvkbd -xsendevent -text '\[BackSpace]'
+bindsym $mod+apostrophe 	exec xvkbd -xsendevent -text '\[Return]'
 bindsym $mod+backslash 		exec spotify
 bindsym $mod+bracketright 	exec slack
 bindsym $mod+Return 		exec kitty -1
