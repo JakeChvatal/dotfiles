@@ -87,7 +87,6 @@ label-indicator-padding = 1
 label-indicator-margin = 0
 label-indicator-background = ${color.red}
 
-
 [module/i3]
 type = internal/i3
 strip-wsnumbers = true
