@@ -1,4 +1,5 @@
 set $mod Mod4
+set $tab 23
 floating_modifier $mod
 
 # default monitor locations
@@ -10,13 +11,13 @@ set $mon2 DP-2
 font pango:monospace 8
 
 # power
-bindsym $mod+Escape 		poweroff
-bindsym $mod+Shift+Escape 	reboot
+bindsym $mod+Escape 		exec poweroff
+bindsym $mod+Shift+Escape 	exec reboot
 
 # run gui programs
 bindsym $mod+semicolon 	exec emacs
 bindsym $mod+apostrophe exec firefox
-bindsym $mod+backslack 	exec spotify
+bindsym $mod+backslash 	exec spotify
 bindsym $mod+Shift_R 	exec slack
 bindsym $mod+Return 	exec kitty -1
 
@@ -68,22 +69,21 @@ bindsym $mod+l 		focus right
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+l move right
 
-bindsym $mod+Shift+Tab workspace back_and_forth
-bindsym $mod+Tab [con_mark=_last] focus
+bindsym $mod+n resize grow width 5 px or 5 ppt
 
-# i3 functions
-bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+Tab 	workspace back_and_forth
+bindsym $mod+f 		fullscreen toggle
 
 # configure workspaces
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
+set $ws1  "1"
+set $ws2  "2"
+set $ws3  "3"
+set $ws4  "4"
+set $ws5  "5"
+set $ws6  "6"
+set $ws7  "7"
+set $ws8  "8"
+set $ws9  "9"
 set $ws10 "10"
 
 # switch to workspace
@@ -118,32 +118,7 @@ bindsym $mod+r restart
 # exit i3 (logs you out of your X session)
 # bindsym $mod+Shift+x exec "i3-msg exit"
 
-# resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
-
-# bindsym $mod+r mode "resize"
 
 # appearance
 for_window [class="^.*"] border pixel 1
