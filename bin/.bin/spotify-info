@@ -1,0 +1,9 @@
+#!/bin/bash
+# from https://github.com/kylesferrazza/dot/blob/master/bin/.bin/spotify-info
+
+STAT="$(playerctl status)"
+if test "$STAT" = "Playing" -o "$STAT" = "Paused"; then
+  echo "$(playerctl metadata title) - $(playerctl metadata artist)"
+else
+  exit 1
+fi

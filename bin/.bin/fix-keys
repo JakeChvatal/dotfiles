@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# simple fix for bluetooth keyboard resetting connection (and losing keybindings)
+
+
+# sleep 5
+xmodmap $HOME/.Xmodmap
+# short press on caps lock is escape
+xcape -e 'Hyper_L=Escape'
+
+if [[ -n $(dmesg | grep "AnnePro2 P2 Keyboard") ]]
+then 
+	while sleep 2 
+	do
+		xmodmap $HOME/.Xmodmap
+		# short press on caps lock is escape
+		xcape -e 'Hyper_L=Escape'
+	done
+fi
