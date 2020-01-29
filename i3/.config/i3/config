@@ -118,11 +118,98 @@ mode "L1" {
 	bindsym slash	exec playerctl next
 
 	bindsym $mod+c mode "default"
+	bindsym $mod+x mode "L2"
+	bindsym $mod+z mode "L3"
 	bindsym Excape mode "default"
 	bindsym Return mode "default"
 }
 
 bindsym $mod+c mode "L1"
+
+# don't have to hold $mod for these!
+mode "L2" {
+
+	# arrow keys cheat
+	bindsym w exec xvkbd -xsendevent -text '\[Up]'
+	bindsym a exec xvkbd -xsendevent -text '\[Left]'
+	bindsym s exec xvkbd -xsendevent -text '\[Down]'
+	bindsym d exec xvkbd -xsendevent -text '\[Right]'
+	
+	# one hand browsing
+	bindsym q 	focus left
+	bindsym e 	focus right
+	bindsym $mod+q 	move left
+	bindsym $mod+e  move right
+	
+	# switch to workspace
+	bindsym 1 workspace number $ws1
+	bindsym 2 workspace number $ws2
+	bindsym 3 workspace number $ws3
+	bindsym 4 workspace number $ws4
+	bindsym 5 workspace number $ws5
+	bindsym 6 workspace number $ws6
+	bindsym 7 workspace number $ws7
+	bindsym 8 workspace number $ws8
+	bindsym 9 workspace number $ws9
+	bindsym 0 workspace number $ws10
+	
+	bindsym n resize grow width 5 px or 5 ppt
+	bindsym m resize grow width 5 px or 5 ppt
+	
+	bindsym comma 	exec playerctl previous
+	bindsym period 	exec playerctl play-pause
+	bindsym slash	exec playerctl next
+
+	bindsym $mod+c mode "L1"
+	bindsym $mod+x mode "default"
+	bindsym $mod+z mode "L3"
+	bindsym Excape mode "default"
+	bindsym Return mode "default"
+}
+bindsym $mod+x mode "L2"
+
+# don't have to hold $mod for these!
+mode "L3" {
+
+	# arrow keys cheat
+	bindsym w exec xvkbd -xsendevent -text '\[Up]'
+	bindsym a exec xvkbd -xsendevent -text '\[Left]'
+	bindsym s exec xvkbd -xsendevent -text '\[Down]'
+	bindsym d exec xvkbd -xsendevent -text '\[Right]'
+	
+	# one hand browsing
+	bindsym q 	focus left
+	bindsym e 	focus right
+	bindsym $mod+q 	move left
+	bindsym $mod+e  move right
+	
+	# switch to workspace
+	bindsym 1 workspace number $ws1
+	bindsym 2 workspace number $ws2
+	bindsym 3 workspace number $ws3
+	bindsym 4 workspace number $ws4
+	bindsym 5 workspace number $ws5
+	bindsym 6 workspace number $ws6
+	bindsym 7 workspace number $ws7
+	bindsym 8 workspace number $ws8
+	bindsym 9 workspace number $ws9
+	bindsym 0 workspace number $ws10
+	
+	bindsym n resize grow width 5 px or 5 ppt
+	bindsym m resize grow width 5 px or 5 ppt
+	
+	bindsym comma 	exec playerctl previous
+	bindsym period 	exec playerctl play-pause
+	bindsym slash	exec playerctl next
+
+	bindsym $mod+c mode "L1"
+	bindsym $mod+x mode "L2"
+	bindsym $mod+z mode "default"
+	bindsym Excape mode "default"
+	bindsym Return mode "default"
+}
+bindsym $mod+z mode "L3"
+
 
 # configure workspaces
 set $ws1  "1"
