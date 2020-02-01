@@ -3,7 +3,7 @@
 # simple fix for bluetooth keyboard resetting connection (and losing keybindings)
 
 
-# sleep 5
+sleep 5
 xmodmap $HOME/.Xmodmap
 # short press on caps lock is escape
 xcape -e 'Hyper_L=Escape'

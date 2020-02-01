@@ -103,6 +103,7 @@ alias ec="emacs"
 alias sudo="sudo "
 alias spotify="/usr/bin/spotify --force-device-scale-factor=2.5"
 
+alias td="todoist "
 export PATH=$PATH:~/.bin
 export PATH="$HOME/.node_modules/bin:$PATH" 
 export npm_config_prefix=~/.node_modules

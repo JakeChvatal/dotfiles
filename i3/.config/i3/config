@@ -11,8 +11,8 @@ set $mon2 DP-2
 font pango:monospace 8
 
 # power
-bindsym $mod+Escape 		exec poweroff
-bindsym $mod+Shift+Escape 	exec reboot
+bindsym $mod+Caps_Lock 		exec poweroff
+bindsym $mod+Shift+Caps_Lock 	exec reboot
 
 # run gui programs
 bindsym $mod+semicolon 		exec emacs

@@ -1,6 +1,4 @@
 clear Lock
+keycode 133 = Escape
 keycode 66 = Hyper_L
-keycode 9 = Escape
-keycode 133 = Caps_Lock
-
-
+keycode 9 = Caps_Lock
