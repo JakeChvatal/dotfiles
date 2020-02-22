@@ -1,5 +1,11 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
 
+
+;; Line number configuration
+;; (setq linum-relative-backend 'display-line-numbers-mode)
+;; (linum-relative-on)
+(setq display-line-numbers-type 'relative)
+
 ;; ### FONTS ###
 (defun fira-code-mode--make-alist (list)
   "Generate prettify-symbols alist from LIST."
@@ -32,6 +38,9 @@
     "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<" "<~"
     "<~~" "</" "</>" "~@" "~-" "~=" "~>" "~~" "~~>" "%%"
     ))
+
+;; org alert default style
+(setq alert-default-style 'libnotify)
 
 (defvar fira-code-mode--old-prettify-alist)
 

@@ -109,12 +109,10 @@ export PATH="$HOME/.node_modules/bin:$PATH"
 export npm_config_prefix=~/.node_modules
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:/home/jake/.gem/ruby/2.6.0/bin
+export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
 export JAVA_HOME=$JAVA_HOME:/usr/lib/jvm/java-8-openjdk/jre
 autoload -Uz compinit
 compinit
-
-# Completion for kitty
-kitty + complete setup zsh | source /dev/stdin
 
 eval $(opam env)
 

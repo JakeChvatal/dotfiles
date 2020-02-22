@@ -30,8 +30,8 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 # make trackpad tappable
-xinput set-prop 14 301 1
-xinput set-prop 14 302 1
+xinput set-prop 14 316 1
+# xinput set-prop 14 302 1
 
 # start gnome-keyring daemon
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)

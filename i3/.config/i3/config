@@ -21,7 +21,7 @@ bindsym $mod+apostrophe		exec firefox
 # bindsym $mod+apostrophe 	exec xvkbd -xsendevent -text '\[Return]'
 bindsym $mod+backslash 		exec spotify
 bindsym $mod+bracketright 	exec slack
-bindsym $mod+Return 		exec kitty -1
+bindsym $mod+Return 		exec termite
 bindsym $mod+BackSpace 		exec thunar
 
 # arrow keys cheat
