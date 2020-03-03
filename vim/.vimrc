@@ -10,3 +10,4 @@ call plug#end()
 map <C-n> :NERDTreeToggle<CR>
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTee.isTabTree()) | q | endif
+
