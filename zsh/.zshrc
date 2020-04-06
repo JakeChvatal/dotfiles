@@ -117,3 +117,5 @@ compinit
 eval $(opam env)
 
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then exec startx; fi
+
+eval $(thefuck --alias)

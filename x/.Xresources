@@ -1,38 +1,38 @@
 #include ".Xresources.hidpi"
 
 ! special
-*.foreground:   #bbcfc5
+*.foreground:   #bbc2cf
 *.background:   #282c34
-*.cursorColor:  #bbcfc5
+*.cursorColor:  #5B6268
 
 ! black
-*.color0:       #19161d
-*.color8:       #d6c0f5
+*.color0:       #1B2229
+*.color8:       #1c1f24
 
 ! red
-*.color1:       #221f28
+*.color1:       #ff6c6b
 *.color9:       #da8548
 
 ! green
-*.color2:       #342f3b
+*.color2:       #4db5bd
 *.color10:      #98be65
 
 ! yellow
-*.color3:       #46d9ff
+*.color3:       #ECBE7B
 *.color11:      #c678dd
 
 ! blue
-*.color4:       #6c6379
-*.color12:      #51afef
+*.color4:       #51afef
+*.color12:      #2257A0
 
 ! magenta
-*.color5:       #8f879a
+*.color5:       #c678dd
 *.color13:      #e987b5
 
 ! cyan
-*.color6:       #b6b1be
-*.color14:      #51afef
+*.color6:       #46D9FF
+*.color14:      #5699AF
 
 ! white
-*.color7:       #5b6268
-*.color15:      #aed8eb
+*.color7:       #DFDFDF
+*.color15:      #5B6268
