@@ -6,6 +6,7 @@ floating_modifier $mod
 # default monitor locations
 set $mon1 eDP-1
 set $mon2 DP-2
+set $mon3 DP-1
 
 # power
 bindsym $mod+Caps_Lock 		exec poweroff
@@ -118,6 +119,9 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 # with two monitors, send workspace 10 to the second
 workspace $ws10 output $mon2
 
+# with three monitors, send workspace 9 to the third
+workspace $ws9 output $mon3
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+r restart
 # exit i3 (logs you out of your X session)
@@ -136,7 +140,7 @@ gaps top 0
 # popup configuration
 popup_during_fullscreen leave_fullscreen
 floating_minimum_size 300 x 300
-floating_maximum_size 1600 x 1200
+floating_maximum_size 3200 x 2400
 
 # color scheme
 # *client.<class>*      <border>  <bg>  <text>  <indic.>  <child_border>
