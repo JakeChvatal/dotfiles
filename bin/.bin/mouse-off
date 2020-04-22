@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# disables touchpad
+xinput --set-prop 16 161 0

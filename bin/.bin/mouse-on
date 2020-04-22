@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# turns touchpad on
+xinput --set-prop 16 161 1
