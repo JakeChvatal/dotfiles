@@ -3,7 +3,7 @@
 # sets up a cli ubuntu development environment
 
 # install packages
-sudo apt install neovim tmux ranger stow
+sudo apt install neovim tmux ranger stow python3
 
 # checkout only the necessary subdirectories from my repository
 mkdir dotfiles
@@ -31,10 +31,12 @@ stow vim
 stow nvim
 stow tmux
 
-# out of dotfiles
 cd ..
+
+# refresh installation
+# nvim -E -s -u "~/.vimrc" +PlugInstall +qall
+nvim --headless +PlugInstall +qall
 
 # zsh is default shell
 sudo chsh -s $(which zsh)
 source .zshrc
-
