@@ -48,12 +48,12 @@ syntax enable               " enable syntax highlighting
 set nobackup
 set nowritebackup
 set noswapfile
-
+let g:limelight_conceal_ctermfg = 'DarkGray'
 
 " --- Key Mappings ---
 let mapleader=" "                   " leader key is space
 map <leader>t :NERDTreeToggle<CR>   " toggle nerdtree
-map <leader>g :Magit<CR>             " toggle magit
+map <leader>f :Goyo<CR>             " enter focus mode
 map rr :source ~/.vimrc<CR>         " reload vim
 
 
@@ -61,28 +61,15 @@ map rr :source ~/.vimrc<CR>         " reload vim
 " not sure what this does ...
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTee.isTabTree()) | q | endif
 
+" Goyo triggers focus mode
+autocmd! User GoyoEnter Limelight  | set cursorline!
+autocmd! User GoyoLeave Limelight! | set cursorline
+
 " remove trailing whitespace on save
 " https://gitlab.com/kmidkiff/vim-configuration/-/blob/master/vimrc
 autocmd BufWritePre * :%s/\s\+$//e
 
 " smaller indentation for html, css
-autocmd FileType css setlocal shiftwidth=2 tabstop=2
-autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType css    setlocal shiftwidth=2 tabstop=2
+autocmd FileType html   setlocal shiftwidth=2 tabstop=2
 autocmd FileType markdown setlocal nofoldenable
-
-
-" https://stackoverflow.com/questions/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping
-" remap: option that makes mappings work recursively
-" map: recursive mapping commands
-" noremap: does not expand the next mapping
-" nnoremap: normal mode
-" vnoremap: visual mode
-" o: operator-pending
-" x: visual only
-" s: select only
-" i: insert mode only
-" c: command line
-" l: insert, command line, regexp search
-"
-
-
