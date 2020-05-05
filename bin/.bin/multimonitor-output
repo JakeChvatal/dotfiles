@@ -1,22 +1,31 @@
 #!/bin/bash
 
+sleep 1
 # if a second monitor is connected: 
 if [[ $(xrandr -q | grep ' connected' | wc -l) == 2 ]]; then
 	# if the lid is closed to this laptop, only power the second monitor
 	if [[ $(cat /proc/acpi/button/lid/LID0/state | grep 'closed' | wc -l) == 1 ]]; then
-		xrandr --output DP-2 --scale 2x2 --mode 1920x1080i --auto && xrandr --output DP-2 --scale 2x2 --mode 1920x1080 --auto &&xrandr --output eDP-1 --off
-	# if the lid is open, display on both monitors
+		# if the lid is closed, display only on hte external monitor
+		echo "Displaying to DP-2"
+		xrandr --output DP-2 --scale 2x2 --mode 1920x1080i --auto && xrandr --output DP-2 --scale 2x2 --mode 1920x1080 --auto && xrandr --output eDP-1 --off
 	else
-		xrandr --output eDP-1 --mode 3840x2160 --scale 1x1 --auto --output DP-2 --scale 2x2 --mode 1920x1080 --left-of eDP-1
+		# if the lid is open, display on both monitors
+		echo "Displaying to eDP-1 and DP-2"
+		xrandr --output eDP-1 --mode 3840x2160 --scale 1x1 --pos 3840x0 --output DP-2 --scale 2x2 --mode 1920x1080 --pos 0x0 
 	fi
 
 # if three monitors are connected:
 elif [[ $(xrandr -q | grep ' connected' | wc -l) == 3 ]]; then
 	if [[ $(cat /proc/acpi/button/lid/LID0/state | grep 'closed' | wc -l) == 1 ]]; then
-		xrandr --output DP-1 --scale 2x2 --mode 1920x1080 --auto && xrandr --output DP-2 --scale 2x2 --mode 1920x1080 --auto
-	# if the lid is open, display on both monitors
+		# if the lid is closed, display only on the external monitors
+		echo "Displaying to DP-1 and DP-2"
+		xrandr --output eDP-1 --mode 3840x2160 --scale 1x1 --pos 3840x0 --output DP-2 --scale 2x2 --mode 1920x1080 --pos 0x0 
 	else 
-		xrandr --output eDP-1 --mode 3840x2160 --scale 1x1 --pos 3840x0 --output DP-2 --scale 2x2 --mode 1920x1080 --pos 0x0 --output DP-1 --scale 2x2 --mode 1920x1080 --pos 11520x0
+		# if the lid is open, display on both monitors
+		echo "Displaying to eDP-1, DP-1 and DP-2"
+		xrandr --output eDP-1 --mode 3840x2160 --scale 1x1 --pos 3840x0 --output DP-2 --scale 2x2 --mode 1920x1080 --pos 0x0 --output DP-1 --scale 2x2 --mode 1920x1080 --pos 7680x0 
+		xrandr --output DP-1 --scale 1x1 --auto 
+		xrandr --output DP-1 --scale 2x2 --auto 
 	fi
 
 else 
