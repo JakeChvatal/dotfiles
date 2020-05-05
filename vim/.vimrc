@@ -12,7 +12,7 @@ Plug 'tpope/vim-surround'       " close parens
 Plug 'scrooloose/nerdtree'		" directory navigation
 Plug 'junegunn/goyo.vim' 		" minimalist vim
 Plug 'junegunn/limelight.vim'
-Plug 'tpope/vim-fugitive'		" git
+Plug 'jreybert/vimagit'         " git
 Plug 'wincent/command-t'		" fuzzy file finding
 Plug 'justmao945/vim-clang'		" clang support for vim
 Plug 'godlygeek/tabular'        " text alignment
@@ -53,6 +53,7 @@ set noswapfile
 " --- Key Mappings ---
 let mapleader=" "                   " leader key is space
 map <leader>t :NERDTreeToggle<CR>   " toggle nerdtree
+map <leader>g :Magit<CR>             " toggle magit
 map rr :source ~/.vimrc<CR>         " reload vim
 
 
