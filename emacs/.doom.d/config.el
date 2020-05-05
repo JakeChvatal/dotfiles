@@ -1,10 +1,24 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
 
+;; clipboard between systems
+(setq x-select-enable-clipboard t)
+(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
 ;; Line number configuration
-;; (setq linum-relative-backend 'display-line-numbers-mode)
-;; (linum-relative-on)
 (setq display-line-numbers-type 'relative)
+
+;; ### mode fixes and configuration ###
+(add-hook 'julia-mode 'julia-repl-mode)
+(add-hook 'darkroom-mode 'visual-line-mode)
+(add-hook 'writeroom-mode 'visual-line-mode)
+
+;; stack install stylish-haskell
+(custom-set-variables
+ '(haskell-stylish-on-save t))
+
+;; add auto spacing at 80 lines to org mode
+(add-hook 'org-mode-hook '(lambda () (setq fill-column 80)))
+(add-hook 'org-mode-hook 'turn-on-auto-fill)
 
 ;; ### FONTS ###
 (defun fira-code-mode--make-alist (list)
@@ -76,9 +90,11 @@
 ;; ### PATH DEBUG FIX ###
 (setq exec-path-from-shell-arguments '("-i"))
 
+
 ;; ### BROWSER ###
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "firefox")
+
 
 ;; ### ORG MODE ###
 
