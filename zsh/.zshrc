@@ -77,3 +77,6 @@ fi
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
     exec startx
 fi
+
+# intel proxy config
+#
