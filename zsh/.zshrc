@@ -1,121 +1,61 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+autoload -Uz compinit
+compinit
 
-# Path to your oh-my-zsh installation.
-export ZSH="/home/jake/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# TODO: remove oh-my-zsh from configuration. write my own!
+export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
+HYPHEN_INSENSITIVE="true" # _ and - correspond to same characters in autocomplete
+DISABLE_AUTO_UPDATE="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true" # faster repo status check
 plugins=(git)
-
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# --- Settings ---
+setopt INC_APPEND_HISTORY # add commands to history as they are entered
+setopt AUTO_CD            # auto change directories
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# --- Aliases ---
 alias vi="nvim"
-alias vim="nvim"
+alias vim="nvim" # always use nvim
 alias ec="emacs"
-alias sudo="sudo "
-alias spotify="/usr/bin/spotify --force-device-scale-factor=2.5"
+alias sudo="sudo " # fix sudo for some commands
+alias spotify="/usr/bin/spotify --force-device-scale-factor = 2.5"
+alias td="todoist " # fast todoist
 
-alias td="todoist "
-export PATH=$PATH:~/.bin
-export PATH="$HOME/.node_modules/bin:$PATH" 
+# Git aliases
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch '
+alias gc='git commit'
+alias gd='git diff'
+alias gco='git checkout '
+
+# --- Path ---
 export npm_config_prefix=~/.node_modules
+export EDITOR='nvim'
+export LANG=en_US.UTF-8
+export ARCHFLAGS="-arch x86_64"
+export MANPATH="/usr/local/man:$MANPATH"
+
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$PATH:~/.bin
+export PATH="$HOME/.node_modules/bin:$PATH"
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:/home/jake/.gem/ruby/2.6.0/bin
 export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
 export JAVA_HOME=$JAVA_HOME:/usr/lib/jvm/java-8-openjdk/jre
-autoload -Uz compinit
-compinit
 
-eval $(opam env)
+# load opam if installed
+if opam --version 1> /dev/null; then
+    eval $(opam env)
+fi
 
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then exec startx; fi
+# configure f if installed
+if thefuck 2>/dev/null; then
+    eval $(thefuck --alias)
+fi
 
-eval $(thefuck --alias)
+# startx if tty1 and a display is connected
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+    exec startx
+fi

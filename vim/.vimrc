@@ -14,7 +14,6 @@ Plug 'joshdick/onedark.vim'       " one dark theme for vim
                                   " Plug 'fatih/vim-go'                 " go for vim
 call plug#end()
 
-
                                   " --- Vim Settings ---
 syntax on                         " syntax highlighting
 colorscheme onedark               " one dark colors
@@ -72,7 +71,7 @@ map <leader>t      : NERDTreeToggle<CR>
 " enter focus mode
 map <leader>f      : Goyo<CR>
 " start tabularize
-map <leader>r      : Tabularize /
+map <leader>d      : Tabularize /
 " reload vim
 map <leader>rr     : source ~/.vimrc<CR>
 
