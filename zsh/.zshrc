@@ -27,8 +27,10 @@ alias gs='git status '
 alias ga='git add '
 alias gb='git branch '
 alias gc='git commit'
+alias gcm='git commit -m '
 alias gd='git diff'
 alias gco='git checkout '
+alias gcb='git checkout -b '
 
 # --- Path ---
 export npm_config_prefix=~/.node_modules
@@ -53,6 +55,22 @@ fi
 # configure f if installed
 if thefuck 2>/dev/null; then
     eval $(thefuck --alias)
+fi
+
+# Tmux specfic configuration
+export TERM=xterm-256color
+[ -n "$TMUX" ] && export TERM=screen-256color
+
+# Variable prompt if SSH'ed into the system
+# https://gitlab.com/kmidkiff/zsh-configuration/-/blob/master/zshrc
+primary="146"
+accent="9"
+accent2="120"
+ssh_msg=""
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    primary="9"
+    accent="146"
+    ssh_msg="[$(hostname)] "
 fi
 
 # startx if tty1 and a display is connected
