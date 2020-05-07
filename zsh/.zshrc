@@ -48,12 +48,12 @@ export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
 export JAVA_HOME=$JAVA_HOME:/usr/lib/jvm/java-8-openjdk/jre
 
 # load opam if installed
-if opam --version 1> /dev/null; then
+if opam --version &> /dev/null; then
     eval $(opam env)
 fi
 
 # configure f if installed
-if thefuck 2>/dev/null; then
+if thefuck -v &> /dev/null; then
     eval $(thefuck --alias)
 fi
 
@@ -74,9 +74,12 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 fi
 
 # startx if tty1 and a display is connected
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]] && startx 2> /dev/null; then
     exec startx
 fi
 
-# intel proxy config
-#
+# add proxy if it exists
+PROCFILE=$HOME/.proxy
+if test -f "$PROCFILE"; then
+    source $PROCFILE
+fi
