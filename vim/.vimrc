@@ -7,7 +7,6 @@ endif
 
 " NOTE: A TODO with no comment corresponds to an item that is currently being tried,
 "       and may be removed in the future.
-
 " --- Plugins ---
 call plug#begin('~/.vim/plugged')
 " editing
@@ -32,6 +31,8 @@ Plug 'scrooloose/nerdtree'        " directory navigation TODO
 Plug 'tpope/vim-projectionist'    " navigation of related files TODO
 Plug 'wincent/loupe'              " improves search TODO
 Plug 'bkad/CamelCaseMotion'       " keybinds for navigating camelcase TODO
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " fuzzy file finding
+Plug 'junegunn/fzf.vim'
 
 " appearance
 Plug 'vim-airline/vim-airline'    " status bar
@@ -185,8 +186,11 @@ nnoremap Y y$
 
 " --- Event Listeners ---
 " Goyo triggers focus mode
-autocmd! User GoyoEnter Limelight  | set cursorline!
-autocmd! User GoyoLeave Limelight! | set cursorline
+autocmd! User GoyoEnter Limelight  | set cursorline! | :CocDisable
+autocmd! User GoyoLeave Limelight! | set cursorline  | :CocEnable
+
+" nerdtree opens in current dir
+autocmd BufEnter * lcd %:p:h
 
 " remove trailing whitespace on save
 " https://gitlab.com/kmidkiff/vim-configuration/-/blob/master/vimrc
@@ -264,3 +268,29 @@ autocmd FileType markdown setlocal nofoldenable
 " https://www.hillelwayne.com/post/intermediate-vim/
 " https://github.com/ghing/vim-config/blob/master/vimrc check out this vimrc
 " https://github.com/yangmillstheory/vim-snipe
+" https://developer.ibm.com/technologies/systems/tutorials/au-customize_vi/
+" https://dougblack.io/words/a-good-vimrc.html
+" https://github.com/amix/vimrc checkout ultimate vimrc
+" https://www.barbarianmeetscoding.com/blog/2018/10/24/exploring-vim-setting-up-your-vim-to-be-more-awesome-at-vim
+" https://www.reddit.com/r/vim/comments/3h6tef/what_are_your_musthave_configs_and_plugins/
+" https://github.com/tpope/vim-unimpaired
+" https://github.com/vim-vdebug/vdebug
+" https://github.com/tpope/vim-speeddating
+" https://github.com/blueyed/vim-diminactive
+" https://github.com/camspiers/lens.vim
+" https://github.com/tpope/vim-obsession
+" https://github.com/sedm0784/vim-you-autocorrect/
+" https://github.com/rbong/vim-flog
+" https://github.com/reedes/vim-pencil
+" https://github.com/svermeulen/vim-easyclip
+" https://github.com/glts/vim-radical
+" https://github.com/tpope/vim-projectionist
+" https://www.reddit.com/r/vim/comments/g4l5p0/good_plugin_to_navigate_buffers/
+" https://www.reddit.com/r/vim/comments/g2w8px/what_was_your_mindblown_moments_about_vim/
+" https://www.reddit.com/r/vim/comments/gbhvlo/what_am_i_missing_by_not_using_fzf/
+" https://github.com/junegunn/fzf.vim
+" https://github.com/doctorn/dotfiles/blob/master/.vimrc
+" https://github.com/jceb/vimrc
+" https://www.reddit.com/r/vim/comments/fzpdpd/im_loving_the_combination_of_vimtex_goyo/
+" https://www.reddit.com/r/vim/comments/g68bf6/pathogen_is_dead_or_should_be_long_live_vim_8/
+"
