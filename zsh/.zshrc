@@ -14,6 +14,8 @@ source $ZSH/oh-my-zsh.sh
 setopt INC_APPEND_HISTORY # add commands to history as they are entered
 setopt AUTO_CD            # auto change directories
 
+set editing-mode vi # vim-style editing
+
 # --- Aliases ---
 alias vi="nvim"
 alias vim="nvim" # always use nvim
@@ -40,6 +42,7 @@ export ARCHFLAGS="-arch x86_64"
 export MANPATH="/usr/local/man:$MANPATH"
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 export PATH=$PATH:~/.bin
 export PATH="$HOME/.node_modules/bin:$PATH"
 export PATH=$PATH:/usr/local/bin
@@ -83,3 +86,6 @@ PROCFILE=$HOME/.proxy
 if test -f "$PROCFILE"; then
     source $PROCFILE
 fi
+
+# https://gitlab.com/kmidkiff/zsh-configuration/-/blob/master/zshrc
+#
