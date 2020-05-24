@@ -22,6 +22,7 @@ Plug 'tpope/vim-repeat'           " improves repeats TODO
 Plug 'wellle/targets.vim'         " better targeting text for operating inside TODO make use of this!
 Plug 'svermeulen/vim-yoink'       " cycle between pastes when pasting
 Plug 'dense-analysis/ale'         " linting
+Plug 'tpope/vim-unimpaired'       " bracket mapping
 
 " navigation
 Plug 'scrooloose/nerdtree'        " directory navigation
@@ -35,8 +36,12 @@ Plug 'junegunn/goyo.vim'          " minimalist vim
 Plug 'junegunn/limelight.vim'     " highlight current paragraph
 Plug 'joshdick/onedark.vim'       " one dark theme for vim
 Plug 'camspiers/lens.vim'         " auto window resizing TODO do i really ever need this?
-Plug 'airblade/vim-gitgutter'     " displays git diff info
 Plug 'vim-scripts/folddigest.vim' " displays folds as summary
+
+" git TODO
+Plug 'airblade/vim-gitgutter'     " displays git diff info
+Plug 'tpope/vim-fugitive'         " vim convenience functions
+Plug 'rbong/vim-flog'             " vim branch viewer
 
 " tools
 Plug 'kassio/neoterm'               " repl in vim TODO
@@ -197,6 +202,9 @@ nnoremap <leader>tk  :tabnext<CR>
 nmap <leader>n      : NERDTreeToggle<CR>
 nmap <leader>f      :FZF<CR>
 " nmap <leader>tf     : NERDTreeFind<CR>
+
+" git
+nmap <leader>g     :Gstatus<CR>
 
 " view undo tree
 map <leader>u      : UndotreeToggle<CR>
