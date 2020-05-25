@@ -1,15 +1,4 @@
 # Config file for Powerlevel10k with the style of robbyrussell theme from Oh My Zsh.
-#
-# Original: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes#robbyrussell.
-#
-# Replication of robbyrussell theme is exact. The only observable difference is in
-# performance. Powerlevel10k prompt is very fast everywhere, even in large Git repositories.
-#
-# Usage: Source this file either before or after loading Powerlevel10k.
-#
-#   source ~/powerlevel10k/config/p10k-robbyrussell.zsh
-#   source ~/powerlevel10k/powerlevel10k.zsh-theme
-
 # Temporarily change options.
 'builtin' 'local' '-a' 'p10k_config_opts'
 [[ ! -o 'aliases'         ]] || p10k_config_opts+=('aliases')
@@ -20,16 +9,11 @@
 () {
   emulate -L zsh
 
-  # Unset all configuration options.
-  unset -m 'POWERLEVEL9K_*|DEFAULT_USER'
+  unset -m 'POWERLEVEL9K_*|DEFAULT_USER'                # Unset all configuration options.
+  autoload -Uz is-at-least && is-at-least 5.1 || return # Zsh >= 5.1 is required.
 
-  # Zsh >= 5.1 is required.
-  autoload -Uz is-at-least && is-at-least 5.1 || return
-
-  # Left prompt segments.
-  typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(prompt_char dir vcs)
-  # Right prompt segments.
-  typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+  typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(prompt_char dir vcs) # Left prompt segments.
+  typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()                   # Right prompt segments.
 
   # Basic style options that define the overall prompt look.
   typeset -g POWERLEVEL9K_BACKGROUND=                            # transparent background
@@ -38,19 +22,13 @@
   typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SEGMENT_SEPARATOR=        # no end-of-line symbol
   typeset -g POWERLEVEL9K_VISUAL_IDENTIFIER_EXPANSION=           # no segment icons
 
-  # Green prompt symbol if the last command succeeded.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS}_FOREGROUND=green
-  # Red prompt symbol if the last command failed.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS}_FOREGROUND=red
-  # Prompt symbol: bold arrow.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_CONTENT_EXPANSION='%B➜ '
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS}_FOREGROUND=green  # success prompt
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS}_FOREGROUND=red # failure prompt
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_CONTENT_EXPANSION='%B➜ '   # Prompt symbol: bold arrow.
 
-  # Cyan current directory.
-  typeset -g POWERLEVEL9K_DIR_FOREGROUND=cyan
-  # Show only the last segment of the current directory.
-  typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_last
-  # Bold directory.
-  typeset -g POWERLEVEL9K_DIR_CONTENT_EXPANSION='%B$P9K_CONTENT'
+  typeset -g POWERLEVEL9K_DIR_FOREGROUND=cyan                    # Cyan current directory.
+  typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_last      # Show only the last segment of the current directory.
+  typeset -g POWERLEVEL9K_DIR_CONTENT_EXPANSION='%B$P9K_CONTENT' # Bold directory.
 
   # Git status formatter.
   function my_git_formatter() {
@@ -72,28 +50,27 @@
     fi
   }
 
-
-  # changes prompt name if ssh'd into system
+  # SSH Status formatter
   function my_ssh_formatter() {
     emulate -L zsh
     if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-        typeset -g "[$(hostname)] "
+        primary="9"
+        accent="146"
+        typeset -g "%F{$accent3}[$(hostname)]%f "
+
+
     fi
   }
+
   functions -M my_git_formatter 2>/dev/null
   functions -M my_ssh_formatter 2>/dev/null
 
-  # Disable the default Git status formatting.
   typeset -g POWERLEVEL9K_VCS_DISABLE_GITSTATUS_FORMATTING=true
-  # Install our own Git status formatter.
   typeset -g POWERLEVEL9K_VCS_CONTENT_EXPANSION='${$((my_git_formatter(1)))+${my_git_format}}'
   typeset -g POWERLEVEL9K_VCS_LOADING_CONTENT_EXPANSION='${$((my_git_formatter()))+${my_git_format}}'
-  # Grey Git status when loading.
   typeset -g POWERLEVEL9K_VCS_LOADING_FOREGROUND=246
 
-  # instant prompt
-  # TODO change to quiet once i am sure config works
-  typeset -g POWERLEVEL9K_INSTANT_PROMPT=verbose
+  typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet # no debug output
 
   # If p10k is already loaded, reload configuration.
   # This works even with POWERLEVEL9K_DISABLE_HOT_RELOAD=true.
