@@ -19,6 +19,7 @@ export LANG=en_US.UTF-8
 export ARCHFLAGS="-arch x86_64"
 export MANPATH="/usr/local/man:$MANPATH"
 export BROWSER=$(which google-chrome chromium-browser firefox links2 links lynx qutebrowser | grep -Pm1 '^/')
+export RANGER_LOAD_DEFAULT_RC="FALSE" # only load zsh once
 
 # TODO only add things to path if they exist?
 typeset -U PATH path
