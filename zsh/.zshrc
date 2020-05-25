@@ -112,7 +112,7 @@ function p_mgr() {
     alias pug='sudo apt upgrade'
     alias puu='sudo apt update && sudo apt upgrade'
     alias par='sudo apt autoremove'
-    alias ps 'sudo apt search'
+    alias ps='sudo apt search'
    elif cmd_exists apt-get; then
     alias pi='sudo apt-get install'
     alias pp='sudo apt-get purge'
