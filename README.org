@@ -1,0 +1,12 @@
+#+TITLE: Dotfiles
+Configuration files for my Arch Linux system.
+
+* Installation
+These files are managed by GNU Stow.
+To install files on your system:
+#+BEGIN_SRC sh
+git clone https://github.com/jakechvatal/dotfiles
+cd dotfiles
+stow {pkg}
+#+END_SRC
+, where {pkg} is the package with the associated configuration to install.
