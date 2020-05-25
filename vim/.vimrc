@@ -1,85 +1,92 @@
 " Install vim-plug if not already installed
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  silent :PlugInstall
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    silent :PlugInstall
 endif
 
 " NOTE: A TODO with no comment corresponds to an item that is currently being tried,
 "       and may be removed in the future.
+" TODO improve interaction between vim and terminal
+" TODO integrate <silent> bindings for better ergonomics
+" https://github.com/CKolkey/.dotfiles/blob/master/nvim_init.vim
+" http://thedarnedestthing.com/space%20vim
+" http://vimsheet.com/
+" https://vim.rtorr.com/
+" https://github.com/huyvohcmc/dotfiles
+" https://github.com/Blaradox/dotFiles
+" https://github.com/xero/dotfiles
 
 " --- Plugins ---
 call plug#begin('~/.vim/plugged')
 " editing
-Plug 'tpope/vim-surround'         " close parens
-Plug 'mbbill/undotree'            " undo tree
-" Plug 'sjl.gundo.vim TODO try this plugin out
-Plug 'wincent/terminus'           " better terminal integration
-Plug 'farmergreg/vim-lastplace'   " save place in file
-Plug 'junegunn/vim-easy-align'    " align text
-Plug 'matze/vim-move'             " move lines without cut-paste TODO
-Plug 'tomtom/tcomment_vim'        " autocomment support TODO make use of this!
-Plug 'tpope/vim-repeat'           " improves repeats
-Plug 'vim-scripts/visualrepeat'   " repeat in visual mode
-Plug 'wellle/targets.vim'         " better targeting text for operating inside TODO make use of this!
-Plug 'svermeulen/vim-yoink'       " cycle between pastes when pasting
-Plug 'dense-analysis/ale'         " linting
-Plug 'tpope/vim-unimpaired'       " bracket mapping
-" Plug 'kana/vim-textobj-user'      " create custom text objects TODO
-Plug 'mattn/emmet-vim'   " expanding abbreviations
-Plug 'sirver/ultisnips'  " snippet engine
-Plug 'honza/vim-snippets' " custom snippets
+Plug 'tpope/vim-surround'              " close parens
+Plug 'junegunn/vim-easy-align'         " align text
+Plug 'matze/vim-move'                  " move lines without cut-paste
+Plug 'tomtom/tcomment_vim'             " autocomment support TODO make use of this!
+Plug 'tpope/vim-repeat'                " improves repeats
+Plug 'vim-scripts/visualrepeat'        " repeat in visual mode
+Plug 'maxbrunsfeld/vim-yankstack'      " track yanks
+Plug 'tpope/vim-unimpaired'            " bracket mapping
+Plug 'chrisbra/NrrwRgn'                " narrow region for editing file in new buffer
+Plug 'wellle/targets.vim'              " better targets
+Plug 'easymotion/vim-easymotion'       " better configuration for motions
+Plug 'michaeljsmith/vim-indent-object' " objects offering indentation interaction
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Autocompletion
+Plug 'dense-analysis/ale' " linting
+if has('nvim')            " autocompletion
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
 endif
-let g:deoplete#enable_at_startup = 1
 
-" navigation
-Plug 'scrooloose/nerdtree'        " directory navigation
+" Navigation
+Plug 'scrooloose/nerdtree'                          " directory navigation
+Plug 'Xuyuanp/nerdtree-git-plugin' " git integration for nerdtree
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " fuzzy file finding - incredible!
 Plug 'junegunn/fzf.vim'
+Plug 'vim-scripts/multisearch.vim'                  " multiple search queries at once TODO map
+Plug 'jceb/vim-shootingstar'                        " leader * for searching for subpart of text TODO
+Plug 'mhinz/vim-sayonara'                           " sensibly close buffer
+Plug 'majutsushi/tagbar'                            " browse tags of current file
+Plug 'vim-scripts/utl.vim'                          " text linking
 
-Plug 'chrisbra/NrrwRgn' " narrow region for editing file in new buffer
-Plug 'ervandew/supertab'  " perform insert mode autocomplete with tab
-" TODO figure out how to stop supertab after quote
-Plug 'bogado/file-line' " edit file with vim and goto line TODO
-Plug 'vim-scripts/multisearch.vim' " multiple search queries at once TODO map
-Plug 'yangmillstheory/vim-snipe' " quick navigation ! TODO bind
-Plug 'jceb/vim-shootingstar'     " leader * for searching for subpart of text TODO
-Plug 'mhinz/vim-sayonara'        " sensibly close buffer
-
-" appearance
-Plug 'vim-airline/vim-airline'    " status bar
-Plug 'junegunn/goyo.vim'          " minimalist vim
-Plug 'junegunn/limelight.vim'     " highlight current paragraph
-Plug 'joshdick/onedark.vim'       " one dark theme for vim
-Plug 'camspiers/lens.vim'         " auto window resizing TODO do i really ever need this?
-Plug 'vim-scripts/folddigest.vim' " displays folds as summary
-" Plug 'tpope/vim-rsi'              " emacs/shell shortcuts in vim TODO learn these shortcuts!
+" Appearance
+Plug 'vim-airline/vim-airline'       " status bar
+Plug 'junegunn/goyo.vim'             " minimalist vim
+Plug 'junegunn/limelight.vim'        " highlight current paragraph
+Plug 'joshdick/onedark.vim'          " one dark theme for vim
+Plug 'camspiers/lens.vim'            " auto window resizing TODO do i really ever need this?
+Plug 'vim-scripts/folddigest.vim'    " displays folds as summary
 
 " git
-Plug 'airblade/vim-gitgutter'     " displays git diff info
-Plug 'tpope/vim-fugitive'         " vim convenience functions
-Plug 'rbong/vim-flog'             " vim branch viewer TODO
+Plug 'airblade/vim-gitgutter' " displays git diff info
+Plug 'tpope/vim-fugitive'     " git convenience functions
+Plug 'rbong/vim-flog'         " git branch viewer TODO may not be frequently used
+
+" tmux
+Plug 'benmills/vimux'           " interact with tmux inside vim
+Plug 'roxma/vim-tmux-clipboard' " copy between vim and tmux
+Plug 'christoomey/vim-tmux-navigator' " vim, tmux nav consistently
 
 " tools
-Plug 'Chiel92/vim-autoformat'       " autoformatting
-Plug 'kassio/neoterm'               " repl in vim TODO
-Plug 'tpope/vim-eunuch'             " TODO shell commands - see if these are used
-" Plug 'majutsushi/tagbar'            " view class outline TODO requires ctags
-" Plug 'craigemery/vim-autotag'      " autogen ctags
-" Plug 'reedes/vim-litecorrect'       " autocorrect for prose
+Plug 'farmergreg/vim-lastplace' " save place in file
+Plug 'Chiel92/vim-autoformat'   " autoformatting
+Plug 'kassio/neoterm'           " repl in vim
+Plug 'jpalardy/vim-slime'       " send to repl TODO
+" Plug 'tpope/vim-eunuch'         " TODO shell commands - see if these are used
+Plug 'mbbill/undotree'          " undo tree
+Plug 'wincent/terminus'         " better terminal integration
 
-" specific file type support
-Plug 'sheerun/vim-polyglot'         " syntax highlighting
-Plug 'jceb/vim-orgmode'             " TODO really just uses vim folds
-" Plug 'reedes/vim-pencil'          " TODO writing
-Plug 'mhinz/vim-startify'           " start menu
+" file type support
+Plug 'sheerun/vim-polyglot' " syntax highlighting
+Plug 'jceb/vim-orgmode'     " TODO keymappings for taking notes
+Plug 'inkarkat/vim-SyntaxRange' " syntax for just part of file - for org mode
+Plug 'mhinz/vim-startify'   " start menu
+Plug 'reedes/vim-pencil'    " TODO writing
 call plug#end()
 
 " --- Vim Settings ---
@@ -90,11 +97,15 @@ call plug#end()
 let g:folddigest_options = 'vertical, flexnumwidth'
 let g:folddigest_size = 30
 
+" allow keymappings to use yankstack's
+call yankstack#setup()
+
 " ALE
-" Use ALE and also some plugin 'foobar' as completion sources for all code.
+" Use ALE for deoplete
+let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option('sources', {
-\ '_': ['ale'],
-\})
+            \ '_': ['ale'],
+            \})
 
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
@@ -104,18 +115,41 @@ let g:ale_completion_tsserver_autoimport = 1 " autoimport ts server
 let g:ale_sign_column_always = 1
 let g:airline#extensions#ale#enabled = 1
 
-" TODO
+" custom fixers and linters for ALE
 let b:ale_fixers = {'python': ['black', 'isort'], 'javascript': ['xo']}
 let b:ale_linters = {'python': ['pyflakes'], 'javascript': ['xo']}
 
+" TODO: compile org mode, latex, markdown to pdf and show pdf
+
+" neoterm
+let g:neoterm_default_mod = 'botright'
+let g:neoterm_autojump = 1
+let g:neoterm_direct_open_repl = 1
+
 " FZF
+" match fzf colors with vim scheme
+let g:fzf_colors = {
+            \ 'fg':      ['fg', 'Normal'],
+            \ 'bg':      ['bg', 'Normal'],
+            \ 'hl':      ['fg', 'Comment'],
+            \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+            \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+            \ 'hl+':     ['fg', 'Statement'],
+            \ 'info':    ['fg', 'PreProc'],
+            \ 'border':  ['fg', 'Ignore'],
+            \ 'prompt':  ['fg', 'Conditional'],
+            \ 'pointer': ['fg', 'Exception'],
+            \ 'marker':  ['fg', 'Keyword'],
+            \ 'spinner': ['fg', 'Label'],
+            \ 'header':  ['fg', 'Comment'] }
+
 let g:fzf_preview_window = 'right:60%'
 let g:fzf_buffers_jump = 1
 
-" utilsnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" utilsnips TODO
+" let g:UltiSnipsExpandTrigger='<tab>'
+" let g:UltiSnipsJumpForwardTrigger='<c-b>'
+" let g:UltiSnipsJumpBackwardTrigger='<c-z>'
 
 " autoformat
 au BufWrite * :Autoformat
@@ -123,49 +157,41 @@ let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
 
-" Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-
-" Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-
 " editing
-set expandtab                     " expand tabs to spaces
-set tabstop=4                     " tabs are 4 spaces
-set shiftwidth=4                  " reindents are 4 spaces
-set smartindent                   " determines indentation with context
-set magic                         " enable regex
-set formatoptions+=j              " delete comment character when joining lines
-set clipboard=unnamedplus         " shared system clipboard
-set textwidth=0                   " line wrap
+set expandtab             " expand tabs to spaces
+set tabstop=4             " tabs are 4 spaces
+set shiftwidth=4          " reindents are 4 spaces
+set smartindent           " determines indentation with context
+set magic                 " enable regex
+set formatoptions+=j      " delete comment character when joining lines
+set clipboard=unnamedplus " shared system clipboard
+set textwidth=0           " line wrap
 set wrapmargin=0
-set undofile                      " undo history persists across sessions
+set undofile              " undo history persists across sessions
 
 " search
-set incsearch                     " highlight as characters are entered
-set hlsearch                      " persistent highlight of prev search
-set smartcase                     " ignore case if search all lowercase
-set wildmenu                      " show menu of suggestions with tab-complete
+set incsearch " highlight as characters are entered
+set hlsearch  " persistent highlight of prev search
+set smartcase " ignore case if search all lowercase
+set wildmenu  " show menu of suggestions with tab-complete
 
 " folding
-set foldenable " turn on folding
-set foldmethod=marker
+set foldenable        " turn on folding
+set foldmethod=marker " marker indicates folds TODO use markers?
 set foldlevelstart=0
+set modelines=1 " use modeline to configure marker
+" vim:foldmethod=marker:foldlevel=0 (put at bottom of file for fold configuraion)
 
 " performance
-set lazyredraw                    " only redraw components on change
-set nobackup                      " remove backups
+set lazyredraw   " only redraw components on change
+set nobackup     " remove backups
 set nowritebackup
 set noswapfile
-set hidden                        " cache more
-set history=1000                  " default is 20
-set complete-=5                   " limit autocomplete
-set scrolloff=3                 " scroll 3l in advance of window
-set backspace=2                 " backspace is normal
+set hidden       " cache more
+set history=1000 " default is 20
+set complete-=5  " limit autocomplete
+set scrolloff=3  " scroll 3l in advance of window
+set backspace=2  " backspace is normal
 
 " https://github.com/dm3/cygwin-config/blob/master/.vimrc
 " show hidden characters and linewraps
@@ -184,41 +210,61 @@ set wildmode=longest:full,list:full
 set splitbelow  " sensible splits
 set splitright
 
+
 " visual
-syntax on                         " syntax highlighting
-filetype plugin indent on        " file type detection
-colorscheme onedark               " one dark colors
-set number                        " cur line number
-set relativenumber                " relative line numbers
-set cursorline                    " current line is visible
-set showmatch                     " show matching braces
-syntax enable                     " enable syntax highlighting
+set cmdheight=1                " one line for commands
+set shortmess+=c               " add to search
+set signcolumn=yes             " always show sign column
+syntax on                      " syntax highlighting
+filetype plugin indent on      " file type detection
+colorscheme onedark            " one dark colors
+set number                     " cur line number
+set relativenumber             " relative line numbers
+set cursorline                 " current line is visible
+set showmatch                  " show matching braces
+syntax enable                  " enable syntax highlighting
 set background=dark
-highlight Comment gui=italic |    " make comments italic
+highlight Comment gui=italic | " make comments italic
 set foldmethod=indent
+
 let g:limelight_conceal_ctermfg = 'Gray'
 let g:gitgutter_sign_column_always=1 " always display gutter
 
 if (empty($TMUX))
     if (has('nvim'))
         " $NVIM_TUI_ENABLE_TRUE_COLOR=1
-     endif
+    endif
     if (has('termguicolors'))
         set termguicolors
     endif
 endif
-" NERDTree settings
-let NERDTreeShowHidden=1 " show hidden files
-let NERDTreeMinimalUI = 1 " minimal ui
-let NERDTreeChDirMode = 2 " change cwd with root dir
-let NERDTreeHijackNetrw = 1 " always use nerdtree
 
-" coc configuration" Better display for messages
-set cmdheight=2
-set updatetime=300
-set shortmess+=c
-set signcolumn=yes
-set nowritebackup
+" NERDTree settings
+let g:NERDTreeIgnore = ["^.git$", "^node_modules$","^__pycache__$", "^venv$", "^.vscode$"]
+let g:NERDTreeShowHidden=1
+let NERDTreeShowHidden=1    " show hidden files
+let NERDTreeMinimalUI = 1   " minimal ui
+let NERDTreeChDirMode = 2   " change cwd with root dir
+let NERDTreeHijackNetrw = 1 " always use nerdtree
+let NERDTreeDirArrowExpandable = "\u00a0" " make arrows invisible
+let NERDTreeDirArrowCollapsible = "\u00a0" " make arrows invisible
+let NERDTreeNodeDelimiter = "\u263a" " smiley face
+
+" airline
+" TODO review config
+let g:airline#extensions#ale#enabled          = 1
+let g:airline#extensions#tabline#enabled      = 1
+let g:airline#extensions#tabline#formatter    = 'unique_tail_improved'
+let g:airline#extensions#bufferline#enabled   = 1
+let g:airline#extensions#gutentags#enabled    = 1
+let g:airline_powerline_fonts                 = 1
+let g:airline_left_sep                        = '█'
+let g:airline_right_sep                       = '█'
+let g:airline_left_alt_sep                    = ' '
+let g:airline#extensions#tabline#left_sep     = '█'
+let g:airline#extensions#tabline#right_sep    = '█'
+let g:airline#extensions#tabline#left_alt_sep = ' '
+
 
 " --- Key Mappings ---
 let mapleader=" "
@@ -228,13 +274,32 @@ let mapleader=" "
 map j gj
 map k gk
 
+" avoid pressing shift
+nnoremap ; :
+
+" http://karolis.koncevicius.lt/posts/porn_zen_and_vimrc/
+" make n always search forward and N backward
+nnoremap <expr> n 'Nn'[v:searchforward]
+nnoremap <expr> N 'nN'[v:searchforward]
+
+" make ; always "find" forward and , backward
+nnoremap <expr> ; getcharsearch().forward ? ';' : ','
+nnoremap <expr> , getcharsearch().forward ? ',' : ';'
+
+" convenient esc
+inoremap jk <ESC>
+
 " Y behavior consistent with C and D
 nnoremap Y y$
 " select entire file
 nnoremap <leader>V ggVG
+" select last insertion
+nnoremap gV `[v`]
 " paragraph formatting
 nnoremap Q gqap
 vnoremap Q gq
+" make backspace delete selected text
+xmap <BS> x
 
 " search for current selection in visual mode
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
@@ -242,6 +307,10 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 " cancel search with esc
 nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
+
+" text alignment
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " --- Vim Navigation ---
 
@@ -251,6 +320,8 @@ nnoremap <leader>j <C-W>j
 nnoremap <leader>k <C-W>k
 nnoremap <leader>l <C-W>l
 nnoremap <leader>.    :NERDTreeToggle<CR>
+" toggle folds
+nnoremap <leader><tab> za
 " toggle with previous file
 nnoremap <Leader><Leader> :e#<CR>
 
@@ -290,7 +361,7 @@ nmap <leader>fm     :Maps<CR>
 nmap <leader>ft     :NERDTreeFind<CR>
 
 " g :: Git
-nmap <leader>gs    :Gstatus<CR>
+nmap <leader>g    :Gstatus<CR>
 
 " i ::
 
@@ -299,18 +370,19 @@ map <leader>mf      :Goyo<CR>
 autocmd! User GoyoEnter Limelight  | set cursorline!
 autocmd! User GoyoLeave Limelight! | set cursorline
 
-" n ::
+" n :: New
 
 " o :: Open
 nmap <leader>og    :Gstatus<CR>
 nmap <leader>of    :NERDTreeToggle<CR>
 nmap <leader>ou    :UndotreeToggle<CR>
 nmap <leader>og    :call FoldDigest()<CR>
-nmap <leader>ot    :TagbarToggle<CR>
+nmap <leader>ot    :Ttoggle<CR>
+nmap <leader>ob    :TagbarToggle<CR>
 vmap o :NR<CR>
 " open visual selection in new window
 
-" p ::
+" p :: Project
 " q ::
 
 " r :: REPL
@@ -321,59 +393,53 @@ map <leader>rs     : TREPLSendSelection
 map <leader>rr     :source ~/.vimrc<CR>
 map <leader>rp     :source ~/.vimrc<CR>:PlugInstall<CR>
 
-" s :: Snipe TODO
-" map <leader>s <Plug>(snipe-f)
-" map <leader><leader>ge <Plug>(snipe-ge)
-" nmap <leader><leader>] <Plug>(snipe-f-xp)
-" nmap <leader><leader>[ <Plug>(snipe-F-xp)
-" nmap <leader><leader>x <Plug>(snipe-f-x)
-" nmap <leader><leader>X <Plug>(nipe-F-x)
-" nmap <leader><leader>r <Plug>(snipe-f-r)
-" nmap <leader><leader>R <Plug>(snipe-F-r)
-" nmap <leader><leader>a <Plug>(snipe-f-a)
-" nmap <leader><leader>A <Plug>(snipe-F-a)
-
 " t :: Tab
 nnoremap <leader>tn  :tabnew<CR>
 nnoremap <leader>tc  :tabclose<CR>
 nnoremap <leader>tj  :tabprev<CR>
 nnoremap <leader>tk  :tabnext<CR>
+nnoremap <leader>to  :Ttoggle<CR>
+
+" t :: Terminal TODO
+nmap <leader>to :call ToggleTerminalDrawer()<CR>
+" nmap tx <Plug>(neoterm-repl-send)
+" xmap tx <Plug>(neoterm-repl-send)
 
 " Browser-similar tab navigation
 nnoremap <C-T> :tabnew<CR>
 nnoremap <C-W> :tabclose<CR>
 nnoremap <C-J> :tabprev<CR>
 nnoremap <C-K> :tabnext<CR>
-
-" Opens a new tab with the current buffer's path
-" map <leader>te :tabedit <CR> :=expand("%:p:h")<CR> TODO
-
+nnoremap <silent> <Tab> :bnext<CR>
+nnoremap <silent> <S-Tab> :bprevious<CR>
 " u :: Undo
 map <leader>u      :UndotreeToggle<CR>
 
-" v ::
+" v :: Vimux (Tmux Vim Interaction)
+map <leader>vp :VimuxPromptCommand<CR>
+map <leader>vl :VimuxRunLastCommand<CR>
+map <leader>vi :VimuxInspectRunner<CR>
+map <leader>vz :VimuxZoomRunner<CR>
 
 " w :: (split) Window
-nnoremap <leader>wh  :sp<CR>
-nnoremap <leader>wv  :vsp<CR>
-nnoremap <leader>wc  <C-W>c
+nnoremap <leader>wh  :sp<CR> nnoremap <leader>wv  :vsp<CR> nnoremap <leader>wc  <C-W>c
 
 " x :: Execute?
 
-" y :: Yank
-nmap <leader>yh <plug>(YoinkPostPasteSwapBack)
-nmap <leader>yl <plug>(YoinkPostPasteSwapForward)
-nmap <leader>yp <plug>(YoinkPaste_p)
-nmap <leader>yP <plug>(YoinkPaste_P)
+" y :: Yank TODO
+" nmap <leader>yp <Plug>yankstack_substitute_older_paste
+" nmap <leader>yP <Plug>yankstack_substitute_newer_paste
 
 " z ::
 
-"
 " --- Event Listeners ---
 
 " command! -range FormatShellCmd <line1>!format_shell_cmd.py | " format shell command TODO
 " nerdtree opens in current dir
-autocmd BufEnter * lcd %:p:h |
+" autocmd BufEnter * lcd %:p:h |
+
+" save file when focus is lost
+au FocusLost * :wa
 
 " remove trailing whitespace on save
 " https://gitlab.com/kmidkiff/vim-configuration/-/blob/master/vimrc
@@ -383,3 +449,40 @@ autocmd BufWritePre * :%s/\s\+$//e |
 autocmd FileType css    setlocal shiftwidth=2 tabstop=2
 autocmd FileType html   setlocal shiftwidth=2 tabstop=2
 autocmd FileType markdown setlocal nofoldenable " fold may not work with markdown?
+
+" open terminal drawer
+" https://github.com/CKolkey/.dotfiles/blob/master/nvim_init.vim
+let g:terminal_drawer = { 'win_id': v:null, 'buffer_id': v:null }
+function! ToggleTerminalDrawer() abort
+  if win_gotoid(g:terminal_drawer.win_id)
+    hide
+    set laststatus=2 showmode ruler
+  else
+    botright new
+    if !g:terminal_drawer.buffer_id
+      call termopen($SHELL, {"detach": 0})
+      let g:terminal_drawer.buffer_id = bufnr("")
+    else
+      exec 'buffer' g:terminal_drawer.buffer_id
+      call RemoveEmptyBuffers()
+    endif
+
+    exec 'resize' float2nr(&lines * 0.25)
+    setlocal laststatus=0 noshowmode noruler
+    setlocal nobuflisted
+    echo ''
+    startinsert!
+    let g:terminal_drawer.win_id = win_getid()
+
+    tnoremap <buffer><Esc> <C-\><C-n>
+    nnoremap <buffer><silent><Esc> :q<cr>
+    nnoremap <buffer><silent> q :q<CR>
+  endif
+endfunction
+" REMOVE EMPTY BUFFERS {{{
+function! RemoveEmptyBuffers()
+  let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val)<0 && !getbufvar(v:val, "&mod")')
+  if !empty(buffers)
+      silent exe 'bw ' . join(buffers, ' ')
+  endif
+endfunction
