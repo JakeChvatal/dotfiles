@@ -15,6 +15,7 @@ else
   export EDITOR='vim' fi export NPM_CONFIG_PREFIX=~/.node_modules
 fi
 
+export TERMINAL='termite'
 export LANG=en_US.UTF-8
 export ARCHFLAGS="-arch x86_64"
 export MANPATH="/usr/local/man:$MANPATH"
@@ -75,13 +76,14 @@ antigen apply
 autoload -Uz compinit # autocompletion
 compinit
 
+set editing-mode vi # vim-style editing
+
 # --- History ---
 HISTSIZE=10000
 SAVEHIST=9000
 HISTFILE=~/.zsh_history
 HISTCONTROL=ignoredups:erasedups
 MISTIGNORE="exit"
-setopt inc_append_history # update history in all windows
 
 # ZSH Settings
 HYPHEN_INSENSITIVE="true" # _ and - correspond to same characters in autocomplete
@@ -89,7 +91,14 @@ DISABLE_AUTO_UPDATE="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true" # faster repo status check
 setopt INC_APPEND_HISTORY # add commands to history as they are entered
 setopt AUTO_CD            # auto change directories
-set editing-mode vi # vim-style editing
+setopt CORRECT            # correct commands
+setopt MULTIOS            # pipe to multiple outputs
+setopt NO_CLOBBER         # str doesn't clobber
+setopt RC_EXPAND_PARAM    # expand arround vars
+setopt NO_CASE_GLOB       # case insensitive glob
+setopt NUMERIC_GLOB_SORT  # sort globs by #
+setopt EXTENDED_GLOB      # glob for more!
+
 
 # --- Aliases ---
 # always ensure that the right editor is used
@@ -101,6 +110,10 @@ alias sudo="sudo " # fix sudo for some commands
 alias spotify="/usr/bin/spotify --force-device-scale-factor = 2.5"
 alias distro='cat /etc/*-release'
 alias reload='source ~/.zshrc'
+
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g DN='/dev/null'
 
 # system-independent package management aliases
 # TODO handles these at install time with script?
@@ -139,13 +152,28 @@ function p_mgr() {
 
 p_mgr
 
+# --- Keybindings ---
+# home, end for beginning and end of line
+bindkey '\e[1~' beginning-of-line
+bindkey '\e[4~' end-of-line
+
+# incremental search is elite!
+bindkey -M vicmd "/" history-incremental-search-backward
+bindkey -M vicmd "?" history-incremental-search-forward
+
+# search based on what you typed in already
+bindkey -M vicmd "//" history-beginning-search-backward
+bindkey -M vicmd "??" history-beginning-search-forward
+
+# --- Startup ---
 # Ocaml support
 if cmd_exists opam; then
     eval $(opam env)
 fi
 
 # startx if tty1, display and has x
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]] && cmd_exists startx; then
+# TODO this hasn't been working...
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
     exec startx
 fi
 
