@@ -422,7 +422,9 @@ map <leader>vi :VimuxInspectRunner<CR>
 map <leader>vz :VimuxZoomRunner<CR>
 
 " w :: (split) Window
-nnoremap <leader>wh  :sp<CR> nnoremap <leader>wv  :vsp<CR> nnoremap <leader>wc  <C-W>c
+nnoremap <leader>wh  :sp<CR>
+nnoremap <leader>wv  :vsp<CR>
+nnoremap <leader>wc  <C-W>c
 
 " x :: Execute?
 

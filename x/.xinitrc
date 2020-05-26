@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
@@ -31,23 +30,24 @@ fi
 
 # make trackpad tappable
 xinput set-prop 14 316 1
-# xinput set-prop 14 302 1
 
 # start gnome-keyring daemon
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 
-source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh 
+# add systemd
+source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
 
-# hide mouse pointer when not in use
-
+# small keymapping changes
 fix-keys &
+# hide mouse pointer
 unclutter &
-# dropbox
 dropbox &
 # compositor
 # reform monitor gang
 multimonitor-output &
-picom --config ~/.config/picom/picom.conf &  
+picom --config ~/.config/picom/picom.conf &
+
 # start wm
-exec i3
+# exec i3
+exec herbstluftwm --locked
