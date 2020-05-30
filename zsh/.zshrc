@@ -65,7 +65,6 @@ extract
 vi-mode
 tmux
 git
-z
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions
@@ -75,8 +74,6 @@ antigen apply
 
 autoload -Uz compinit # autocompletion
 compinit
-
-set editing-mode vi # vim-style editing
 
 # --- History ---
 HISTSIZE=10000
@@ -111,12 +108,16 @@ alias spotify="/usr/bin/spotify --force-device-scale-factor = 2.5"
 alias distro='cat /etc/*-release'
 alias reload='source ~/.zshrc'
 
+# sane shell commands
+alias mkdir='mkdir -p' # mkdir always makes recursive directories
+# alias mv='
+
 alias -g ...='../..'
 alias -g ....='../../..'
 alias -g DN='/dev/null'
 
 # system-independent package management aliases
-# TODO handles these at install time with script?
+# TODO handle these at install time with script?
 function p_mgr() {
    if cmd_exists apt; then # prioritize apt over apt-get
     alias pi='sudo apt install'
@@ -139,14 +140,14 @@ function p_mgr() {
   elif cmd_exists pacman; then
     alias pi='sudo pacman -S'
     alias pp='sudo pacman -R'
-    alias pr='sudo pacman -Rscgn'
+    alias pr='sudo pacman -Rscn'
     alias pu='sudo pacman -u'
     alias pug='sudo pacman -yyu'
     alias puu='sudo pacman -Syyu'
     alias par='sudo pacman -Rc'
     alias ps='pacman -Q'
   else
-    echo "Make sure to use a package manager compatible with pacman or apt-get."
+    echo "Make sure that either the pacman, apt or apt-get package manager is installed."
   fi
 }
 
@@ -169,6 +170,11 @@ bindkey -M vicmd "??" history-beginning-search-forward
 # Ocaml support
 if cmd_exists opam; then
     eval $(opam env)
+fi
+
+# add bspwm scripts to path if it exists
+if cmd_exists bspwm; then
+    export PATH=$PATH:"$HOME/.config/bspwm/scripts"
 fi
 
 # startx if tty1, display and has x
