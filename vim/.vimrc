@@ -45,7 +45,7 @@ endif
 
 " Navigation
 Plug 'scrooloose/nerdtree'                          " directory navigation
-Plug 'Xuyuanp/nerdtree-git-plugin' " git integration for nerdtree
+Plug 'Xuyuanp/nerdtree-git-plugin'                  " git integration for nerdtree
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " fuzzy file finding - incredible!
 Plug 'junegunn/fzf.vim'
 Plug 'vim-scripts/multisearch.vim'                  " multiple search queries at once TODO map
@@ -74,7 +74,6 @@ Plug 'christoomey/vim-tmux-navigator' " vim, tmux nav consistently
 
 " tools
 Plug 'farmergreg/vim-lastplace' " save place in file
-Plug 'Chiel92/vim-autoformat'   " autoformatting
 Plug 'kassio/neoterm'           " repl in vim
 Plug 'jpalardy/vim-slime'       " send to repl TODO
 " Plug 'tpope/vim-eunuch'         " TODO shell commands - see if these are used
@@ -152,7 +151,7 @@ let g:fzf_buffers_jump = 1
 " let g:UltiSnipsJumpBackwardTrigger='<c-z>'
 
 " autoformat
-au BufWrite * :Autoformat
+" au BufWrite * :Autoformat
 let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
@@ -376,19 +375,14 @@ autocmd! User GoyoLeave Limelight! | set cursorline
 nmap <leader>og    :Gstatus<CR>
 nmap <leader>of    :NERDTreeToggle<CR>
 nmap <leader>ou    :UndotreeToggle<CR>
-nmap <leader>og    :call FoldDigest()<CR>
 nmap <leader>ot    :Ttoggle<CR>
 nmap <leader>ob    :TagbarToggle<CR>
-vmap o :NR<CR>
 " open visual selection in new window
+vmap o :NR<CR> 
 
 " p :: Project
 " q ::
 
-" r :: REPL
-map <leader>rf     : TREPLSendFile
-map <leader>rl     : TREPLSendLine
-map <leader>rs     : TREPLSendSelection
 " r :: Reload
 map <leader>rr     :source ~/.vimrc<CR>
 map <leader>rp     :source ~/.vimrc<CR>:PlugInstall<CR>
@@ -398,12 +392,6 @@ nnoremap <leader>tn  :tabnew<CR>
 nnoremap <leader>tc  :tabclose<CR>
 nnoremap <leader>tj  :tabprev<CR>
 nnoremap <leader>tk  :tabnext<CR>
-nnoremap <leader>to  :Ttoggle<CR>
-
-" t :: Terminal TODO
-nmap <leader>to :call ToggleTerminalDrawer()<CR>
-" nmap tx <Plug>(neoterm-repl-send)
-" xmap tx <Plug>(neoterm-repl-send)
 
 " Browser-similar tab navigation
 nnoremap <C-T> :tabnew<CR>
@@ -412,6 +400,7 @@ nnoremap <C-J> :tabprev<CR>
 nnoremap <C-K> :tabnext<CR>
 nnoremap <silent> <Tab> :bnext<CR>
 nnoremap <silent> <S-Tab> :bprevious<CR>
+
 " u :: Undo
 map <leader>u      :UndotreeToggle<CR>
 
@@ -437,15 +426,14 @@ nnoremap <leader>wc  <C-W>c
 " --- Event Listeners ---
 
 " command! -range FormatShellCmd <line1>!format_shell_cmd.py | " format shell command TODO
-" nerdtree opens in current dir
-" autocmd BufEnter * lcd %:p:h |
-
-" save file when focus is lost
-au FocusLost * :wa
+autocmd BufEnter * lcd %:p:h | " nerdtree opens in current dir
+autocmd FocusLost * :wa | " save file when focus is lost
 
 " remove trailing whitespace on save
 " https://gitlab.com/kmidkiff/vim-configuration/-/blob/master/vimrc
-autocmd BufWritePre * :%s/\s\+$//e |
+function! RemoveWhitespace()
+    :%s/\s\+$//e
+endfunction
 
 " smaller indentation for html, css
 autocmd FileType css    setlocal shiftwidth=2 tabstop=2
@@ -455,6 +443,8 @@ autocmd FileType markdown setlocal nofoldenable " fold may not work with markdow
 " open terminal drawer
 " https://github.com/CKolkey/.dotfiles/blob/master/nvim_init.vim
 let g:terminal_drawer = { 'win_id': v:null, 'buffer_id': v:null }
+
+" Toggles terminal drawer
 function! ToggleTerminalDrawer() abort
   if win_gotoid(g:terminal_drawer.win_id)
     hide
@@ -481,6 +471,7 @@ function! ToggleTerminalDrawer() abort
     nnoremap <buffer><silent> q :q<CR>
   endif
 endfunction
+
 " REMOVE EMPTY BUFFERS {{{
 function! RemoveEmptyBuffers()
   let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val) && empty(bufname(v:val)) && bufwinnr(v:val)<0 && !getbufvar(v:val, "&mod")')
@@ -488,3 +479,4 @@ function! RemoveEmptyBuffers()
       silent exe 'bw ' . join(buffers, ' ')
   endif
 endfunction
+" }}}
