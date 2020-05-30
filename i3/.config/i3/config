@@ -127,7 +127,6 @@ bindsym $mod+r restart
 # exit i3 (logs you out of your X session)
 # bindsym $mod+Shift+x exec "i3-msg exit"
 
-
 # appearance
 for_window [class="^.*"] border pixel 1
 
@@ -150,9 +149,5 @@ client.unfocused        #333333 #303641 #888888 #292D2E   #1d2026
 client.urgent           #2F343A #ff6c6b #FFFFFF #CC241D   #CC241D
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
-# set up background color
-exec --no-startup-id hsetroot -solid "#1d2026"
-
 # start polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
