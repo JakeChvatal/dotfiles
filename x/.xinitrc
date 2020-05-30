@@ -46,8 +46,11 @@ dropbox &
 # compositor
 # reform monitor gang
 multimonitor-output &
-picom --config ~/.config/picom/picom.conf &
+# picom --config ~/.config/picom/picom.conf &
 
 # start wm
 # exec i3
-exec herbstluftwm --locked
+# exec herbstluftwm --locked
+termite &
+hsetroot -solid "#1d2026" &
+exec bspwm
