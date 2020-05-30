@@ -1,0 +1,2 @@
+#!/bin/dash
+bspc subscribe node_{remove,add} | while read _; do stack_layout; done

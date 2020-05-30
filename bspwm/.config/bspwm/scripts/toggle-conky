@@ -1,0 +1,13 @@
+#!/bin/bash
+
+BAR_ID=$(pgrep -x conky)
+
+# for pid in $(pgrep -x conky); do
+
+if [ -n "${BAR_ID}" ] ; then
+    kill -TERM ${BAR_ID}
+    bspc config -m eDP-1 right_padding 0
+else
+    bspc config -m eDP-1 right_padding 660
+    conky -q
+fi

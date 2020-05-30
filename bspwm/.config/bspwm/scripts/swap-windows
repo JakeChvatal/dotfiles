@@ -1,0 +1,5 @@
+# swap windows while still focused on current frame and desktop 
+notify-send "swapping windows"
+M=$(bspc query –M –n last); 
+bspc node --swap last; 
+[[ $M = $(bspc query -M -m focused) ]] && bspc node --focus last

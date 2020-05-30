@@ -1,0 +1,15 @@
+notify-send "running script with $1";
+D=$1;
+notify-send "getting d: ${D}";
+M1=$(bspc query -M -d $D --names) ;
+M2=$(bspc query -M -m focused --names);
+if [[ $(bspc query -D -m $M --names | wc -l) -gt 1 ]]; then 
+    if [[ $(bspc query -D -d focused --names) != $D ]]; then 
+        notify-send "swapping monitors";
+        bspc desktop $D --to-monitor focused;
+        bspc desktop $D -f;
+    fi; 
+elif [[ $M1 != $M2 ]]; then 
+    notify-send "swapping ${M1} with ${M2}";
+    bspc desktop $M1:focused --swap $M2:focused;
+fi

@@ -1,0 +1,11 @@
+D=$1; 
+M=$(bspc query –M –m focused --names); 
+N=$(bspc query –M –d $D --names); 
+W=$(bspc query –N –n focused --names); 
+[[ $M != $N ]] && bspc monitor $N –focus; 
+E=$(bspc query –D –d focused --names); 
+bspc window $W -–to-desktop $D; 
+bspc node $W –focus; 
+bspc node –swap biggest; 
+bspc desktop $E –focus; 
+[[ $M != $N ]] && bspc monitor $M --focus
