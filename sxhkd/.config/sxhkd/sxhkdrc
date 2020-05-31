@@ -14,11 +14,13 @@ super + r
 super + w
     scratch dropdown
 
+# toggle conky
+# TODO: multiple conky panels
 super + p
     toggle-conky
 
 # program launcher
-super + space
+super + v
     exec rofi -show run -lines 5 -bw 2 -width 20 -padding 50 -eh 2 -hide-scrollbar true
 
 # start emacs
@@ -35,81 +37,32 @@ super + {_,shift +}Caps_Lock
     exec {poweroff,reboot}
 
 
-# audio
-# raise volume
-XF86AudioRaiseVolume 	
-    exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
-# lower volume
-XF86AudioLowerVolume	
-    exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
-# mute volume
-XF86AudioMute 		
-    exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-# mute mic
-bindsym XF86AudioMicMute 	
-    exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+# --- navigation ---
+# Navigate layouts TODO
+# i believe this is no different from bringing a program full screen
+# super + {_,shift + }space
+	# bspc desktop --layout {next,prev}
 
-# music
-# control music
-# go to previous song
-XF86AudioPrev 	
-    exec playerctl previous
-# go to previous song
-super + comma 	
-    exec playerctl previous
-# play or pause music
-XF86AudioPlay 	
-    exec playerctl play-pause
-# play or pause music
-super + period 	
-    exec playerctl play-pause
-# go to next song
-XF86AudioNext 	
-    exec playerctl next
-# go to next song
-super + slash	
-    exec playerctl next
+# rotate desktop
+# TODO remove refresh for sxhkd
+super + {_, shift + }r
+    bspc node @/ --rotate {90,-90}
 
-# brightness
-# raise brightness
-XF86MonBrightnessUp 
-    exec light -A 10
-# lower brightness
-XF86MonBrightnessDown 
-    exec light -U 10
-# raise brightness by smaller increment
-shift + XF86MonBrightnessUp 
-    exec light -A 5
-# lower brightness by smaller increment
-shift + XF86MonBrightnessDown 
-    exec light -U 5
-# raise brightness by small increment
-super + shift + XF86MonBrightnessUp 
-    exec light -A 1
-# lower brightness for small increment
-super + shift + XF86MonBrightnessDown 
-    exec light -U 1
+# circulate leaves of tree
+super + {_, shift +}c
+    bspc node @/ --circulate {backward,forward}
 
-#
-# bspwm hotkeys
-#
+# make split ratios equal
+super + equal
+    bspc node @/ --equalize
 
-# quit/restart bspwm
-super + alt + {q,r}
-	bspc {quit,wm -r}
+# make split ratios balanced
+super + minus
+    bspc node @/ --balance
 
-
-
-# TODO close and kill 
-# super + {_,shift + }r
-	# bspc node -{c,k}
-
+# close window
 super + shift + q
     bspc node -c
-
-# alternate between the tiled and monocle layout
-super + m
-	bspc desktop -l next
 
 # send the newest marked node to the newest preselected node
 super + y
@@ -123,9 +76,11 @@ super + g
 # state/flags
 #
 
-# set the window state
+# toggle state of current window
 super + {t,shift + t,s,f}
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+	bspc node --state \~{tiled,pseudo_tiled,floating,fullscreen} # fullscreen
+
+# TODO: change state of all nodes on workspace (with super + alt + something)
 
 # set the node flags
 super + ctrl + {m,x,y,z}
@@ -155,34 +110,47 @@ super + bracket{left,right}
 super + {grave,Tab}
 	bspc {node,desktop} -f last
 
+# focus the previous / next window
+super + {q,e}
+    bspc node --focus {prev,next}
+
 # focus the older or newer node in the focus history
-super + {o,i}
+super + {u,i}
 	bspc wm -h off; \
 	bspc node {older,newer} -f; \
 	bspc wm -h on
+
+# move window to last split
+super + y
+	bspc query --nodes -n focused.automatic \
+	&& bspc node -n last.\!automatic \
+	|| bspc node last.leaf -n focused
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
 # allows for multiple desktops on the same monitors
+# TODO still in progress: not currently working
 # super + {_,shift + } {1,2,3} ; {1-9,0}
 	# notify-send "changing desktop"; \
 	# bspc {desktop -f, node -d} "^{1,2,3}:^{1-9,10}"
 
 # focus any desktop on the currently focused monitor
+# TODO still wip
 alt + {1-9,0}
     focus-desktop-to-cur-monitor {1-9,0} 
 
 # alt + shift + {1-9,0}
     # place-win-on-desktop {1-9,0}
+    # TODO 
 
 # grab last window and swap it with current one, keeping focus
 super + apostrophe
     swap-windows
 
 #
-# preselect
+# --- preselect ---
 #
 
 # preselect the direction
@@ -202,23 +170,82 @@ super + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 #
-# move/resize
+# --- move/resize ---
 #
 
 # expand a window by moving one of its side outward
+# TODO: different behavior when floating
 super + alt + {h,j,k,l}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # contract a window by moving one of its side inward
+# TODO: different behavior when flaoting
 super + alt + shift + {h,j,k,l}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
-    # if [ $(bspc query -N -n) = 'floating' ]; then \
-    # else 
 
-
-# move a floating window
-super + {Left,Down,Up,Right}
+# move a floating window TODO
 
 # show help with key bindings
+# TODO needs some reformatting or something
+# TODO should also be in floating terminal
 super + colon
     termite --class keys-help -e keys-help
+
+# --- system settings ---
+# quit/restart bspwm
+    super + alt + {q,r}
+    bspc {quit,wm -r}
+
+# --- audio
+# raise volume
+XF86AudioRaiseVolume 	
+    exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+# lower volume
+XF86AudioLowerVolume	
+    exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+# mute volume
+XF86AudioMute 		
+    exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+# mute mic
+bindsym XF86AudioMicMute 	
+    exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# --- music
+# go to previous song
+XF86AudioPrev 	
+    exec playerctl previous
+# go to previous song
+super + comma 	
+    exec playerctl previous
+# play or pause music
+XF86AudioPlay 	
+    exec playerctl play-pause
+# play or pause music
+super + period 	
+    exec playerctl play-pause
+# go to next song
+XF86AudioNext 	
+    exec playerctl next
+# go to next song
+super + slash	
+    exec playerctl next
+
+# --- brightness
+# raise brightness
+XF86MonBrightnessUp 
+    exec light -A 10
+# lower brightness
+XF86MonBrightnessDown 
+    exec light -U 10
+# raise brightness by smaller increment
+shift + XF86MonBrightnessUp 
+    exec light -A 5
+# lower brightness by smaller increment
+shift + XF86MonBrightnessDown 
+    exec light -U 5
+# raise brightness by small increment
+super + shift + XF86MonBrightnessUp 
+    exec light -A 1
+# lower brightness for small increment
+super + shift + XF86MonBrightnessDown 
+    exec light -U 1
