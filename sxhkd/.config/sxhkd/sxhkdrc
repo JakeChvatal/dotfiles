@@ -6,10 +6,6 @@
 super + Return
 	termite
 
-# program launcher
-super + v 
-    exec rofi -show run -lines 5 -bw 2 -width 20 -padding 50 -eh 2 -hide-scrollbar true
-
 # make sxhkd reload its configuration files:
 super + r
 	pkill -USR1 -x sxhkd
@@ -21,6 +17,79 @@ super + w
 super + p
     toggle-conky
 
+# program launcher
+super + space
+    exec rofi -show run -lines 5 -bw 2 -width 20 -padding 50 -eh 2 -hide-scrollbar true
+
+# start emacs
+super + semicolon
+    exec emacs
+
+# start firefox
+super + apostrophe
+    exec firefox
+
+
+# power off or reboot system
+super + {_,shift +}Caps_Lock
+    exec {poweroff,reboot}
+
+
+# audio
+# raise volume
+XF86AudioRaiseVolume 	
+    exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+# lower volume
+XF86AudioLowerVolume	
+    exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+# mute volume
+XF86AudioMute 		
+    exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+# mute mic
+bindsym XF86AudioMicMute 	
+    exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# music
+# control music
+# go to previous song
+XF86AudioPrev 	
+    exec playerctl previous
+# go to previous song
+super + comma 	
+    exec playerctl previous
+# play or pause music
+XF86AudioPlay 	
+    exec playerctl play-pause
+# play or pause music
+super + period 	
+    exec playerctl play-pause
+# go to next song
+XF86AudioNext 	
+    exec playerctl next
+# go to next song
+super + slash	
+    exec playerctl next
+
+# brightness
+# raise brightness
+XF86MonBrightnessUp 
+    exec light -A 10
+# lower brightness
+XF86MonBrightnessDown 
+    exec light -U 10
+# raise brightness by smaller increment
+shift + XF86MonBrightnessUp 
+    exec light -A 5
+# lower brightness by smaller increment
+shift + XF86MonBrightnessDown 
+    exec light -U 5
+# raise brightness by small increment
+super + shift + XF86MonBrightnessUp 
+    exec light -A 1
+# lower brightness for small increment
+super + shift + XF86MonBrightnessDown 
+    exec light -U 1
+
 #
 # bspwm hotkeys
 #
@@ -29,8 +98,10 @@ super + p
 super + alt + {q,r}
 	bspc {quit,wm -r}
 
+
+
 # TODO close and kill 
-# super + {_,shkft + }r
+# super + {_,shift + }r
 	# bspc node -{c,k}
 
 super + shift + q
@@ -141,7 +212,13 @@ super + alt + {h,j,k,l}
 # contract a window by moving one of its side inward
 super + alt + shift + {h,j,k,l}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+    # if [ $(bspc query -N -n) = 'floating' ]; then \
+    # else 
+
 
 # move a floating window
 super + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# show help with key bindings
+super + colon
+    termite --class keys-help -e keys-help
