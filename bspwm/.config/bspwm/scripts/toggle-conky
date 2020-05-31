@@ -8,6 +8,6 @@ if [ -n "${BAR_ID}" ] ; then
     kill -TERM ${BAR_ID}
     bspc config -m eDP-1 right_padding 0
 else
-    bspc config -m eDP-1 right_padding 660
+    bspc config -m eDP-1 right_padding 760
     conky -q
 fi

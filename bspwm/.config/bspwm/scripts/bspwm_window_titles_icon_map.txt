@@ -1,0 +1,8 @@
+Google-chrome 
+Firefox 
+Code 
+nvim 
+Slack 
+termite 
+Nautilus 
+Fallback ·
