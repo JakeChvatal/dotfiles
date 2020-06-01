@@ -92,11 +92,12 @@ Plug 'mbbill/undotree'          " undo tree
 Plug 'wincent/terminus'         " better terminal integration
 
 " file type support
-Plug 'sheerun/vim-polyglot' " syntax highlighting
-Plug 'jceb/vim-orgmode'     " TODO keymappings for taking notes
+Plug 'sheerun/vim-polyglot'     " syntax highlighting
+Plug 'jceb/vim-orgmode'         " TODO keymappings for taking notes
+Plug 'tpope/vim-speeddating'    " required for org
 Plug 'inkarkat/vim-SyntaxRange' " syntax for just part of file - for org mode
-Plug 'mhinz/vim-startify'   " start menu
-Plug 'reedes/vim-pencil'    " TODO writing
+Plug 'mhinz/vim-startify'       " start menu
+Plug 'reedes/vim-pencil'        " TODO writing
 call plug#end()
 
 " --- Vim Settings ---
