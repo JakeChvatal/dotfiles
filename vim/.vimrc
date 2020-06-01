@@ -36,11 +36,25 @@ Plug 'michaeljsmith/vim-indent-object' " objects offering indentation interactio
 " Autocompletion
 Plug 'dense-analysis/ale' " linting
 if has('nvim')            " autocompletion
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    if has('nvim-0.3.0')
+        Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+        " Use ALE for deoplete
+        let g:deoplete#enable_at_startup = 1
+        call deoplete#custom#option('sources', {
+                                    \ '_': ['ale'],
+                                    \})
+    endif
 else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
+    if has('nvim-0.3.0')
+        Plug 'Shougo/deoplete.nvim'
+        Plug 'roxma/nvim-yarp'
+        Plug 'roxma/vim-hug-neovim-rpc'
+        " Use ALE for deoplete
+        let g:deoplete#enable_at_startup = 1
+        call deoplete#custom#option('sources', {
+                                    \ '_': ['ale'],
+                                    \})
+    endif
 endif
 
 " Navigation
@@ -74,7 +88,8 @@ Plug 'christoomey/vim-tmux-navigator' " vim, tmux nav consistently
 
 " tools
 Plug 'farmergreg/vim-lastplace' " save place in file
-Plug 'kassio/neoterm'           " repl in vim
+Plug 'Chiel92/vim-autoformat'   " autoformatting
+
 Plug 'jpalardy/vim-slime'       " send to repl TODO
 " Plug 'tpope/vim-eunuch'         " TODO shell commands - see if these are used
 Plug 'mbbill/undotree'          " undo tree
@@ -100,11 +115,6 @@ let g:folddigest_size = 30
 call yankstack#setup()
 
 " ALE
-" Use ALE for deoplete
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('sources', {
-            \ '_': ['ale'],
-            \})
 
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0

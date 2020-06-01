@@ -39,9 +39,6 @@ export JAVA_HOME=$JAVA_HOME:/usr/lib/jvm/java-8-openjdk/jre
 export QT_AUTO_SCREEN_SCALE_FACTOR=1 # qutebrowser scaling
 
 # --- SSH ---
-zstyle :omz:plugins:ssh-agent agent-forwarding on
-zstyle :omz:plugins:ssh-agent identities id_rsa # other ids ...
-
 PROCFILE=$HOME/.proxy # add proxy
 if test -f "$PROCFILE"; then
     source $PROCFILE
@@ -49,18 +46,24 @@ fi
 
 # --- Antigen ---
 export ANTIGEN="$HOME/.antigen.zsh"
-if [ ! -f $ANTIGEN ]; then
-    echo "Installing Antigen at $ANTIGEN..."
-    curl -L git.io/antigen > $ANTIGEN
-fi
+# ensure that the system is not WSL
+if [ -z "$(uname -a | grep "Microsoft")" ]; then
+    # if not wsl, install antigen
+    if [ ! -f $ANTIGEN ]; then
+        echo "Installing Antigen at $ANTIGEN..."
+        curl -L git.io/antigen > $ANTIGEN
+    fi
 
+# TODO: add back packages that work with WSL,
+# OR use a theme that works well with WSL
+# (though this should probably be done at
+# installation time, with different dotfiles)
 source $ANTIGEN
 antigen use oh-my-zsh
 antigen theme romkatv/powerlevel10k
-antigen bundles <<EOBUNDLES
+antigen bundles<<EOBUNDLES
 colored-man-pages
 magic-enter
-ssh-agent
 extract
 vi-mode
 tmux
@@ -71,9 +74,10 @@ zsh-users/zsh-autosuggestions
 zsh-users/zsh-history-substring-search
 EOBUNDLES
 antigen apply
+fi
 
-autoload -Uz compinit # autocompletion
-compinit
+# autoload -Uz compinit # autocompletion
+# compinit -u
 
 # --- History ---
 HISTSIZE=10000
@@ -185,3 +189,11 @@ fi
 
 # start prompt
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+zstyle :compinstall filename '/home/jake/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
