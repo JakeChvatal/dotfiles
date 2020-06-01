@@ -1,3 +1,5 @@
 *.cmdline
 *.db
 *.lock
+
+**/autoload/**
