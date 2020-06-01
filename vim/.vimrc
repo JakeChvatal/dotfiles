@@ -35,26 +35,22 @@ Plug 'michaeljsmith/vim-indent-object' " objects offering indentation interactio
 
 " Autocompletion
 Plug 'dense-analysis/ale' " linting
-if has('nvim')            " autocompletion
-    if has('nvim-0.3.0')
-        Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-        " Use ALE for deoplete
-        let g:deoplete#enable_at_startup = 1
-        call deoplete#custom#option('sources', {
-                                    \ '_': ['ale'],
-                                    \})
-    endif
-else
-    if has('nvim-0.3.0')
-        Plug 'Shougo/deoplete.nvim'
-        Plug 'roxma/nvim-yarp'
-        Plug 'roxma/vim-hug-neovim-rpc'
-        " Use ALE for deoplete
-        let g:deoplete#enable_at_startup = 1
-        call deoplete#custom#option('sources', {
-                                    \ '_': ['ale'],
-                                    \})
-    endif
+if has('nvim-0.3.0')            " autocompletion
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    " Use ALE for deoplete
+    let g:deoplete#enable_at_startup = 1
+    call deoplete#custom#option('sources', {
+                                \ '_': ['ale'],
+                                \})
+elseif has('vim')
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+    " Use ALE for deoplete
+    let g:deoplete#enable_at_startup = 1
+    call deoplete#custom#option('sources', {
+                                \ '_': ['ale'],
+                                \})
 endif
 
 " Navigation
