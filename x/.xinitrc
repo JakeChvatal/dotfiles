@@ -42,15 +42,15 @@ source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
 fix-keys &
 # hide mouse pointer
 unclutter &
-dropbox &
-# compositor
 # reform monitor gang
 multimonitor-output &
+
+# daemons but in userspace
 # picom --config ~/.config/picom/picom.conf &
+dropbox &
+exec mopidy -q &
 
 # start wm
-# exec i3
-# exec herbstluftwm --locked
 termite &
 hsetroot -solid "#1d2026" &
 exec bspwm
