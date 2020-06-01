@@ -39,9 +39,6 @@ export JAVA_HOME=$JAVA_HOME:/usr/lib/jvm/java-8-openjdk/jre
 export QT_AUTO_SCREEN_SCALE_FACTOR=1 # qutebrowser scaling
 
 # --- SSH ---
-zstyle :omz:plugins:ssh-agent agent-forwarding on
-zstyle :omz:plugins:ssh-agent identities id_rsa # other ids ...
-
 PROCFILE=$HOME/.proxy # add proxy
 if test -f "$PROCFILE"; then
     source $PROCFILE
@@ -60,11 +57,11 @@ antigen theme romkatv/powerlevel10k
 antigen bundles <<EOBUNDLES
 colored-man-pages
 magic-enter
-ssh-agent
 extract
 vi-mode
 tmux
 git
+pyenv
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions

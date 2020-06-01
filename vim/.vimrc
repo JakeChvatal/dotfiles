@@ -177,7 +177,7 @@ set wildmenu  " show menu of suggestions with tab-complete
 " folding
 set foldenable        " turn on folding
 set foldmethod=marker " marker indicates folds TODO use markers?
-set foldlevelstart=0
+set foldlevelstart=10
 set modelines=1 " use modeline to configure marker
 " vim:foldmethod=marker:foldlevel=0 (put at bottom of file for fold configuraion)
 
