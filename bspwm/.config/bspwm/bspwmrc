@@ -1,4 +1,8 @@
 #! /bin/dash
+#
+# TODO: https://www.reddit.com/r/bspwm/comments/ggtwxa/guide_to_creating_startup_layout_using_receptacles/
+# https://github.com/windelicato/dotfiles/wiki/bspwm-for-dummies
+# https://www.reddit.com/r/unixporn/comments/gftc5o/oc_realtime_websearch_suggestions_for_rofi_extras/
 
 sxhkd &
 
