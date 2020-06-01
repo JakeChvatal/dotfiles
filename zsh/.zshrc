@@ -68,6 +68,7 @@ extract
 vi-mode
 tmux
 git
+pyenv
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions
@@ -170,6 +171,52 @@ bindkey -M vicmd "?" history-incremental-search-forward
 bindkey -M vicmd "//" history-beginning-search-backward
 bindkey -M vicmd "??" history-beginning-search-forward
 
+
+# VIM PLUGIN - auto edit file
+auto_edit() {
+    cmdstr=${BUFFER//[$'\t\r\n']}
+    extension="${cmdstr##*.}" 
+    edit_ext=(
+        js 
+        jsx 
+        py 
+        txt
+        org 
+        md 
+        yml 
+        yaml
+        toml 
+        json
+    )
+
+    edit_files=(
+        Dockerfile 
+        # .gitignore TODO allow for editing dotfiles
+        # .zshrc
+    )
+     
+    if [[ ! $cmdstr =~ ( |\') ]]; then
+        if [ -z ${cmdstr##*.*} ]; then
+            if [[ ! "$(($edit_ext[(Ie)$extension]))" == 0 ]];  then
+                # if the file name has a text editing extension, 
+                # use the default editor to edit the file
+                BUFFER="$EDITOR $cmdstr"
+            elif [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then 
+                # if the file type isn't supported and GUI is available,
+                # touch it and open it with X
+                BUFFER="touch $cmdstr && xdg-open $cmdstr"
+            fi
+        elif [[ ! "$(($edit_files[(Ie)$cmdstr]))" == 0 ]]; then
+            # if the full name of the file matches, edit it
+            BUFFER="$EDITOR $cmdstr"
+        fi
+    fi
+
+    zle .accept-line
+}
+
+zle -N accept-line auto_edit
+
 # --- Startup ---
 # Ocaml support
 if cmd_exists opam; then
@@ -182,7 +229,6 @@ if cmd_exists bspwm; then
 fi
 
 # startx if tty1, display and has x
-# TODO this hasn't been working...
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
     exec startx
 fi
