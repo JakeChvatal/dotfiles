@@ -7,8 +7,8 @@ super + Return
 	termite
 
 # make sxhkd reload its configuration files:
-super + r
-	pkill -USR1 -x sxhkd
+# super + r
+	# pkill -USR1 -x sxhkd
 
 # open scratchpad
 super + w
@@ -198,17 +198,14 @@ super + colon
 
 # --- audio
 # raise volume
-XF86AudioRaiseVolume 	
-    exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+XF86AudioRaiseVolume
+    exec pulseaudio-ctl up 10
 # lower volume
 XF86AudioLowerVolume	
-    exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+    exec pulseaudio-ctl down 10
 # mute volume
 XF86AudioMute 		
-    exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-# mute mic
-bindsym XF86AudioMicMute 	
-    exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+    exec pulseaudio-ctl mute
 
 # --- music
 # go to previous song
