@@ -1,0 +1,3 @@
+*.cmdline
+*.db
+*.lock
