@@ -163,6 +163,27 @@ bindkey -M vicmd "?" history-incremental-search-forward
 bindkey -M vicmd "//" history-beginning-search-backward
 bindkey -M vicmd "??" history-beginning-search-forward
 
+
+# VIM PLUGIN
+auto_edit() {
+    # cmdstr, delimstr, text
+    cmdstr=${BUFFER//[$'\t\r\n']}
+    extension="${cmdstr##*.}" 
+    extension=${extension//[$'\t\r\n']}
+    edit_ext=(js jsx py org md)
+    if [[ ! $cmdstr =~ ( |\') ]] && [ -z ${cmdstr##*.*} ]; then
+        if [[ ! "$(($edit_ext[(Ie)$extension]))" == 0 ]];  then
+            BUFFER="$EDITOR $cmdstr"
+        else
+        fi
+    else
+    fi
+
+    zle .accept-line
+}
+
+zle -N accept-line auto_edit
+
 # --- Startup ---
 # Ocaml support
 if cmd_exists opam; then
