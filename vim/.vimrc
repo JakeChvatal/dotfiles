@@ -39,18 +39,14 @@ if has('nvim-0.3.0')            " autocompletion
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     " Use ALE for deoplete
     let g:deoplete#enable_at_startup = 1
-    call deoplete#custom#option('sources', {
-                                \ '_': ['ale'],
-                                \})
+    " call deoplete#custom#option('sources', { '_': ['ale'] })
 elseif has('vim')
     Plug 'Shougo/deoplete.nvim'
     Plug 'roxma/nvim-yarp'
     Plug 'roxma/vim-hug-neovim-rpc'
     " Use ALE for deoplete
     let g:deoplete#enable_at_startup = 1
-    call deoplete#custom#option('sources', {
-                                \ '_': ['ale'],
-                                \})
+    " call deoplete#custom#option('sources', { '_': ['ale'] })
 endif
 
 " Navigation

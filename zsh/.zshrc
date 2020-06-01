@@ -208,6 +208,7 @@ auto_edit() {
             fi
         elif [[ ! "$(($edit_files[(Ie)$cmdstr]))" == 0 ]]; then
             # if the full name of the file matches, edit it
+            # TODO match only the last . or / (support full paths)
             BUFFER="$EDITOR $cmdstr"
         fi
     fi
