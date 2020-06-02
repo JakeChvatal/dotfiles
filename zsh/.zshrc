@@ -9,10 +9,13 @@ cmd_exists () {
 }
 
 # --- Path Configuration ---
+# use the best editor currently available
 if cmd_exists nvim; then
-  export EDITOR='nvim'
+    export EDITOR='nvim' # yes
+elif cmd_exists vim; then
+    export EDITOR='vim'  # perhaps
 else
-  export EDITOR='vim' fi export NPM_CONFIG_PREFIX=~/.node_modules
+    export EDITOR='vi' # oh god
 fi
 
 export TERMINAL='termite'
@@ -38,12 +41,6 @@ export PATH
 export JAVA_HOME=$JAVA_HOME:/usr/lib/jvm/java-8-openjdk/jre
 export QT_AUTO_SCREEN_SCALE_FACTOR=1 # qutebrowser scaling
 
-# --- SSH ---
-PROCFILE=$HOME/.proxy # add proxy
-if test -f "$PROCFILE"; then
-    source $PROCFILE
-fi
-
 # --- Antigen ---
 export ANTIGEN="$HOME/.antigen.zsh"
 # ensure that the system is not WSL
@@ -54,10 +51,7 @@ if [ -z "$(uname -a | grep "Microsoft")" ]; then
         curl -L git.io/antigen > $ANTIGEN
     fi
 
-# TODO: add back packages that work with WSL,
-# OR use a theme that works well with WSL
-# (though this should probably be done at
-# installation time, with different dotfiles)
+# TODO: better WSL compatibility
 source $ANTIGEN
 antigen use oh-my-zsh
 antigen theme romkatv/powerlevel10k
@@ -75,34 +69,31 @@ zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-history-substring-search
 jakechvatal/autoedit
+jakechvatal/p
 EOBUNDLES
 antigen apply
 fi
 
-# autoload -Uz compinit # autocompletion
-# compinit -u
-
 # --- History ---
-HISTSIZE=10000
+HISTSIZE=10000 # long history
 SAVEHIST=9000
 HISTFILE=~/.zsh_history
-HISTCONTROL=ignoredups:erasedups
+HISTCONTROL=ignoredups:erasedups # no duplicates in history
 MISTIGNORE="exit"
 
 # ZSH Settings
-HYPHEN_INSENSITIVE="true" # _ and - correspond to same characters in autocomplete
-DISABLE_AUTO_UPDATE="true"
+HYPHEN_INSENSITIVE="true"            # _ and - are the same for autocomplete
+DISABLE_AUTO_UPDATE="true"           # disable omzsh auto update
 DISABLE_UNTRACKED_FILES_DIRTY="true" # faster repo status check
-setopt INC_APPEND_HISTORY # add commands to history as they are entered
-setopt AUTO_CD            # auto change directories
-setopt CORRECT            # correct commands
-setopt MULTIOS            # pipe to multiple outputs
-setopt NO_CLOBBER         # str doesn't clobber
-setopt RC_EXPAND_PARAM    # expand arround vars
-setopt NO_CASE_GLOB       # case insensitive glob
-setopt NUMERIC_GLOB_SORT  # sort globs by #
-setopt EXTENDED_GLOB      # glob for more!
-
+setopt INC_APPEND_HISTORY            # add commands to history as they are entered
+setopt AUTO_CD                       # auto change directories
+setopt CORRECT                       # correct commands
+setopt MULTIOS                       # pipe to multiple outputs
+setopt NO_CLOBBER                    # str doesn't clobber
+setopt RC_EXPAND_PARAM               # expand arround vars
+setopt NO_CASE_GLOB                  # case insensitive glob
+setopt NUMERIC_GLOB_SORT             # sort globs by #
+setopt EXTENDED_GLOB                 # glob for more!
 
 # --- Aliases ---
 # always ensure that the right editor is used
@@ -116,11 +107,8 @@ alias distro='cat /etc/*-release'
 alias reload='source ~/.zshrc'
 
 # sane shell commands
-alias mkdir='mkdir -p' # mkdir always makes recursive directories
-
-alias -g ...='../..'
-alias -g ....='../../..'
-alias -g DN='/dev/null'
+alias mkdir='mkdir -p'  # mkdir always makes recursive directories
+alias -g DN='/dev/null' # easier
 
 # --- Keybindings ---
 # home, end for beginning and end of line
@@ -136,15 +124,17 @@ bindkey -M vicmd "//" history-beginning-search-backward
 bindkey -M vicmd "??" history-beginning-search-forward
 
 # --- Startup ---
-# Ocaml support
-if cmd_exists opam; then
+cmd_exists opam && # ocaml support
     eval $(opam env)
-fi
 
-# add bspwm scripts to path if it exists
-if cmd_exists bspwm; then
+cmd_exists npm && # redirect node_modules
+    export NPM_CONFIG_PREFIX=~/.node_modules
+
+cmd_exists bspwm && # bspwm-specific scripts
     export PATH=$PATH:"$HOME/.config/bspwm/scripts"
-fi
+
+test -f "$HOME/.proxy" && # add proxy config if it exists
+    source $HOME/.proxy
 
 # startx if tty1, display and has x
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
