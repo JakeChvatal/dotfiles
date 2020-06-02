@@ -15,7 +15,7 @@ if cmd_exists nvim; then
 elif cmd_exists vim; then
     export EDITOR='vim'  # perhaps
 else
-    export EDITOR='vi' # oh god
+    export EDITOR='vi'   # oh god
 fi
 
 export TERMINAL='termite'
@@ -25,7 +25,7 @@ export MANPATH="/usr/local/man:$MANPATH"
 export BROWSER=$(which google-chrome chromium-browser firefox links2 links lynx qutebrowser | grep -Pm1 '^/')
 export RANGER_LOAD_DEFAULT_RC="FALSE" # only load zsh once
 
-# TODO only add things to path if they exist?
+# TODO only add things to path if they exist
 typeset -U PATH path
 path=(
     "/usr/local/bin"
