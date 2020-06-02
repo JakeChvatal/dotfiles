@@ -69,10 +69,12 @@ vi-mode
 tmux
 git
 pyenv
+lainiwa/zsh-manydots-magic
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-completions
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-history-substring-search
+jakechvatal/autoedit
 EOBUNDLES
 antigen apply
 fi
@@ -115,48 +117,10 @@ alias reload='source ~/.zshrc'
 
 # sane shell commands
 alias mkdir='mkdir -p' # mkdir always makes recursive directories
-# alias mv='
 
 alias -g ...='../..'
 alias -g ....='../../..'
 alias -g DN='/dev/null'
-
-# system-independent package management aliases
-# TODO handle these at install time with script?
-function p_mgr() {
-   if cmd_exists apt; then # prioritize apt over apt-get
-    alias pi='sudo apt install'
-    alias pp='sudo apt purge'
-    alias pr='sudo apt remove'
-    alias pu='sudo apt update'
-    alias pug='sudo apt upgrade'
-    alias puu='sudo apt update && sudo apt upgrade'
-    alias par='sudo apt autoremove'
-    alias ps='sudo apt search'
-   elif cmd_exists apt-get; then
-    alias pi='sudo apt-get install'
-    alias pp='sudo apt-get purge'
-    alias pr='sudo apt-get remove'
-    alias pu='sudo apt-get update'
-    alias pug='sudo apt-get upgrade'
-    alias puu='sudo apt-get update && sudo apt upgrade'
-    alias par='sudo apt-get autoremove'
-    alias ps 'sudo apt-cache search'
-  elif cmd_exists pacman; then
-    alias pi='sudo pacman -S'
-    alias pp='sudo pacman -R'
-    alias pr='sudo pacman -Rscn'
-    alias pu='sudo pacman -u'
-    alias pug='sudo pacman -yyu'
-    alias puu='sudo pacman -Syyu'
-    alias par='sudo pacman -Rc'
-    alias ps='pacman -Q'
-  else
-    echo "Make sure that either the pacman, apt or apt-get package manager is installed."
-  fi
-}
-
-p_mgr
 
 # --- Keybindings ---
 # home, end for beginning and end of line
@@ -170,53 +134,6 @@ bindkey -M vicmd "?" history-incremental-search-forward
 # search based on what you typed in already
 bindkey -M vicmd "//" history-beginning-search-backward
 bindkey -M vicmd "??" history-beginning-search-forward
-
-
-# VIM PLUGIN - auto edit file
-auto_edit() {
-    cmdstr=${BUFFER//[$'\t\r\n']}
-    extension="${cmdstr##*.}" 
-    edit_ext=(
-        js 
-        jsx 
-        py 
-        txt
-        org 
-        md 
-        yml 
-        yaml
-        toml 
-        json
-    )
-
-    edit_files=(
-        Dockerfile 
-        # .gitignore TODO allow for editing dotfiles
-        # .zshrc
-    )
-     
-    if [[ ! $cmdstr =~ ( |\') ]]; then
-        if [ -z ${cmdstr##*.*} ]; then
-            if [[ ! "$(($edit_ext[(Ie)$extension]))" == 0 ]];  then
-                # if the file name has a text editing extension, 
-                # use the default editor to edit the file
-                BUFFER="$EDITOR $cmdstr"
-            elif [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then 
-                # if the file type isn't supported and GUI is available,
-                # touch it and open it with X
-                BUFFER="touch $cmdstr && xdg-open $cmdstr"
-            fi
-        elif [[ ! "$(($edit_files[(Ie)$cmdstr]))" == 0 ]]; then
-            # if the full name of the file matches, edit it
-            # TODO match only the last . or / (support full paths)
-            BUFFER="$EDITOR $cmdstr"
-        fi
-    fi
-
-    zle .accept-line
-}
-
-zle -N accept-line auto_edit
 
 # --- Startup ---
 # Ocaml support
@@ -236,11 +153,9 @@ fi
 
 # start prompt
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# The following lines were added by compinstall
 
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
 zstyle :compinstall filename '/home/jake/.zshrc'
 
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
