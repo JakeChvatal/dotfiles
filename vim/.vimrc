@@ -23,9 +23,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'              " close parens
 Plug 'junegunn/vim-easy-align'         " align text
 Plug 'matze/vim-move'                  " move lines without cut-paste
-Plug 'tomtom/tcomment_vim'             " autocomment support TODO make use of this!
-Plug 'tpope/vim-repeat'                " improves repeats
-Plug 'vim-scripts/visualrepeat'        " repeat in visual mode
+Plug 'tomtom/tcomment_vim'             " autocomment support 
+" Plug 'tpope/vim-repeat'                " improves repeats
+" Plug 'vim-scripts/visualrepeat'        " repeat in visual mode
 Plug 'maxbrunsfeld/vim-yankstack'      " track yanks
 Plug 'tpope/vim-unimpaired'            " bracket mapping
 Plug 'chrisbra/NrrwRgn'                " narrow region for editing file in new buffer
@@ -93,7 +93,7 @@ Plug 'jceb/vim-orgmode'         " TODO keymappings for taking notes
 Plug 'tpope/vim-speeddating'    " required for org
 Plug 'inkarkat/vim-SyntaxRange' " syntax for just part of file - for org mode
 Plug 'mhinz/vim-startify'       " start menu
-Plug 'reedes/vim-pencil'        " TODO writing
+" Plug 'reedes/vim-pencil'        " TODO writing
 call plug#end()
 
 " --- Vim Settings ---
@@ -108,7 +108,6 @@ let g:folddigest_size = 30
 call yankstack#setup()
 
 " ALE
-
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_fix_on_save = 1
@@ -118,8 +117,8 @@ let g:ale_sign_column_always = 1
 let g:airline#extensions#ale#enabled = 1
 
 " custom fixers and linters for ALE
-let b:ale_fixers = {'python': ['black', 'isort'], 'javascript': ['xo']}
-let b:ale_linters = {'python': ['pyflakes'], 'javascript': ['xo']}
+let b:ale_fixers = {'python': ['autopep8', 'yapf']}
+let b:ale_linters = {'python': ['flake8', 'mypy']}
 
 " TODO: compile org mode, latex, markdown to pdf and show pdf
 
@@ -414,9 +413,9 @@ map <leader>vi :VimuxInspectRunner<CR>
 map <leader>vz :VimuxZoomRunner<CR>
 
 " w :: (split) Window
-nnoremap <leader>wh  :sp<CR>
+nnoremap <leader>wc  :sp<CR>
 nnoremap <leader>wv  :vsp<CR>
-nnoremap <leader>wc  <C-W>c
+nnoremap <leader>wr  <C-W>c
 
 " x :: Execute?
 
