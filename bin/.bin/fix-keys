@@ -1,8 +1,12 @@
 #!/bin/bash
 
-sleep 2
-# enable tapping and dragging on touchpad
-xinput set-prop 16 316 1 
-xmodmap $HOME/.Xmodmap
-# short press on caps lock is escape
-xcape -e 'Hyper_L=Escape'
+# ASSUMES on-device keyboard will not be used when external keyboard is
+# if the external keyboard is not plugged in:
+sleep 10
+if [[ ! $(ls /dev/input/by-id | grep "Planck") ]]; then
+    # enable tapping and dragging on touchpad
+    xinput set-prop 16 316 1 
+    # short press on caps lock is escape
+    xmodmap $HOME/.Xmodmap
+    xcape -e 'Hyper_L=Escape'
+fi
