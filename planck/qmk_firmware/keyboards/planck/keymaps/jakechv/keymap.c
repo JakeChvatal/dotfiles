@@ -1,21 +1,5 @@
-// This is the canonical layout file for the Quantum project. If you want to add another keyboard,
-// this is the style you want to emulate.
-//
-// To flash planck firmware
-// ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔
-//   Reset keyboard or press hw reset button on base (hole)
-//
-//   cd qmk_firmware/keyboards/planck
-//   sudo make KEYMAP=sdothum dfu
-//
-//   sudo make clean          (good practice before flashing)
-//   sudo make KEYMAP=sdothum (to compile check)
-//
 // Package requirements (for arch linux)
-// ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔
-//   avr-gcc-atmel
-//   avr-libc-atmel
-//   dfu-programmer
+//   avr-gcc-atmel avr-libc-atmel dfu-programmer
 //
 // Notes
 // ▔▔▔▔▔
@@ -32,44 +16,17 @@
 //   see function private()
 //
 // Modifier clusters
-// ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔
 //   The num and sym keys together access the navigation pad layer
-//
 //   ,-----------------------------------------------------------------------------------.
 //   | Ctrl |  GUI |  Alt |  Esc | Space|  Tab | Bksp |  Ent | Left | Down |  Up  | Right|
 //   `-----------------------------------------------------------------------------------'
 //
 // Hint
-// ▔▔▔▔
 //   For sculpted keycaps such as Cherry or OEM profile, reverse the Alt, Num,
 //   Shift, Shift, Nav, Sym keycaps for more ergonomic thumb orientation and
 //   actuation
-//
-// Code
-// ▔▔▔▔
-//   This source is shamelessly based on the "default" planck layout
-//
-//   #ifdef/#endif block structures are not indented, as syntax highlighting
-//   in vim is sufficient for identification
-//
-//   c++ commenting style is used throughout
-//
-// Change history
-// ▔▔▔▔▔▔▔▔▔▔▔▔▔▔
-//   See http://thedarnedestthing.com/planck%20constant
-//   See http://thedarnedestthing.com/planck%20done
-
-
-
-//                === N O T E ===
-//
-// sudo CPATH=<keymap.c directory>/common make ...
-
 
 #include QMK_KEYBOARD_H
-#ifdef STENO_ENABLE
-#include "keymap_steno.h"
-#endif
 
 extern keymap_config_t keymap_config;
 
@@ -145,35 +102,6 @@ enum planck_keycodes {
 #define MT_X    MT   (MOD_LALT | MOD_LSFT, KC_X)
 #define ST_A    SFT_T(KC_A)
 
-/* BEAKL ONLY
-#ifdef HOME_MODS
-#define HOME_K  CTL_T(KC_K)
-#define HOME_H  GUI_T(KC_H)
-#define HOME_E  ALT_T(KC_E)
-#define HOME_A  SFT_T(KC_A)
-#if defined(BEAKLMU) || defined(BEAKLSP)
-#define HOME_T  SFT_T(KC_T)
-#define HOME_R  ALT_T(KC_R)
-#define HOME_S  GUI_T(KC_S)
-#define HOME_W  CTL_T(KC_W)
-#else
-#define HOME_T  SFT_T(KC_T)
-#define HOME_S  ALT_T(KC_S)
-#define HOME_N  GUI_T(KC_N)
-#define HOME_B  CTL_T(KC_B)
-#endif
-#else
-#define HOME_K  KC_K
-#define HOME_H  KC_H
-#define HOME_E  KC_E
-#define HOME_A  KC_A
-#define HOME_T  KC_T
-#define HOME_S  KC_S
-#define HOME_N  KC_N
-#define HOME_B  KC_B
-#endif
-*/
-
 // hold shift, press keycode
 #define S_DOWN  S    (KC_DOWN)
 #define S_LEFT  S    (KC_LEFT)
@@ -200,7 +128,7 @@ enum planck_keycodes {
 #define TMCOPY  LALT(LCTL(KC_C))
 #define TMPASTE LALT(LCTL(KC_V))
 
-
+// mom activates layer when held, key when tapped
 #define LT_BSLS LT  (_MOUSE,  KC_BSLS)      // see process_record_user() for extended handling
 #define LT_BSPC LT  (_EDIT,   KC_BSPC)
 #define SP_LEFT LT  (_EDIT,   KC_LEFT)
@@ -210,7 +138,8 @@ enum planck_keycodes {
 #define LT_TAB  LT  (_FNCKEY, KC_TAB)
 #define LT_INS  LT  (_FNCKEY, KC_INS)
 #define LT_ALTG LT  (_FNCKEY, KC_RALT)
-#define ADJUST  MO  (_ADJUST)
+
+#define ADJUST  MO  (_ADJUST) 
 #define OS_ALT  OSM (MOD_LALT)
 #define OS_CTL  OSM (MOD_LCTL)
 #define OS_GUI  OSM (MOD_LGUI)
@@ -221,26 +150,7 @@ enum planck_keycodes {
 #define OS_SALT OSM (MOD_LALT | MOD_LSFT)
 #define OS_SGUI OSM (MOD_LGUI | MOD_LSFT)
 
-#ifdef CENTER_TT
-#ifdef BEAKLSP
-#define CNTR_TL OSM (MOD_LSFT)
-#else
-#define CNTR_TL TT  (_TTFNCKEY)
-#endif
-#define CNTR_TR KC_CAPS
-#define CNTR_HL TT  (_TTCURSOR)
-#define CNTR_HR TT  (_TTMOUSE)
-#define CNTR_BL TT  (_TTNUMBER)
-#define CNTR_BR TT  (_TTREGEX)
-#else
-#define CNTR_TL OSM (MOD_LALT | MOD_LCTL)
-#define CNTR_TR OSM (MOD_LGUI | MOD_LCTL)
-#define CNTR_HL OSM (MOD_LALT | MOD_LSFT)
-#define CNTR_HR OSM (MOD_LGUI | MOD_LSFT)
-#define CNTR_BL TD  (_CAPS)
-#define CNTR_BR OSM (MOD_LSFT | MOD_LCTL)
-#endif
-
+// unclear yet
 #ifdef THUMB_0
 #define LT_EQL  LT  (_ADJUST, KC_EQL)
 #else
@@ -258,27 +168,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #include "beakl.h"
 #include "colemak.h"
 #include "qwerty.h"
-
 // ...................................................... Number / Function Keys
-
 #include "common/number_fkey_layout.h"
-
 // ......................................................... Symbol / Navigation
-
 #include "common/symbol_guifn_layout.h"
-
 // ............................................................... Toggle Layers
-
 #ifdef CENTER_TT
 #include "common/toggle_layout.h"
 #endif
-
 // ......................................................... Short Cuts / Adjust
-
 #include "common/chord_layout.h"
-
 };
-
 
 // ........................................................... User Keycode Trap
 
@@ -287,6 +187,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define BASE_1  1
 #define BASE_2  2
 #define BASE_12 3
+
 static uint8_t base_n = 0;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record)
@@ -315,44 +216,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
       }
       return false;
     case AT_DOWN:
-#ifdef HOME_MODS
-    case HOME_E:
-#if defined(BEAKLMU) || defined(BEAKLSP)
-    case HOME_R:
-#else
-    case HOME_S:
-#endif
-#endif
-      tap_mods(record, KC_LALT);
-      break;
-    case CT_RGHT:
-#ifdef HOME_MODS
-    case HOME_K:
-#if defined(BEAKLMU) || defined(BEAKLSP)
-    case HOME_W:
-#else
-    case HOME_B:
-#endif
-#endif
-      tap_mods(record, KC_LCTL);
-      break;
-    case GT_UP:
-#ifdef HOME_MODS
-    case HOME_H:
-#if defined(BEAKLMU) || defined(BEAKLSP)
-    case HOME_S:
-#else
-    case HOME_N:
-#endif
-#endif
-      tap_mods(record, KC_LGUI);
-      break;
-#ifdef HOME_MODS
-    case HOME_A:
-    case HOME_T:
-      tap_mods(record, KC_LSFT);
-      break;
-#endif
+
 #ifdef CENTER_TT
     case TT_ESC:
       clear_tt();                           // exit TT layer
@@ -434,19 +298,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
       // LT (_LSHIFT, KC_SPC) left right combination layer, see tap dance TD_SPC
       thumb_layer(record, LEFT, 0, 0, _LSHIFT, _SYMBOL);
       break;
-#ifdef CENTER_TT
-    case CNTR_TL:
-    case CNTR_TR:
-    case CNTR_HL:
-    case CNTR_HR:
-    case CNTR_BL:
-    case CNTR_BR:
-      if (tt_keycode != keycode && tt_keycode != 0) {
-        clear_tt();                         // return to base layer first if different TT layer selected
-      }
-      tt_keycode = keycode;
-      break;
-#endif
     case PS_BASE:
       if (record->event.pressed) {
         base_layer();

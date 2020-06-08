@@ -15,9 +15,7 @@ void shift_key(uint16_t keycode)
 
 #define SHIFT   1
 #define NOSHIFT 0
-
-static uint16_t key_timer = 0;
-
+static uint16_t key_timer = 0; 
 // key press for thumb_layer() and lt_shift() macros
 bool key_press(uint8_t shift, uint16_t keycode)
 {

@@ -17,7 +17,7 @@
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P   , KC_BSPC,
     GUI_ESC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, 
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  TD_QUOT, KC_ENT,
-    OS_CTL,  OS_GUI,  OS_ALT,  LT_ESC,  TD_SPC,  LT_TAB,  LT_BSPC, TD_ENT,  LT_LEFT, AT_DOWN, GT_UP,   CT_RGHT
+    OS_CTL,  OS_GUI,  OS_ALT,  LT_ESC,  LT_TAB,  TD_SPC,  LT_BSPC, TD_ENT,  LT_LEFT, AT_DOWN, GT_UP,   CT_RGHT
   ),
 
 // CNTR_TL, CNTR_TR,
@@ -28,7 +28,7 @@
     KC_TAB,  S(KC_Q), S(KC_W), S(KC_E), S(KC_R), S(KC_T),  S(KC_Y), S(KC_U), S(KC_I), S(KC_O), S(KC_P), KC_BSPC,
     GUI_ESC, S(KC_A), S(KC_S), S(KC_D), S(KC_F), S(KC_G),  S(KC_H), S(KC_J), S(KC_K), S(KC_L), KC_SCLN, KC_QUOT,
     KC_LSFT, S(KC_Z), S(KC_X), S(KC_C), S(KC_V), S(KC_B),  S(KC_N), S(KC_M), KC_COMM, KC_DOT,  TD_QUOT, KC_ENT,
-    OS_CTL,  OS_GUI,  OS_ALT,  LT_ESC,  TD_SPC,  LT_TAB,   LT_BSPC, TD_ENT,  LT_LEFT, AT_DOWN, GT_UP,   CT_RGHT
+    OS_CTL,  OS_GUI,  OS_ALT,  LT_ESC,  LT_TAB,  TD_SPC,   LT_BSPC, TD_ENT,  LT_LEFT, AT_DOWN, GT_UP,   CT_RGHT
   ),
 
 // CNTR_TL, CNTR_TR,
@@ -46,10 +46,10 @@
   // `-----------------------------------------------------------------------------------'
 
   [_LSHIFT] = LAYOUT_planck_grid(
-    S(KC_Q), S(KC_W), S(KC_E), S(KC_R), S(KC_T), CNTR_TL, CNTR_TR, S(KC_Y), S(KC_U), S(KC_I), S(KC_O), S(KC_P),
-    S(KC_A), S(KC_S), S(KC_D), S(KC_F), S(KC_G), CNTR_HL, CNTR_HR, S(KC_H), S(KC_J), S(KC_K), S(KC_L), TD_COLN,
-    S(KC_Z), S(KC_X), S(KC_C), S(KC_V), S(KC_B), CNTR_BL, CNTR_BR, S(KC_N), S(KC_M), KC_SLSH, KC_QUES, TD_DQOT,
-    OS_CTL,  OS_GUI,  OS_ALT,  LT_ESC,  ___fn__, LT_TAB,  KC_DEL,  KC_MINS, SL_LEFT, S_DOWN,  S_UP,    S_RGHT
+    KC_TAB,  S(KC_Q), S(KC_W), S(KC_E), S(KC_R), S(KC_T), S(KC_Y), S(KC_U), S(KC_I), S(KC_O), S(KC_P), KC_BSPC,
+    GUI_ESC, S(KC_A), S(KC_S), S(KC_D), S(KC_F), S(KC_G), S(KC_H), S(KC_J), S(KC_K), S(KC_L), TD_COLN, KC_QUOT,
+    KC_LSFT, S(KC_Z), S(KC_X), S(KC_C), S(KC_V), S(KC_B), S(KC_N), S(KC_M), KC_SLSH, KC_QUES, TD_DQOT, KC_ENT,
+    OS_CTL,  OS_GUI,  OS_ALT,  LT_ESC,  LT_TAB,  ___fn__, KC_DEL,  KC_MINS, SL_LEFT, S_DOWN,  S_UP,    S_RGHT
   ),
 
   // ,-----------------------------------------------------------------------------------.
@@ -63,10 +63,9 @@
   // `-----------------------------------------------------------------------------------'
 
   [_RSHIFT] = LAYOUT_planck_grid(
-    S(KC_Q), S(KC_W), S(KC_E), S(KC_R), S(KC_T), CNTR_TL, CNTR_TR, S(KC_Y), S(KC_U), S(KC_I), S(KC_O), S(KC_P),
-    S(KC_A), S(KC_S), S(KC_D), S(KC_F), S(KC_G), CNTR_HL, CNTR_HR, S(KC_H), S(KC_J), S(KC_K), S(KC_L), TD_COLN,
-    S(KC_Z), S(KC_X), S(KC_C), S(KC_V), S(KC_B), CNTR_BL, CNTR_BR, S(KC_N), S(KC_M), TD_TILD, TD_GRV,  TD_DQOT,
-    OS_CTL,  OS_GUI,  OS_ALT,  KC_CAPS, KC_UNDS, SL_TAB,  LT_BSPC, ___fn__, SL_LEFT, S_DOWN,  S_UP,    S_RGHT
+    KC_TAB,  S(KC_Q), S(KC_W), S(KC_E), S(KC_R), S(KC_T), S(KC_Y), S(KC_U), S(KC_I), S(KC_O), S(KC_P), KC_BSPC,
+    GUI_ESC, S(KC_A), S(KC_S), S(KC_D), S(KC_F), S(KC_G), S(KC_H), S(KC_J), S(KC_K), S(KC_L), TD_COLN, KC_QUOT,
+    KC_LSFT, S(KC_Z), S(KC_X), S(KC_C), S(KC_V), S(KC_B), S(KC_N), S(KC_M), TD_TILD, TD_GRV,  TD_DQOT, KC_ENT,
+    OS_CTL,  OS_GUI,  OS_ALT,  KC_CAPS, SL_TAB,  KC_UNDS, LT_BSPC, ___fn__, SL_LEFT, S_DOWN,  S_UP,    S_RGHT
   ),
 #endif
-

@@ -50,9 +50,7 @@
   // |   H  |   I  |   E  |   A  |   "  | ↑Alt | ↑GUI |   L  |   S  |   T  |   N  |   W  |
   // |------+------+------+------+------+------|------+------+------+------+------+------|
   // |   :  |   /  |   J  |   ?  |   X  | Caps |^Shift|   B  |   D  |   M  |   P  |   Z  |
-  // |------+------+------+------+------+------+------+------+------+------+------+------|
-  // | Ctrl |  GUI |  Alt | Caps |   -  | ↑Tab | Bksp |  f() | Left | Down |  Up  | Right|
-  // `-----------------------------------------------------------------------------------'
+  // |------+------+------+------+------+------+------+------+------+------+------+------| | Ctrl |  GUI |  Alt | Caps |   -  | ↑Tab | Bksp |  f() | Left | Down |  Up  | Right| `-----------------------------------------------------------------------------------'
 
   [_RSHIFT] = LAYOUT_planck_grid(
     S(KC_Q), S(KC_Y), S(KC_O), S(KC_U), S(KC_K), CNTR_TL, CNTR_TR, S(KC_F), S(KC_G), S(KC_R), S(KC_C), S(KC_V),
@@ -140,14 +138,14 @@
     KC_K,    KC_H,    KC_E,    HOME_A,  KC_DOT,  CNTR_HL, CNTR_HR, KC_C,    KC_T,    KC_S,    KC_N,    KC_B   ,
     KC_J,    KC_SCLN, TD_QUOT, KC_I,    KC_COMM, CNTR_BL, CNTR_BR, KC_W,    KC_M,    KC_L,    KC_P,    KC_V   ,
     OS_CTL,  OS_GUI,  OS_ALT,  LT_ESC,  TD_SPC,  LT_TAB,  LT_BSPC, TD_ENT,  LT_LEFT, AT_DOWN, GT_UP,   CT_RGHT
-  ,
+  ),
 
   [_SHIFT] = LAYOUT_planck_grid(
     S(KC_Q), S(KC_Y), S(KC_O), S(KC_U), S(KC_Z), CNTR_TL, CNTR_TR, S(KC_G), S(KC_D), S(KC_R), S(KC_F), S(KC_X),
     S(KC_K), S(KC_H), S(KC_E), S(KC_A), KC_DOT,  CNTR_HL, CNTR_HR, S(KC_C), S(KC_T), S(KC_S), S(KC_N), S(KC_B),
     S(KC_J), KC_SCLN, TD_QUOT, S(KC_I), KC_COMM, CNTR_BL, CNTR_BR, S(KC_W), S(KC_M), S(KC_L), S(KC_P), S(KC_V),
     OS_CTL,  OS_GUI,  OS_ALT,  LT_ESC,  TD_SPC,  LT_TAB,  LT_BSPC, TD_ENT,  LT_LEFT, AT_DOWN, GT_UP,   CT_RGHT
-  ,
+    ),
 
   // ,-----------------------------------------------------------------------------------.
   // |   Q  |   Y  |   {  |   }  |   $  | ^Alt | ^GUI |   G  |   D  |   R  |   F  |   X  |
