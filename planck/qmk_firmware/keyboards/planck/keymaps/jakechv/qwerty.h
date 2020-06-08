@@ -20,20 +20,12 @@
     OS_CTL,  OS_GUI,  OS_ALT,  LT_ESC,  LT_TAB,  TD_SPC,  LT_BSPC, TD_ENT,  LT_LEFT, AT_DOWN, GT_UP,   CT_RGHT
   ),
 
-// CNTR_TL, CNTR_TR,
-// CNTR_HL, CNTR_HR,
-// CNTR_BL, CNTR_BR,
-
   [_SHIFT] = LAYOUT_planck_grid(
     KC_TAB,  S(KC_Q), S(KC_W), S(KC_E), S(KC_R), S(KC_T),  S(KC_Y), S(KC_U), S(KC_I), S(KC_O), S(KC_P), KC_BSPC,
     GUI_ESC, S(KC_A), S(KC_S), S(KC_D), S(KC_F), S(KC_G),  S(KC_H), S(KC_J), S(KC_K), S(KC_L), KC_SCLN, KC_QUOT,
     KC_LSFT, S(KC_Z), S(KC_X), S(KC_C), S(KC_V), S(KC_B),  S(KC_N), S(KC_M), KC_COMM, KC_DOT,  TD_QUOT, KC_ENT,
     OS_CTL,  OS_GUI,  OS_ALT,  LT_ESC,  LT_TAB,  TD_SPC,   LT_BSPC, TD_ENT,  LT_LEFT, AT_DOWN, GT_UP,   CT_RGHT
   ),
-
-// CNTR_TL, CNTR_TR,
-// CNTR_HL, CNTR_HR,
-// CNTR_BL, CNTR_BR,
 
   // ,-----------------------------------------------------------------------------------.
   // |   Q  |   W  |   E  |   R  |   T  | ^Alt | ^GUI |   Y  |   U  |   I  |   O  |   P  |
@@ -44,7 +36,7 @@
   // |------+------+------+------+------+------+------+------+------+------+------+------|
   // | Ctrl |  GUI |  Alt |  Esc |  f() |  Tab |  Del |   -  | Left | Down |  Up  | Right|
   // `-----------------------------------------------------------------------------------'
-
+  
   [_LSHIFT] = LAYOUT_planck_grid(
     KC_TAB,  S(KC_Q), S(KC_W), S(KC_E), S(KC_R), S(KC_T), S(KC_Y), S(KC_U), S(KC_I), S(KC_O), S(KC_P), KC_BSPC,
     GUI_ESC, S(KC_A), S(KC_S), S(KC_D), S(KC_F), S(KC_G), S(KC_H), S(KC_J), S(KC_K), S(KC_L), TD_COLN, KC_QUOT,
@@ -69,3 +61,4 @@
     OS_CTL,  OS_GUI,  OS_ALT,  KC_CAPS, SL_TAB,  KC_UNDS, LT_BSPC, ___fn__, SL_LEFT, S_DOWN,  S_UP,    S_RGHT
   ),
 #endif
+

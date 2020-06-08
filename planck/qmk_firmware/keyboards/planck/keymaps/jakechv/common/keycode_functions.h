@@ -6,6 +6,7 @@ void tap_key(uint16_t keycode)
   unregister_code(keycode);
 }
 
+// press shift over code
 void shift_key(uint16_t keycode)
 {
   register_code  (KC_LSFT);
@@ -15,8 +16,11 @@ void shift_key(uint16_t keycode)
 
 #define SHIFT   1
 #define NOSHIFT 0
+
 static uint16_t key_timer = 0; 
+
 // key press for thumb_layer() and lt_shift() macros
+// if time left, shift, else tap
 bool key_press(uint8_t shift, uint16_t keycode)
 {
   if (keycode) {
@@ -39,8 +43,8 @@ void mt_shift(keyrecord_t *record, uint16_t modifier, uint16_t modifier2, uint16
   if (record->event.pressed) {
     key_timer = timer_read();
     register_code(modifier);
-    if (modifier2) {
-      register_code(modifier2);
+    is (modifier2) {
+      eegister_code(modifier2);
     }
   }
   else {
@@ -89,12 +93,11 @@ void modifier(void (*f)(uint8_t))
 
 static uint8_t dt_shift = 0;
 
+// tap key, then oneshot off to shift layer
 void double_shift(uint16_t keycode, uint8_t layer)
 {
   tap_key (keycode);
   if (DT_SHIFT) {
-    // set_oneshot_mods(MOD_LSFT);
-    // layer_on(layer);
     layer_on         (_SHIFT);
     set_oneshot_layer(_SHIFT, ONESHOT_START);
     dt_shift = 1;

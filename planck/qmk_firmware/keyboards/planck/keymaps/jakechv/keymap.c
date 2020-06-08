@@ -1,6 +1,8 @@
 // Package requirements (for arch linux)
 //   avr-gcc-atmel avr-libc-atmel dfu-programmer
 //
+// To implement in the future:
+// http://thedarnedestthing.com/rolling%20qmk%20modifiers
 // Notes
 // ▔▔▔▔▔
 //   ** E R G O   W I D E   S P L I T ** Layout
@@ -35,7 +37,6 @@ enum planck_layers {
  ,_SHIFT
  ,_LSHIFT
  ,_RSHIFT
- ,_PLOVER
  ,_NUMBER
  ,_SYMBOL
  ,_FNCKEY
@@ -164,10 +165,9 @@ enum planck_keycodes {
 // ........................................................ Default Alpha Layout
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-
-#include "beakl.h"
-#include "colemak.h"
 #include "qwerty.h"
+#include "colemak.h"
+#include "beakl.h"
 // ...................................................... Number / Function Keys
 #include "common/number_fkey_layout.h"
 // ......................................................... Symbol / Navigation
