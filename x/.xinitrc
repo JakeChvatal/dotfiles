@@ -39,7 +39,6 @@ export SSH_AUTH_SOCK
 source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
 
 # small keymapping changes
-fix-keys &
 # hide mouse pointer
 unclutter &
 # reform monitor gang
@@ -53,4 +52,5 @@ exec mopidy -q &
 # start wm
 termite &
 hsetroot -solid "#1d2026" &
+# fix-keys &
 exec bspwm
