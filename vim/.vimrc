@@ -54,8 +54,7 @@ Plug 'scrooloose/nerdtree'                          " directory navigation
 Plug 'Xuyuanp/nerdtree-git-plugin'                  " git integration for nerdtree
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " fuzzy file finding - incredible!
 Plug 'junegunn/fzf.vim'
-Plug 'vim-scripts/multisearch.vim'                  " multiple search queries at once TODO map
-Plug 'jceb/vim-shootingstar'                        " leader * for searching for subpart of text TODO
+Plug 'justinmk/vim-sneak'                           " hunt with two chars
 Plug 'mhinz/vim-sayonara'                           " sensibly close buffer
 Plug 'majutsushi/tagbar'                            " browse tags of current file
 Plug 'vim-scripts/utl.vim'                          " text linking
@@ -81,9 +80,6 @@ Plug 'christoomey/vim-tmux-navigator' " vim, tmux nav consistently
 " tools
 Plug 'farmergreg/vim-lastplace' " save place in file
 Plug 'Chiel92/vim-autoformat'   " autoformatting
-
-Plug 'jpalardy/vim-slime'       " send to repl TODO
-" Plug 'tpope/vim-eunuch'         " TODO shell commands - see if these are used
 Plug 'mbbill/undotree'          " undo tree
 Plug 'wincent/terminus'         " better terminal integration
 
@@ -286,9 +282,6 @@ nnoremap <expr> N 'nN'[v:searchforward]
 " make ; always "find" forward and , backward
 nnoremap <expr> ; getcharsearch().forward ? ';' : ','
 nnoremap <expr> , getcharsearch().forward ? ',' : ';'
-
-" convenient esc
-inoremap jk <ESC>
 
 " Y behavior consistent with C and D
 nnoremap Y y$

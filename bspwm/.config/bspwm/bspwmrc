@@ -5,8 +5,7 @@
 # https://www.reddit.com/r/unixporn/comments/gftc5o/oc_realtime_websearch_suggestions_for_rofi_extras/
 
 sxhkd &
-
-bspc monitor DP-2 -d 1 2 3 
+bspc monitor DP-1 -d 1 2 3
 bspc monitor eDP-1 -d 4 5 6 7
 bspc monitor DP-1 -d 8 9 0
 

@@ -1,3 +1,7 @@
+
+# make sxhkd reload its configuration files:
+# pkill -USR1 -x sxhkd
+
 #
 # --- run programs ---
 #
@@ -5,10 +9,6 @@
 # terminal emulator
 super + Return
 	termite
-
-# make sxhkd reload its configuration files:
-# super + r
-	# pkill -USR1 -x sxhkd
 
 # open scratchpad
 super + w
@@ -23,14 +23,9 @@ super + p
 super + v
     exec rofi -show run -lines 5 -bw 2 -width 20 -padding 50 -eh 2 -hide-scrollbar true
 
-# start emacs
-super + semicolon
-    exec emacs
-
 # start firefox
 super + apostrophe
     exec firefox
-
 
 # power off or reboot system
 super + {_,shift +}Caps_Lock
@@ -38,13 +33,8 @@ super + {_,shift +}Caps_Lock
 
 
 # --- navigation ---
-# Navigate layouts TODO
-# i believe this is no different from bringing a program full screen
-# super + {_,shift + }space
-	# bspc desktop --layout {next,prev}
 
 # rotate desktop
-# TODO remove refresh for sxhkd
 super + {_, shift + }r
     bspc node @/ --rotate {90,-90}
 
@@ -128,7 +118,7 @@ super + y
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
+	bspc {desktop -f,node -d} '^{1-9,0}'
 
 # allows for multiple desktops on the same monitors
 # TODO still in progress: not currently working
