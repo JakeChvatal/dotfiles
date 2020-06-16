@@ -46,11 +46,7 @@ multimonitor-output &
 
 # daemons but in userspace
 # picom --config ~/.config/picom/picom.conf &
-dropbox &
-exec mopidy -q &
 
-# start wm
 termite &
 hsetroot -solid "#1d2026" &
-# fix-keys &
 exec bspwm
