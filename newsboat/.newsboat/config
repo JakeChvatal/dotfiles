@@ -52,3 +52,11 @@ color info                                                  blue      black
 color article                                               default   default
 color listnormal_unread                                     white     default
 color listfocus_unread                                      color255  red
+
+urls-source "ttrss"
+ttrss-url "https://matrix.chvatal.com/tt-rss"
+ttrss-login "jake"
+ttrss-passwordfile "~/.newsboat/password"
+
+ttrss-flag-star "s"
+ttrss-flag-publish "p"
