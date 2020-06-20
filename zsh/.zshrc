@@ -12,8 +12,8 @@ cmd_exists () {
 # use the best editor currently available
 if cmd_exists nvim; then
     export EDITOR='nvim' # yes
-elif cmd_exists vim; then
-    export EDITOR='vim'  # perhaps
+# elif cmd_exists vim; then
+    # export EDITOR='vim'  # perhaps
 else
     export EDITOR='vi'   # oh god
 fi
@@ -133,8 +133,8 @@ cmd_exists npm && # redirect node_modules
 cmd_exists bspwm && # bspwm-specific scripts
     export PATH=$PATH:"$HOME/.config/bspwm/scripts"
 
-test -f "$HOME/.proxy" && # add proxy config if it exists
-    source $HOME/.proxy
+test -f "$HOME/.private" && # add local config if it exists
+    source $HOME/.private
 
 # startx if tty1, display and has x
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
