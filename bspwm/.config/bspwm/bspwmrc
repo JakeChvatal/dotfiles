@@ -54,3 +54,5 @@ bspc rule -a dropdown sticky=on state=floating locked=on hidden=on
 termite --class dropdown -e "zsh -i" e
 
 bspc rule -a keys-help sticky=on state=floating 
+
+pidof bspswallow || bspswallow &
