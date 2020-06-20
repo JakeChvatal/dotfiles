@@ -105,6 +105,7 @@ alias sudo="sudo " # fix sudo for some commands
 alias spotify="/usr/bin/spotify --force-device-scale-factor = 2.5"
 alias distro='cat /etc/*-release'
 alias reload='source ~/.zshrc'
+alias weather='curl wttr.in'
 
 # sane shell commands
 alias mkdir='mkdir -p'  # mkdir always makes recursive directories
