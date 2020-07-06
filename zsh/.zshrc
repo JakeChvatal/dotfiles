@@ -134,6 +134,9 @@ cmd_exists npm && # redirect node_modules
 cmd_exists bspwm && # bspwm-specific scripts
     export PATH=$PATH:"$HOME/.config/bspwm/scripts"
 
+cmd_exists emacs &&
+    export PATH=$PATH:~/.emacs.d/bin
+
 test -f "$HOME/.private" && # add local config if it exists
     source $HOME/.private
 
