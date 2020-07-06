@@ -67,7 +67,7 @@ color listnormal_unread                                     white     default
 color listfocus_unread                                      color255  red
 
 urls-source "ttrss"
-ttrss-url "https://matrix.chvatal.com/tt-rss"
+ttrss-url "https://rss.chvatal.com/"
 ttrss-login "jake"
 ttrss-passwordfile "~/.newsboat/password"
 
