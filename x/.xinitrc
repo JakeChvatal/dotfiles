@@ -43,10 +43,12 @@ source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
 unclutter &
 # reform monitor gang
 multimonitor-output &
+fix-keys &
 
 # daemons but in userspace
 # picom --config ~/.config/picom/picom.conf &
 
 termite &
 hsetroot -solid "#1d2026" &
+# exec emacs: for exwm
 exec bspwm

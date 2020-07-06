@@ -2,5 +2,7 @@
 *.db
 *.lock
 *password
+history*
+*.log
 
 **/autoload/**
