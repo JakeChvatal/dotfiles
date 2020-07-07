@@ -93,10 +93,14 @@
 
 ;; -------------------------------------------------------------------------- Org
 ;; org-directories
+
+(require 'find-lisp)
+
 (setq org-directory "~/org/"
-      org-agenda-files "~/org/agenda/"
+      j/org-agenda-directory "~/org/agenda/"
+      org-agenda-files (find-lisp-find-files j/org-agenda-directory "\.org$")
       org-default-notes-file "~/org/refile.org"
-      org-attach-directory "~/org/.attach/")
+      org-attach-id-dir "~/org/.attach/")
 
 (setq j/org-calendar-dir "~/org/calendar/")
 
@@ -127,9 +131,9 @@
                                        ("el" . "src emacs-lisp")
                                        ("d" . "definition")
                                        ("t" . "theorem")))
-
-  (with-eval-after-load 'flycheck
-    (flycheck-add-mode 'proselint 'org-mode)))
+  ;; (with-eval-after-load 'flycheck
+  ;;   (flycheck-add-mode 'proselint 'org-mode))
+  )
 
 
 (setq org-log-done 'time
@@ -137,13 +141,13 @@
       org-log-state-notes-insert-after-drawers nil)
 
 (setq org-capture-templates
-      `(("i" "inbox" entry (file ,(concat org-agenda-files "inbox.org"))
+      `(("i" "inbox" entry (file ,(concat j/org-agenda-directory "inbox.org"))
          "* TODO %?")
-        ("m" "media" entry (file+headline ,(concat org-agenda-files "media.org") "Media")
+        ("m" "media" entry (file+headline ,(concat j/org-agenda-directory "media.org") "Media")
          "* TODO [#A] Reply: %a :@home:@school:" :immediate-finish t)
-        ("l" "link" entry (file ,(concat org-agenda-files "inbox.org"))
+        ("l" "link" entry (file ,(concat j/org-agenda-directory "inbox.org"))
          "* TODO %(org-cliplink-capture)" :immediate-finish t)
-        ("c" "org-protocol-capture" entry (file ,(concat org-agenda-files "inbox.org"))
+        ("c" "org-protocol-capture" entry (file ,(concat j/org-agenda-directory "inbox.org"))
          "* TODO [[%:link][%:description]]\n\n %i" :immediate-finish t)))
 
 ;; ;; Org-GCAL
@@ -159,25 +163,6 @@
       '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
         (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)")))
 
-;;("oao5h6d8eimrav5use51ea0pt8@group.calendar.google.com" .(concat 'j/org-calendar-dir "important_events.org"))
-;; eojeegm37fqfgtq97iqt52mucg@group.calendar.google.com extracirriculars
-;; oao5h6d8eimrav5use51ea0pt8@group.calendar.google.com important events
-;; qlsddquar66p6k014jme4v1f6g@group.calendar.google.com office hours
-;; 017sn1vqhpdtpcaoqtqriku28o@group.calendar.google.com TAing
-;; u0utv6dn5to1ng51etrheqiahs@group.calendar.google.com class schedule
-;; directory for attaching files in org mode
-
-;; ;; refiling tasks after collecting in capture mode
-;; ;; any file in org-agenda-files is a target, or the current file
-;; (setq org-refile-targets (quote ((nil :maxlevel . 9)
-;;                                  (org-agenda-files :maxlevel . 9)))
-;;       org-refile-use-outline-path t
-;;       org-outline-path-complete-in-steps nil
-;;       org-refile-allow-creating-parent-nodes (quote confirm)
-;;       org-agenda-dim-blocked-tasks nil
-;;       org-agenda-compact-blocks t
-;;       org-enforce-todo-dependencies t)
-
 (use-package! org-roam
   :commands (org-roam-insert org-roam-find-file org-roam-switch-to-buffer org-roam)
   :hook (after-init . org-roam-mode)
@@ -189,7 +174,7 @@
         :desc "org-roam-insert" "i" #'org-roam-insert
         :desc "org-roam-switch-to-buffer" "b" #'org-roam-switch-to-buffer
         :desc "org-roam-find-file" "f" #'org-roam-find-file
-        :desc "org-roam-show-graph" "g" #'org-roam-show-graph
+        :desc "org-roam-show-graph" "g" #'org-roam-graph
         :desc "org-roam-insert" "i" #'org-roam-insert
         :desc "org-roam-capture" "c" #'org-roam-capture)
   (setq org-roam-directory "~/org/wiki/org/"
@@ -264,7 +249,7 @@
 
   (defun j/org-roam-export-updated ()
     "Re-export files that are linked to the current file."
-    (let ((files (org-roam-sql [:select [to] :from links :where (= from $s1)] buffer-file-name)))
+    (let ((files (org-roam-db-query [:select [to] :from links :where (= from $s1)] buffer-file-name)))
       (interactive)
       (dolist (f files)
         (with-current-buffer (find-file-noselect (car f))
@@ -281,17 +266,18 @@
         (org-hugo-auto-export-mode -1))))
   (add-hook 'org-mode-hook #'j/conditional-hugo-enable))
 
-;; org-projectile todo integration
+
 (use-package! org-projectile
   :init
   (map! :leader
         :prefix "p"
         :desc "Add a TODO to a project" "n" #'org-projectile-project-todo-completing-read)
   :config
-  (org-projectile-per-project)
   (progn
-    (setq org-projectile-per-project-filepath "TODO.org"
-          org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
+    (org-projectile-per-project)
+    (setq org-projectile-projects-file
+          "TODO.org")
+    (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
     (push (org-projectile-project-todo-entry) org-capture-templates))
   :ensure t)
 
@@ -353,15 +339,15 @@
 ;;   (citeproc-org-setup))
 
 ;; add auto spacing at 80 lines to org mode
-(add-hook 'org-mode-hook '(lambda () (setq fill-column 80)))
-(add-hook 'org-mode-hook 'turn-on-auto-fill)
+(add-hook 'org-mode-hook '(lambda () (setq fill-column 80))
+          'org-mode-hook 'turn-on-auto-fill)
 
 ;; ----------------------------------------------------------------------------- ETC
 ;; clipboard between systems
-(setq x-select-enable-clipboard t)
-(setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+(setq select-enable-clipboard t
+      interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
-;; Line number configuration
+;; line number configuration
 (setq display-line-numbers-type 'relative)
 
 ;; ### mode fixes and configuration ###
@@ -370,10 +356,10 @@
 (add-hook 'writeroom-mode 'visual-line-mode)
 
 ;; org alert default style
-(setq alert-default-style 'libnotify)
+;;(setq alert-default-style 'libnotify)
 
 ;; ### PATH DEBUG FIX ###
-(setq exec-path-from-shell-arguments '("-i"))
+;;(setq exec-path-from-shell-arguments '("-i"))
 
 ;; ### BROWSER ###
 (setq browse-url-browser-function 'browse-url-generic
