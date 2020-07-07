@@ -12,4 +12,4 @@ LWin::Return
 ; CapsLock -> Esc when pressed
 ; TODO: simulate ctrl when held
 capslock::Esc
-capslock & *::Ctrl & *
+; capslock & *::Ctrl & *
