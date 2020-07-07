@@ -16,9 +16,19 @@
   :custom (fira-code-mode-disabled-ligatures '("[]" "#{" "#(" "#_" "#_(" "x"))
   :hook prog-mode) ;; Enables fira-code-mode automatically for programming major modes
 
+(use-package! mastodon
+  :ensure t
+  :init
+  (setq mastodon-instance-url "https://merveilles.town")
+  :config
+  (mastodon-discover)
+  (map!
+   :leader
+   :prefix "t"
+   :desc "toot" "t" #'mastodon-toot))
+
 ;; ------------------------------------------------------------------------- Mail
-(use-package! notmuch
-  :commands (notmuch)
+(use-package! notmuch :commands (notmuch)
   :init
   (map! :desc "notmuch" "<f2>" #'notmuch)
   (map! :map notmuch-search-mode-map
@@ -84,13 +94,11 @@
 ;; -------------------------------------------------------------------------- Org
 ;; org-directories
 (setq org-directory "~/org/"
-      org-agenda-files '("~/org/agenda/")
+      org-agenda-files "~/org/agenda/"
       org-default-notes-file "~/org/refile.org"
-      org-attach-directory "~/org/.attach/"
-      org-roam-directory "~/org/roam")
+      org-attach-directory "~/org/.attach/")
 
-(setq j/org-agenda-directory "~/org/agenda/"
-      j/org-calendar-dir "~/org/calendar/")
+(setq j/org-calendar-dir "~/org/calendar/")
 
 (use-package! org
   :mode ("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode)
@@ -128,33 +136,31 @@
       org-log-into-drawer t
       org-log-state-notes-insert-after-drawers nil)
 
-
-
 (setq org-capture-templates
-      `(("i" "inbox" entry (file ,(concat j/org-agenda-directory "inbox.org"))
+      `(("i" "inbox" entry (file ,(concat org-agenda-files "inbox.org"))
          "* TODO %?")
-        ("e" "email" entry (file+headline ,(concat j/org-agenda-directory "emails.org") "Emails")
+        ("e" "email" entry (file+headline ,(concat org-agenda-files "emails.org") "Emails")
          "* TODO [#A] Reply: %a :@home:@school:" :immediate-finish t)
-        ("l" "link" entry (file ,(concat j/org-agenda-directory "inbox.org"))
+        ("l" "link" entry (file ,(concat org-agenda-files "inbox.org"))
          "* TODO %(org-cliplink-capture)" :immediate-finish t)
-        ("c" "org-protocol-capture" entry (file ,(concat j/org-agenda-directory "inbox.org"))
+        ("c" "org-protocol-capture" entry (file ,(concat org-agenda-files "inbox.org"))
          "* TODO [[%:link][%:description]]\n\n %i" :immediate-finish t)))
 
 ;; (setq org-capture-templates
 ;;       `(("l" "Link" entry (file+headline "~/org/links.org" "Links")
 ;;                     "* %a %^g\n %?\n %T\n %i")
-;;         ("i" "inbox" entry (file ,(concat j/org-agenda-directory "inbox.org"))
+;;         ("i" "inbox" entry (file ,(concat org-agenda-files "inbox.org"))
 ;;            "* TODO %?")
-;;           ("e" "email" entry (file+headline ,(concat j/org-agenda-directory "emails.org") "Emails")
+;;           ("e" "email" entry (file+headline ,(concat org-agenda-files "emails.org") "Emails")
 ;;                "* TODO [#A] Reply: %a :@home:@school:"
 ;;                :immediate-finish t)
-;;           ("c" "org-protocol-capture" entry (file ,(concat j/org-agenda-directory "inbox.org"))
+;;           ("c" "org-protocol-capture" entry (file ,(concat org-agenda-files "inbox.org"))
 ;;                "* TODO [[%:link][%:description]]\n\n %i"
 ;;                :immediate-finish t)
-;;           ("w" "Weekly Review" entry (file+olp+datetree ,(concat j/org-agenda-directory "reviews.org"))
-;;            (file ,(concat j/org-agenda-directory "templates/weekly_review.org")))
+;;           ("w" "Weekly Review" entry (file+olp+datetree ,(concat org-agenda-files "reviews.org"))
+;;            (file ,(concat org-agenda-files "templates/weekly_review.org")))
 ;;           ("r" "Reading" todo ""
-;;                ((org-agenda-files '(,(concat j/org-agenda-directory "reading.org")))))))
+;;                ((org-agenda-files '(,(concat org-agenda-files "reading.org")))))))
 
 ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
 ;; (setq org-capture-templates
@@ -221,8 +227,8 @@
         :desc "org-roam-show-graph" "g" #'org-roam-show-graph
         :desc "org-roam-insert" "i" #'org-roam-insert
         :desc "org-roam-capture" "c" #'org-roam-capture)
-  (setq org-roam-directory "~/org/roam/"
-        org-roam-db-location "~/org/roam/org-roam.db"
+  (setq org-roam-directory "~/org/wiki/org/"
+        org-roam-db-location "~/org/wiki/org/org-roam.db"
         org-roam-graph-exclude-matcher "private"
         org-roam-tag-sources '(prop last-directory)
         org-id-link-to-org-use-id t)
@@ -312,17 +318,22 @@
 
 ;; org-projectile todo integration
 (use-package! org-projectile
-  :init (map! :leader
-              :prefix "p"
-              :desc "Add a TODO to a project" "n" #'org-projectile-project-todo-completing-read)
-  :config (setq org-projectile-per-project-filepath "TODO.org"
-                org-agenda-files (append org-agenda-files (org-projectile-todo-files))))
+  :init
+  (map! :leader
+        :prefix "p"
+                  :desc "Add a TODO to a project" "n" #'org-projectile-project-todo-completing-read)
+  :config
+  (org-projectile-per-project)
+  (progn
+    (setq org-projectile-per-project-filepath "TODO.org"
+          org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
+    (push (org-projectile-project-todo-entry) org-capture-templates))
+  :ensure t)
 
+;; (after! org-projectile
+;;   (org-projectile-per-project))
 
 (global-set-key (kbd "C-c n p") 'org-projectile-project-todo-completing-read)
-
-(after! org-projectile
-  (org-projectile-per-project))
 
 (use-package! deft
       :after org
@@ -330,9 +341,10 @@
       ("C-c n d" . deft)
       :custom
       (deft-recursive t)
+      (deft-use-filename-as-title t)
       (deft-use-filter-string-for-filename t)
       (deft-default-extension "org")
-      (deft-directory "~/org/roam/"))
+      (deft-directory "~/org/wiki/org/"))
 
 
 (use-package! org-journal
@@ -348,8 +360,8 @@
 
 (use-package! bibtex-completion
   :config
-  (setq bibtex-completion-notes-path "~/org/roam/"
-        bibtex-completion-bibliography "~/org/roam/biblio.bib"
+  (setq bibtex-completion-notes-path "~/org/wiki/org/"
+        bibtex-completion-bibliography "~/org/wiki/org/biblio.bib"
         bibtex-completion-pdf-field "file"
         bibtex-completion-notes-template-multiple-files
         (concat
@@ -461,7 +473,7 @@
  '(haskell-interactive-popup-errors nil)
  '(package-selected-packages
    (quote
-    (fira-code-mode deft org-projectile-helm proof-general org-roam-server org-roam-bibtex org-projectile org-noter exwm-x elfeed-protocol company-org-roam))))
+    (ox-hugo mastodon fira-code-mode deft org-projectile-helm proof-general org-roam-server org-roam-bibtex org-projectile org-noter exwm-x elfeed-protocol company-org-roam))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
