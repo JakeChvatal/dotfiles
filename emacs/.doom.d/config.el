@@ -140,6 +140,9 @@
       org-log-into-drawer t
       org-log-state-notes-insert-after-drawers nil)
 
+(use-package! org-chef
+  :ensure t)
+
 (setq org-capture-templates
       `(("i" "inbox" entry (file ,(concat j/org-agenda-directory "inbox.org"))
          "* TODO %?")
@@ -148,7 +151,13 @@
         ("l" "link" entry (file ,(concat j/org-agenda-directory "inbox.org"))
          "* TODO %(org-cliplink-capture)" :immediate-finish t)
         ("c" "org-protocol-capture" entry (file ,(concat j/org-agenda-directory "inbox.org"))
-         "* TODO [[%:link][%:description]]\n\n %i" :immediate-finish t)))
+         "* TODO [[%:link][%:description]]\n\n %i" :immediate-finish t)
+        ("r" "recipe" entry (file "~/org/recipes.org")
+         "%(org-chef-get-recipe-from-url)"
+         :empty-lines 1)
+        ;; ("m" "manual recipe" entry (file "~/org/recipes.org")
+        ;;  "* %^{Recipe title: }\n  :PROPERTIES:\n  :source-url:\n  :servings:\n  :prep-time:\n  :cook-time:\n  :ready-in:\n  :END:\n** Ingredients\n   %?\n** Directions\n\n")
+        ))
 
 ;; ;; Org-GCAL
 ;; (use-package! org-gcal
@@ -409,6 +418,40 @@
     ("k" smerge-kill-current)
     ("q" nil "cancel" :color blue)))
 
+
+(use-package! spray
+  :config
+  (setq spray-wpm 500
+        spray-height 700))
+
+(sp-local-pair
+     '(org-mode)
+     "<<" ">>"
+     :actions '(insert))
+
+;; (after! tramp
+;;   (setenv "SHELL" "/bin/bash")
+;;   (setq tramp-shell-prompt-pattern "\\(?:^\\|
+;; \\)[^]#$%>\n]*#?[]#$%>] *\\(\\[[0-9;]*[a-zA-Z] *\\)*")) ;; default + 
+
+;; (after! text-mode
+;;   (add-hook! 'text-mode-hook
+;;     ;; Apply ANSI color codes
+;;     (with-silent-modifications
+;;       (ansi-color-apply-on-region (point-min) (point-max)))))
+
+(after! flyspell
+  (require 'flyspell-lazy)
+  (flyspell-lazy-mode 1))
+
+(use-package! tramp
+  :config
+  (setq tramp-default-method "ssh"))
+
+(defun connect-vultr () ;; connect to vps
+  (interactive)
+  (dired "/ssh:jake@107.191.42.68:"))
+
 ;; ----------------------------------------------------------------------------- OFF-LIMITS
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -418,7 +461,7 @@
  '(haskell-interactive-popup-errors nil)
  '(package-selected-packages
    (quote
-    (ox-hugo mastodon fira-code-mode deft org-projectile-helm proof-general org-roam-server org-roam-bibtex org-projectile org-noter exwm-x elfeed-protocol company-org-roam))))
+    (flyspell-lazy org-chef ox-hugo mastodon fira-code-mode deft org-projectile-helm proof-general org-roam-server org-roam-bibtex org-projectile org-noter exwm-x elfeed-protocol company-org-roam))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
