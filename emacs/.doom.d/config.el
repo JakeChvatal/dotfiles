@@ -139,44 +139,12 @@
 (setq org-capture-templates
       `(("i" "inbox" entry (file ,(concat org-agenda-files "inbox.org"))
          "* TODO %?")
-        ("e" "email" entry (file+headline ,(concat org-agenda-files "emails.org") "Emails")
+        ("m" "media" entry (file+headline ,(concat org-agenda-files "media.org") "Media")
          "* TODO [#A] Reply: %a :@home:@school:" :immediate-finish t)
         ("l" "link" entry (file ,(concat org-agenda-files "inbox.org"))
          "* TODO %(org-cliplink-capture)" :immediate-finish t)
         ("c" "org-protocol-capture" entry (file ,(concat org-agenda-files "inbox.org"))
          "* TODO [[%:link][%:description]]\n\n %i" :immediate-finish t)))
-
-;; (setq org-capture-templates
-;;       `(("l" "Link" entry (file+headline "~/org/links.org" "Links")
-;;                     "* %a %^g\n %?\n %T\n %i")
-;;         ("i" "inbox" entry (file ,(concat org-agenda-files "inbox.org"))
-;;            "* TODO %?")
-;;           ("e" "email" entry (file+headline ,(concat org-agenda-files "emails.org") "Emails")
-;;                "* TODO [#A] Reply: %a :@home:@school:"
-;;                :immediate-finish t)
-;;           ("c" "org-protocol-capture" entry (file ,(concat org-agenda-files "inbox.org"))
-;;                "* TODO [[%:link][%:description]]\n\n %i"
-;;                :immediate-finish t)
-;;           ("w" "Weekly Review" entry (file+olp+datetree ,(concat org-agenda-files "reviews.org"))
-;;            (file ,(concat org-agenda-files "templates/weekly_review.org")))
-;;           ("r" "Reading" todo ""
-;;                ((org-agenda-files '(,(concat org-agenda-files "reading.org")))))))
-
-;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
-;; (setq org-capture-templates
-;;       (quote (("t" "todo" entry (file "~/org/refile.org")
-;;                "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-;;               ("n" "note" entry (file "~/org/refile.org")
-;;                "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
-;;               ("w" "org-protocol" entry (file "~/org/refile.org")
-;;                "* TODO Review %c\n%U\n" :immediate-finish t)
-;;               ("m" "Meeting" entry (file "~/org/refile.org")
-;;                "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-;;               ("p" "Phone call" entry (file "~/org/refile.org")
-;;                "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
-;;               ("h" "Habit" entry (file "~/org/refile.org")
-;;                "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
-
 
 ;; ;; Org-GCAL
 ;; (use-package! org-gcal
@@ -191,27 +159,24 @@
       '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
         (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)")))
 
-
 ;;("oao5h6d8eimrav5use51ea0pt8@group.calendar.google.com" .(concat 'j/org-calendar-dir "important_events.org"))
 ;; eojeegm37fqfgtq97iqt52mucg@group.calendar.google.com extracirriculars
 ;; oao5h6d8eimrav5use51ea0pt8@group.calendar.google.com important events
 ;; qlsddquar66p6k014jme4v1f6g@group.calendar.google.com office hours
 ;; 017sn1vqhpdtpcaoqtqriku28o@group.calendar.google.com TAing
 ;; u0utv6dn5to1ng51etrheqiahs@group.calendar.google.com class schedule
-;; directory for attaching files in org more
+;; directory for attaching files in org mode
 
-
-
-;; refiling tasks after collecting in capture mode
-;; any file in org-agenda-files is a target, or the current file
-(setq org-refile-targets (quote ((nil :maxlevel . 9)
-                                 (org-agenda-files :maxlevel . 9)))
-      org-refile-use-outline-path t
-      org-outline-path-complete-in-steps nil
-      org-refile-allow-creating-parent-nodes (quote confirm)
-      org-agenda-dim-blocked-tasks nil
-      org-agenda-compact-blocks t
-      org-enforce-todo-dependencies t)
+;; ;; refiling tasks after collecting in capture mode
+;; ;; any file in org-agenda-files is a target, or the current file
+;; (setq org-refile-targets (quote ((nil :maxlevel . 9)
+;;                                  (org-agenda-files :maxlevel . 9)))
+;;       org-refile-use-outline-path t
+;;       org-outline-path-complete-in-steps nil
+;;       org-refile-allow-creating-parent-nodes (quote confirm)
+;;       org-agenda-dim-blocked-tasks nil
+;;       org-agenda-compact-blocks t
+;;       org-enforce-todo-dependencies t)
 
 (use-package! org-roam
   :commands (org-roam-insert org-roam-find-file org-roam-switch-to-buffer org-roam)
@@ -265,11 +230,11 @@
 - source :: ${ref}"
            :unnarrowed t))))
 
-(use-package! org-roam-protocol)
-
 (after! (org org-roam)
-      (setq org-roam-ref-capture-templates
-            '(("r" "ref" plain (function org-roam-capture--get-point)
+  (use-package! org-roam-protocol)
+  (use-package! org-roam-server)
+  (setq org-roam-ref-capture-templates
+        '(("r" "ref" plain (function org-roam-capture--get-point)
                "%?"
                :file-name "websites/${slug}"
                :head "#+TITLE: ${title}
@@ -321,7 +286,7 @@
   :init
   (map! :leader
         :prefix "p"
-                  :desc "Add a TODO to a project" "n" #'org-projectile-project-todo-completing-read)
+        :desc "Add a TODO to a project" "n" #'org-projectile-project-todo-completing-read)
   :config
   (org-projectile-per-project)
   (progn
@@ -329,11 +294,6 @@
           org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
     (push (org-projectile-project-todo-entry) org-capture-templates))
   :ensure t)
-
-;; (after! org-projectile
-;;   (org-projectile-per-project))
-
-(global-set-key (kbd "C-c n p") 'org-projectile-project-todo-completing-read)
 
 (use-package! deft
       :after org
@@ -379,7 +339,6 @@
          ":URL: ${url}\n"
          ":END:\n\n")))
 
-(use-package! org-roam-server)
 
 ;; (use-package! org-noter
 ;;   :after org
