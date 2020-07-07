@@ -111,6 +111,16 @@ alias weather='curl wttr.in'
 alias mkdir='mkdir -p'  # mkdir always makes recursive directories
 alias -g DN='/dev/null' # easier
 
+# trying out fasd
+alias a='fasd -a'        # any
+alias s='fasd -si'       # show / search / select
+alias d='fasd -d'        # directory
+alias f='fasd -f'        # file
+alias sd='fasd -sid'     # interactive directory selection
+alias sf='fasd -sif'     # interactive file selection
+alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+alias zz='fasd_cd -d -i' # cd with interactive selection
+
 # --- Keybindings ---
 # home, end for beginning and end of line
 bindkey '\e[1~' beginning-of-line
@@ -131,6 +141,9 @@ cmd_exists opam && # ocaml support
 cmd_exists npm && # redirect node_modules
     export NPM_CONFIG_PREFIX=~/.node_modules
 
+cmd_exists fasd &&
+    eval "$(fasd --init auto)"
+
 cmd_exists bspwm && # bspwm-specific scripts
     export PATH=$PATH:"$HOME/.config/bspwm/scripts"
 
@@ -139,6 +152,7 @@ cmd_exists emacs &&
 
 test -f "$HOME/.private" && # add local config if it exists
     source $HOME/.private
+
 
 # startx if tty1, display and has x
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
