@@ -51,8 +51,9 @@ bspc config presel_feedback_color '#1d2026'
 
 # add hidden scratchpad
 bspc rule -a dropdown sticky=on state=floating locked=on hidden=on
-termite --class dropdown -e "zsh -i" e
+termite --class dropdown -e "zsh -i" 
 
 bspc rule -a keys-help sticky=on state=floating 
+bspc rule -a Emacs sticky=off state=tiled
 
-pidof bspswallow || bspswallow &
+bspswallow &
