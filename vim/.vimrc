@@ -215,8 +215,6 @@ set signcolumn=yes             " always show sign column
 syntax on                      " syntax highlighting
 filetype plugin indent on      " file type detection
 colorscheme onedark            " one dark colors
-set number                     " cur line number
-set relativenumber             " relative line numbers
 set cursorline                 " current line is visible
 set showmatch                  " show matching braces
 syntax enable                  " enable syntax highlighting
