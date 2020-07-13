@@ -52,7 +52,7 @@ scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
 
 ## Mod Loc #########
-modules-left = i3 
+modules-left = bspwm
 modules-center = xwindow
 modules-right = xkeyboard music volume battery time date
 
@@ -87,26 +87,39 @@ label-indicator-padding = 1
 label-indicator-margin = 0
 label-indicator-background = ${color.red}
 
-[module/i3]
-type = internal/i3
-strip-wsnumbers = true
-wrapping-scroll = false
 
-label-focused =%name%
-label-focused-foreground = ${color.cyan}
-label-focused-background = ${color.adapta}
-label-focused-padding = 1
+[module/bspwm]
+type = internal/bspwm
 
-label-unfocused =%name%
-label-unfocused-padding = 1
+; Only show workspaces defined on the same output as the bar
+; NOTE: The bspwm and XRandR monitor names must match, which they do by default.
+; But if you rename your bspwm monitors with bspc -n this option will no longer
+; behave correctly.
+; Default: true
+pin-workspaces = true
 
-label-visible =%name%
-label-visible-padding = 1
+; Output mode flags after focused state label
+; Default: false
+inline-mode = false
 
-label-urgent =%name%
-label-urgent-background = ${color.adapta}
-label-urgent-foreground = ${color.red}
-label-urgent-padding = 1
+; Create click handler used to focus workspace
+; Default: true
+enable-click = false
+
+; Create scroll handlers used to cycle workspaces
+; Default: true
+enable-scroll = false
+
+; Set the scroll cycle direction 
+; Default: true
+reverse-scroll = false
+
+; Use fuzzy (partial) matching on labels when assigning 
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces 
+; containing 'code' in the label
+; Default: false
+fuzzy-match = true
 
 [module/battery]
 type = internal/battery
