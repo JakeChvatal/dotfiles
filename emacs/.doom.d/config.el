@@ -1,11 +1,64 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
 
+;; https://github.com/tecosaur/emacs-config/blob/master/config.org
+
+;; -------------------------------------------------------------- Global Configuration
 (setq user-full-name "Jacob Chvatal"
       user-mail-address "jakechvatal@gmail.com"
       company-idle-delay nil
       lsp-ui-sideline-enable nil
       lsp-enable-symbol-highlighting nil)
 
+(setq-default
+ delete-by-moving-to-trash t                      ; Delete files to trash
+ tab-width 4                                      ; Set width for tabs
+ uniquify-buffer-name-style 'forward              ; Uniquify buffer names
+ window-combination-resize t                      ; take new window space from all other windows (not just current)
+ x-stretch-cursor t)                              ; Stretch cursor to the glyph width
+
+(setq undo-limit 80000000                         ; Raise undo-limit to 80Mb
+      evil-want-fine-undo t                       ; By default while in insert all changes are one big blob. Be more granular
+      auto-save-default t                         ; Nobody likes to loose work, I certainly don't
+      inhibit-compacting-font-caches t            ; When there are lots of glyphs, keep them in memory
+      truncate-string-ellipsis "…")               ; Unicode ellispis are nicer than "...", and also save /precious/ space
+
+(delete-selection-mode 1)                         ; Replace selection when inserting text
+(display-time-mode 1)                             ; Enable time in the mode-line
+(unless (equal "Battery status not avalible"
+               (battery))
+  (display-battery-mode 1))                       ; On laptops it's nice to know how much power you have
+(global-subword-mode 1)                           ; Iterate through CamelCase words
+
+(if (eq initial-window-system 'x)                 ; if started by emacs command or desktop file
+    (toggle-frame-maximized)
+  (toggle-frame-fullscreen))
+
+;; determine where to split the window
+(setq evil-vsplit-window-right t
+      evil-split-window-below t)
+
+;; open ivy to look for buffer after splitting window
+(defadvice! prompt-for-buffer (&rest _)
+  :after '(evil-window-split evil-window-vsplit)
+  (+ivy/switch-buffer))
+
+(setq +ivy-buffer-preview t)
+
+(setq-default major-mode 'org-mode)
+
+(defun doom-modeline-conditional-buffer-encoding ()
+  "We expect the encoding to be LF UTF-8, so only show the modeline when this is not the case"
+  (setq-local doom-modeline-buffer-encoding
+              (unless (or (eq buffer-file-coding-system 'utf-8-unix)
+                          (eq buffer-file-coding-system 'utf-8)))))
+
+(setq doom-fallback-buffer-name "► Doom"
+      +doom-dashboard-name "► Doom")
+
+(add-hook 'after-change-major-mode-hook #'doom-modeline-conditional-buffer-encoding)
+
+
+;; some other stuff
 (use-package! deadgrep
   :if (executable-find "rg")
   :init
@@ -296,6 +349,7 @@
       ("C-c n d" . deft)
       :custom
       (deft-recursive t)
+      (deft-ignore-file-regexp "hugo_setup")
       (deft-use-filename-as-title t)
       (deft-use-filter-string-for-filename t)
       (deft-default-extension "org")
@@ -313,6 +367,7 @@
     (org-journal-new-entry t)))
 
 
+;; TODO figure out what this is for
 (use-package! bibtex-completion
   :config
   (setq bibtex-completion-notes-path "~/org/wiki/org/"
@@ -347,6 +402,13 @@
 ;;   :config
 ;;   (citeproc-org-setup))
 
+(require 'company-org-roam)
+(use-package company-org-roam
+  :when (featurep! :completion company)
+  :after org-roam
+  :config
+  (set-company-backend! 'org-mode '(company-org-roam company-yasnippet company-dabbrev)))
+
 ;; add auto spacing at 80 lines to org mode
 (add-hook 'org-mode-hook '(lambda () (setq fill-column 80))
           'org-mode-hook 'turn-on-auto-fill)
@@ -361,8 +423,7 @@
 
 ;; ### mode fixes and configuration ###
 (add-hook 'julia-mode 'julia-repl-mode)
-(add-hook 'darkroom-mode 'visual-line-mode)
-(add-hook 'writeroom-mode 'visual-line-mode)
+(add-hook 'darkroom-mode 'visual-line-mode) (add-hook 'writeroom-mode 'visual-line-mode)
 
 ;; org alert default style
 ;;(setq alert-default-style 'libnotify)
@@ -452,6 +513,42 @@
   (interactive)
   (dired "/ssh:jake@107.191.42.68:"))
 
+;; supercollider
+(use-package! sclang)
+
+;; set XeTeX mode in TeX/LaTeX
+;; (add-hook 'LaTeX-mode-hook
+;;           (lambda()
+;;              (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex%(mode)%' %t" TeX-run-TeX nil t))
+;;              (setq TeX-command-default "XeLaTeX")
+;;              (setq TeX-save-query nil)
+;;              (setq TeX-show-compilation t)))
+
+ ;; to use pdfview with auctex
+ ;; (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+ ;;    TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
+ ;;    TeX-source-correlate-start-server t) ;; not sure if last line is neccessary
+;; to have the buffer refresh after compilation
+ (add-hook 'TeX-after-compilation-finished-functions
+        #'TeX-revert-document-buffer)
+
+(use-package! latex-preview-pane
+  :config
+  (setq pdf-latex-command "xelatex"))
+
+(add-hook 'latex-mode-hook #'latex-preview-pane-mode)
+
+(setq frame-title-format
+    '(""
+      (:eval
+       (if (s-contains-p org-roam-directory (or buffer-file-name ""))
+           (replace-regexp-in-string ".*/[0-9]*-?" "🢔 " buffer-file-name)
+         "%b"))
+      (:eval
+       (let ((project-name (projectile-project-name)))
+         (unless (string= "-" project-name)
+           (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
+
 ;; ----------------------------------------------------------------------------- OFF-LIMITS
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -459,9 +556,18 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(haskell-interactive-popup-errors nil)
+ '(latex-preview-pane-multifile-mode (quote auctex))
  '(package-selected-packages
    (quote
-    (flyspell-lazy org-chef ox-hugo mastodon fira-code-mode deft org-projectile-helm proof-general org-roam-server org-roam-bibtex org-projectile org-noter exwm-x elfeed-protocol company-org-roam))))
+    (exwm-firefox-evil auctex markdown-mode+ markdown-mode company-irony-c-headers flyspell-lazy org-chef ox-hugo mastodon fira-code-mode deft org-projectile-helm proof-general org-roam-server org-roam-bibtex org-projectile org-noter exwm-x elfeed-protocol company-org-roam)))
+ '(safe-local-variable-values
+   (quote
+    ((format-all-mode)
+     (electric-indent-mode)
+     (eval
+      (quote
+       ((electric-indent-mode 0)
+        (format-all-mode 0))))))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -469,3 +575,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(org-roam-link ((t (:inherit org-link :foreground "#005200")))))
+(put 'customize-group 'disabled nil)

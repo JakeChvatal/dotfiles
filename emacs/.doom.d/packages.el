@@ -36,3 +36,4 @@
 (package! org-plot :recipe (:local-repo "lisp" :no-byte-compile t))
 (package! org-roam-server :pin "7617ac01a1...")
 (package! systemd :pin "51c148e09a...")
+(package! fzf)
