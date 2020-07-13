@@ -48,7 +48,5 @@ fix-keys &
 # daemons but in userspace
 # picom --config ~/.config/picom/picom.conf &
 
-termite &
 hsetroot -solid "#1d2026" &
-# exec emacs: for exwm
-exec bspwm
+exec emacs
