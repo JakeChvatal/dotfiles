@@ -29,7 +29,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 # make trackpad tappable
-xinput set-prop 14 316 1
+# xinput set-prop 14 316 1
 
 # start gnome-keyring daemon
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
@@ -41,12 +41,18 @@ source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
 # small keymapping changes
 # hide mouse pointer
 unclutter &
+
 # reform monitor gang
 multimonitor-output &
+
+# fix keys
 fix-keys &
 
-# daemons but in userspace
-# picom --config ~/.config/picom/picom.conf &
+# reduce firefox screen tearing
+picom --config ~/.config/picom/picom.conf &
 
+# set background color
 hsetroot -solid "#1d2026" &
+
+# start my window manager : )
 exec emacs
