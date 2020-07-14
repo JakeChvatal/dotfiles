@@ -264,6 +264,20 @@
 #+hugo_slug: ${slug}
 #+title: ${title}\n"
            :unnarrowed t)
+          ("p" "people" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "people/${slug}"
+           :head "#+setupfile:./hugo_setup.org
+#+hugo_slug: ${slug}
+#+title: ${title}\n"
+           :unnarrowed t)
+          ("t" "tools" plain (function org-roam--capture-get-point)
+           "%?"
+           :file-name "tools/${slug}"
+           :head "#+setupfile:./hugo_setup.org
+#+hugo_slug: ${slug}
+#+title: ${title}\n"
+           :unnarrowed t)
           ("p" "private" plain (function org-roam-capture--get-point)
            "%?"
            :file-name "private/${slug}"
