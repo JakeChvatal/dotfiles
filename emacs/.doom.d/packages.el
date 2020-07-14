@@ -20,7 +20,7 @@
 
 ;; (package! emacs-anywhere)
 (package! flyspell-lazy)
-;; (package! wttrin :recipe (:local-repo "lisp" :no-byte-compile t))
+(package! wttrin)
 (package! org-msg)
 (package! mu4e-alert)
 
@@ -33,7 +33,14 @@
 (package! ox-gfm :pin "99f93011b0...")
 (package! org-ref :pin "b05d6b4434...")
 (package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view") :pin "13314338d7...")
-(package! org-plot :recipe (:local-repo "lisp" :no-byte-compile t))
 (package! org-roam-server :pin "7617ac01a1...")
 (package! systemd :pin "51c148e09a...")
-(package! fzf)
+
+;; async package installation
+(package! el-get)
+(package! use-package-el-get)
+
+;; plotting or something
+(package! gnuplot)
+(package! gnuplot-mode)
+(package! org-plot :recipe (:local-repo "lisp" :no-byte-compile t))
