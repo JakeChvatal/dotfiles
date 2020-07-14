@@ -123,16 +123,22 @@
 ;; -------------------------------------------------------------------------- RSS
 (use-package! elfeed)
 (use-package! elfeed-protocol
-  :init
   :config
+  (elfeed-protocol-enable)
   (setq elfeed-protocol-ttrss-maxsize 200
         elfeed-set-timeout 36000
+        elfeed-show-entry-switch 'display-buffer
+        elfeed-search-remain-on-entry t
         elfeed-feeds
         '(("ttrss+https://jake@rss.chvatal.com"
            :password (read-passwd "Provide your tt-rss password:")))))
 
 (after! elfeed
-  (elfeed-protocol-enable)
+  :init
+  ;; (map! :map elfeed-search-mode-map
+	;; 	 "n" (lambda () (interactive) (next-line) (call-interactively 'elfeed-search-show-entry))
+	;; 	 "p" (lambda () (interactive) (previous-line) (call-interactively 'elfeed-search-show-entry))
+	;; 	 "m" (lambda () (interactive) (apply 'elfeed-search-toggle-all '(star))))
   (map!
    :leader
    :prefix "o"
@@ -141,8 +147,7 @@
         :prefix "e"
         :desc "elfeed" "e" #'elfeed
         :desc "elfeed-protocol-ttrss-update" "u" #'elfeed-protocol-ttrss-update
-        :desc "elfeed-protocol-ttrss-update-star" "s"
-        #'elfeed-protocol-ttrss-update-star))
+        :desc "elfeed-protocol-ttrss-update-star" "s" #'elfeed-protocol-ttrss-update-star))
 
 ;; -------------------------------------------------------------------------- Org
 ;; org-directories
@@ -184,9 +189,8 @@
                                        ("el" . "src emacs-lisp")
                                        ("d" . "definition")
                                        ("t" . "theorem")))
-  ;; (with-eval-after-load 'flycheck
-  ;;   (flycheck-add-mode 'proselint 'org-mode))
-  )
+  (with-eval-after-load 'flycheck
+    (flycheck-add-mode 'proselint 'org-mode)))
 
 
 (setq org-log-done 'time
@@ -549,6 +553,14 @@
          (unless (string= "-" project-name)
            (format (if (buffer-modified-p)  " ◉ %s" "  ●  %s") project-name))))))
 
+;; (use-package wttrin
+;;   :init
+;;   (setq wttrin-default-cities '("Boston" "Portland" "New York")
+;;         wttin-default-accept-language '("Accept-Language" . "en-US"))
+;;   (defun wttrin-fetch-raw-string (query) TODO: modify pacakge to do this
+;;     ;; "Get the weather information based on your query."
+;;     (let ((url-user-agent "curl")))))
+
 ;; ----------------------------------------------------------------------------- OFF-LIMITS
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -559,7 +571,7 @@
  '(latex-preview-pane-multifile-mode (quote auctex))
  '(package-selected-packages
    (quote
-    (exwm-firefox-evil auctex markdown-mode+ markdown-mode company-irony-c-headers flyspell-lazy org-chef ox-hugo mastodon fira-code-mode deft org-projectile-helm proof-general org-roam-server org-roam-bibtex org-projectile org-noter exwm-x elfeed-protocol company-org-roam)))
+    (el-get exwm-firefox-evil auctex markdown-mode+ markdown-mode company-irony-c-headers flyspell-lazy org-chef ox-hugo mastodon fira-code-mode deft org-projectile-helm proof-general org-roam-server org-roam-bibtex org-projectile org-noter exwm-x elfeed-protocol company-org-roam)))
  '(safe-local-variable-values
    (quote
     ((format-all-mode)
