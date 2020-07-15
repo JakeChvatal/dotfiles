@@ -430,6 +430,13 @@
 ;; add auto spacing at 80 lines to org mode
 (add-hook 'org-mode-hook '(lambda () (setq fill-column 80))
           'org-mode-hook 'turn-on-auto-fill)
+;; ...and hopefully other things as well.
+(add-hook 'org-journal-mode-hook '(lambda () (setq fill-column 80))
+          'org-journal-mode-hook 'turn-on-auto-fill)
+(add-hook 'org-capture-mode-hook '(lambda () (setq fill-column 80))
+          'org-capture-mode-hook 'turn-on-auto-fill)
+(add-hook 'org-roam-mode-hook '(lambda () (setq fill-column 80))
+          'org-roam-mode-hook 'turn-on-auto-fill)
 
 ;; ----------------------------------------------------------------------------- ETC
 ;; clipboard between systems
