@@ -32,7 +32,6 @@
 ;; better firefox experience in exwm
 (use-package exwm-firefox-evil)
 (add-hook 'exwm-manage-finish-hook 'exwm-firefox-evil-activate-if-firefox)
-
 ;; add something to firefox
 (dolist (k `(escape))
   (cl-pushnew k exwm-input-prefix-keys))
@@ -71,7 +70,7 @@
 ;;             (when (string-match "Firefox" exwm-class-name)
 ;;               (exwm-workspace-rename-buffer exwm-title))))
 
-;; (setq browse-url-firefox-arguments '("-new-window"))
+(setq browse-url-firefox-arguments '("-new-window"))
 
 (exwm-input-set-key (kbd "s-SPC") #'counsel-linux-app)
 
