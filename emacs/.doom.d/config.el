@@ -582,6 +582,24 @@
 ;;     ;; "Get the weather information based on your query."
 ;;     (let ((url-user-agent "curl")))))
 
+
+(defun gotop ()
+  "Run the GOTOP process monitor."
+  (interactive)
+  (if (get-buffer "*gotop*")
+      (switch-to-buffer "*gotop*")
+    (ansi-term "/bin/bash" "gotop")
+    (comint-send-string "*gotop*" "gotop\n")))
+
+
+(defun htop ()
+  "Run the HTOP process monitor."
+  (interactive)
+  (if (get-buffer "*htop*")
+      (switch-to-buffer "*htop*")
+    (ansi-term "/bin/bash" "htop")
+    (comint-send-string "*htop*" "htop\n")))
+
 ;; ----------------------------------------------------------------------------- OFF-LIMITS
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
