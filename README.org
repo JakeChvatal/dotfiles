@@ -1,4 +1,7 @@
 #+TITLE: Dotfiles
+*DEPRECATED*: I've now switched to using NixOS on my systems.
+You can find that configuration here: [[https://github.com/jakechv/nix-cfg]]
+
 Configuration files for my Arch Linux system.
 
 * Installation
