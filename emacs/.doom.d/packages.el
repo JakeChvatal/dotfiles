@@ -44,3 +44,4 @@
 (package! gnuplot)
 (package! gnuplot-mode)
 (package! org-plot :recipe (:local-repo "lisp" :no-byte-compile t))
+(package! doct) ;; TODO: declarative org-capture templates

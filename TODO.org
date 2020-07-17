@@ -1,0 +1,44 @@
+#+TITLE: Todo
+* TODO Move to NixOS
+* [0/4] Add a new Conky menu
+** TODO weather
+** TODO time
+** TODO animations?
+** TODO bspwm information
+* TODO switch from notmuch to mu4e config
+my understanding is that mu4e has better interface for mail
+it may not be the case
+* TODO ensure the config uses only what I use
+* DONE do things
+CLOSED: [2020-07-07 Tue 02:22]
+* TODO remove unused keybindings
+:PROPERTIES:
+:ID:       fdd408c9-2cbf-4e78-af61-509afc4f350a
+:END:
+* TODO fix window swallowing with bspwm
+:PROPERTIES:
+:ID:       baa3f3c2-650f-484a-a64e-c5a579f88086
+:END:
+* HOLD reevaluate bspwm keybindings
+:LOGBOOK:
+- State "HOLD"       from "TODO"       [2020-07-13 Mon 18:33] \\
+  moving to exwm for the time being
+:END:
+* TODO smart remove comment characters when moving prev line to current one :: emacs
+* WAITING move emacs config to a submodule
+:LOGBOOK:
+- State "WAITING"    from "TODO"       [2020-07-13 Mon 18:33] \\
+  this will be part of my move to nixos
+:END:
+everything should be separated ::
+- exwm / emacs things
+- vim + ranger + modular 'unix-like' things
+this should probably be done when moving to nixos.
+* TODO let s-* keyboard shortcuts through in the firefox mode
+* TODO emacs :: make a org capture template to save a link and add a note to it
+* TODO emacs :: block audio ctrl and f-keys from firefox
+* TODO emacs :: fix wttrin, fork package and load manually
+* TODO emacs :: hopefully make config literate at some point!
+this is good for documentation and for ensuring the code is good quality
+* TODO make sure that vim and emacs cfg have same behavior
+* TODO make sure that vim and tmux (headless) cfg use same kbd shortcuts

@@ -1,0 +1,11 @@
+[user]
+	email = jakechvatal@github.com
+	name = jakechvatal
+[credential]
+	helper = store
+
+[alias]
+    co = checkout
+    c = commit
+    s = status
+    br = branch

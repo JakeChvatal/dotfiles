@@ -1,0 +1,2 @@
+machine smtp.gmail.com login jakechvatal port 587 password you-wish
+machine smtp.office365.com login chvatal.j@northeastern.edu port 587 password you-wish
